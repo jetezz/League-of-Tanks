@@ -1,0 +1,794 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;Patrol manager 
+                              3 ;; 
+                              4 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "man/patrol_manager.h.s"
+                              1 ;;
+                              2 ;;Patrol manager h
+                              3 ;;
+                              4 
+                              5 ;;
+                     FFFFFFFF     6 patrol_invalid_move_x =-1
+                              7 
+                              8 .globl man_patrol_single_11_get
+                              9 .globl man_patrol_single_12_get
+                             10 .globl man_patrol_single_13_get
+                             11 .globl man_patrol_single_21_get
+                             12 .globl man_patrol_single_22_get
+                             13 .globl man_patrol_single_23_get
+                             14 .globl man_patrol_single_31_get
+                             15 .globl man_patrol_single_32_get
+                             16 .globl man_patrol_single_33_get
+                             17 .globl man_patrol_single_41_get
+                             18 .globl man_patrol_single_42_get
+                             19 .globl man_patrol_single_43_get
+                             20 .globl man_patrol_single_51_get
+                             21 .globl man_patrol_single_52_get
+                             22 .globl man_patrol_single_53_get
+                             23 .globl man_patrol_single_61_get
+                             24 .globl man_patrol_single_62_get
+                             25 .globl man_patrol_single_63_get
+                             26 
+                             27 .globl man_patrol_multi_11_get
+                             28 .globl man_patrol_multi_12_get
+                             29 .globl man_patrol_multi_13_get
+                             30 .globl man_patrol_multi_21_get
+                             31 .globl man_patrol_multi_22_get
+                             32 .globl man_patrol_multi_23_get
+                             33 .globl man_patrol_multi_31_get
+                             34 .globl man_patrol_multi_32_get
+                             35 .globl man_patrol_multi_33_get
+                             36 .globl man_patrol_multi_41_get
+                             37 .globl man_patrol_multi_42_get
+                             38 .globl man_patrol_multi_43_get
+                             39 .globl man_patrol_multi_51_get
+                             40 .globl man_patrol_multi_52_get
+                             41 .globl man_patrol_multi_53_get
+                             42 .globl man_patrol_multi_61_get
+                             43 .globl man_patrol_multi_62_get
+                             44 .globl man_patrol_multi_63_get
+                             45 
+                             46 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              6 
+                              7 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                              8 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                              9 ;;;Patrones para el single;;;
+                             10 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             11 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             12 
+                             13 ;;;;;;;;;;;;;;;;;
+                             14 ;;Mapa 1 single;;
+                             15 ;;;;;;;;;;;;;;;;;
+   0000                      16 patrol_single_11:
+                             17 	
+                             18 
+   0000 FF                   19 	.db patrol_invalid_move_x
+   0001 00 00                20 	.dw patrol_single_11
+                             21 
+   0003                      22 patrol_single_12:
+                             23 	
+                             24 
+   0003 FF                   25 	.db patrol_invalid_move_x
+   0004 03 00                26 	.dw patrol_single_12
+                             27 
+   0006                      28 patrol_single_13:
+   0006 40 30                29 	.db 64, 48
+   0008 40 70                30 	.db 64, 112
+   000A 48 50                31 	.db 72, 80
+   000C 44 50                32 	.db 68, 80
+   000E 48 50                33 	.db 72, 80
+   0010 FF                   34 	.db patrol_invalid_move_x
+   0011 06 00                35 	.dw patrol_single_13
+                             36 ;;;;;;;;;;;;;;;;;
+                             37 ;;Mapa 2 single;;
+                             38 ;;;;;;;;;;;;;;;;;
+                             39 
+                             40 
+                             41 
+   0013                      42 patrol_single_21:
+                             43 	
+                             44 	
+   0013 38 40                45 	.db 56, 64	
+   0015 28 40                46 	.db 40, 64	
+   0017 1C 58                47 	.db 28, 88
+   0019 14 40                48 	.db 20, 64
+   001B 04 58                49 	.db 4, 88
+   001D 20 40                50 	.db 32, 64
+   001F 2C 58                51 	.db 44, 88
+                             52 	
+                             53 
+                             54 
+                             55 
+   0021 FF                   56 	.db patrol_invalid_move_x
+   0022 13 00                57 	.dw patrol_single_21
+                             58 
+   0024                      59 patrol_single_22:
+                             60 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                             61 
+   0024 FF                   62 	.db patrol_invalid_move_x
+   0025 24 00                63 	.dw patrol_single_22
+                             64 
+   0027                      65 patrol_single_23:
+   0027 08 90                66 	.db 8,144
+   0029 18 90                67 	.db 24,144
+   002B 24 78                68 	.db 36,120
+   002D 30 90                69 	.db 48,144
+   002F 3C 78                70 	.db 60,120
+   0031 2C 78                71 	.db 44,120
+   0033 20 90                72 	.db 32,144
+   0035 14 78                73 	.db 20,120
+                             74 
+                             75 
+                             76 
+                             77 
+                             78 
+                             79 
+                             80 
+                             81 
+   0037 FF                   82 	.db patrol_invalid_move_x
+   0038 27 00                83 	.dw patrol_single_23
+                             84 ;;;;;;;;;;;;;;;;;
+                             85 ;;Mapa 3 single;;
+                             86 ;;;;;;;;;;;;;;;;;
+                             87 
+   003A                      88 patrol_single_31:
+                             89 	
+   003A 0C 20                90 	.db 12,32
+   003C 40 20                91 	.db 64,32
+   003E 40 80                92 	.db 64,128	
+   0040 0C 80                93 	.db 12,128
+                             94 
+                             95 
+                             96 
+   0042 FF                   97 	.db patrol_invalid_move_x
+   0043 3A 00                98 	.dw patrol_single_31
+                             99 
+   0045                     100 patrol_single_32:
+   0045 44 90               101 	.db 68,144	
+   0047 08 10               102 	.db 8,16
+   0049 44 10               103 	.db 68,16
+   004B 24 10               104 	.db 36,16
+   004D 24 48               105 	.db 36,72
+   004F 2C 48               106 	.db 44,72
+   0051 24 48               107 	.db 36,72
+   0053 24 90               108 	.db 36,144
+   0055 44 90               109 	.db 68,144	
+   0057 08 90               110 	.db 8,144
+                            111 
+   0059 FF                  112 	.db patrol_invalid_move_x
+   005A 45 00               113 	.dw patrol_single_32
+                            114 
+   005C                     115 patrol_single_33:
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                            116 
+   005C 26 10               117 	.db 38,16
+   005E 26 90               118 	.db 38,144
+                            119 
+                            120 
+   0060 FF                  121 	.db patrol_invalid_move_x
+   0061 5C 00               122 	.dw patrol_single_33
+                            123 ;;;;;;;;;;;;;;;;;
+                            124 ;;Mapa 4 single;;
+                            125 ;;;;;;;;;;;;;;;;;
+                            126 
+   0063                     127 patrol_single_41:
+   0063 34 20               128 	.db 52,32
+   0065 34 80               129 	.db 52,128
+   0067 3C 80               130 	.db 60,128
+   0069 48 50               131 	.db 72,80
+                            132 
+                            133 
+                            134 
+                            135 
+                            136 
+   006B FF                  137 	.db patrol_invalid_move_x
+   006C 63 00               138 	.dw patrol_single_41
+                            139 
+   006E                     140 patrol_single_42:
+                            141 	
+                            142 
+   006E 14 40               143 	.db 20,64
+   0070 14 60               144 	.db 20,96
+                            145 	
+                            146 
+   0072 FF                  147 	.db patrol_invalid_move_x
+   0073 6E 00               148 	.dw patrol_single_42
+                            149 
+   0075                     150 patrol_single_43:
+                            151 
+   0075 30 50               152 	.db 48,80	
+   0077 30 18               153 	.db 48,24
+   0079 1C 18               154 	.db 28,24
+   007B 1C 50               155 	.db 28,80
+   007D 30 50               156 	.db 48,80
+   007F 30 88               157 	.db 48,136
+   0081 1C 88               158 	.db 28,136
+   0083 1C 50               159 	.db 28,80
+                            160 
+                            161 
+                            162 
+                            163 
+                            164 
+                            165 
+   0085 FF                  166 	.db patrol_invalid_move_x
+   0086 75 00               167 	.dw patrol_single_43
+                            168 ;;;;;;;;;;;;;;;;;
+                            169 ;;Mapa 5 single;;
+                            170 ;;;;;;;;;;;;;;;;;
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                            171 
+   0088                     172 patrol_single_51:
+                            173 	
+   0088 16 50               174 	.db 22,80
+   008A 16 70               175 	.db 22,112	
+   008C 04 50               176 	.db 4,80
+   008E 04 40               177 	.db 4,64
+   0090 16 40               178 	.db 22,64
+   0092 16 70               179 	.db 22,112
+   0094 16 40               180 	.db 22,64
+   0096 48 40               181 	.db 72,64
+   0098 48 50               182 	.db 72,80
+   009A 16 50               183 	.db 22,80
+   009C 16 70               184 	.db 22,112
+                            185 
+                            186 
+                            187 
+                            188 
+                            189 
+                            190 
+                            191 
+                            192 
+                            193 
+   009E FF                  194 	.db patrol_invalid_move_x
+   009F 88 00               195 	.dw patrol_single_51
+                            196 
+   00A1                     197 patrol_single_52:
+                            198 	
+   00A1 26 30               199 	.db 38,48
+   00A3 26 70               200 	.db 38,112
+   00A5 26 30               201 	.db 38,48
+   00A7 04 30               202 	.db 4,48
+   00A9 26 30               203 	.db 38,48
+   00AB 26 70               204 	.db 38,112
+   00AD 26 30               205 	.db 38,48	
+   00AF 48 30               206 	.db 72,48
+                            207 
+                            208 
+                            209 
+                            210 
+                            211 
+                            212 
+                            213 
+   00B1 FF                  214 	.db patrol_invalid_move_x
+   00B2 A1 00               215 	.dw patrol_single_52
+                            216 
+   00B4                     217 patrol_single_53:
+                            218 	
+   00B4 36 10               219 	.db 54,16
+   00B6 36 70               220 	.db 54,112
+   00B8 36 10               221 	.db 54,16
+   00BA 04 10               222 	.db 4,16
+   00BC 04 20               223 	.db 4,32
+   00BE 36 20               224 	.db 54,32
+   00C0 36 70               225 	.db 54,112
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+   00C2 36 20               226 	.db 54,32
+   00C4 48 20               227 	.db 72,32
+   00C6 48 10               228 	.db 72,16
+                            229 
+                            230 
+                            231 
+                            232 
+                            233 
+                            234 
+                            235 
+                            236 
+                            237 
+                            238 
+                            239 
+   00C8 FF                  240 	.db patrol_invalid_move_x
+   00C9 B4 00               241 	.dw patrol_single_53
+                            242 ;;;;;;;;;;;;;;;;;
+                            243 ;;Mapa 6 single;;
+                            244 ;;;;;;;;;;;;;;;;;
+                            245 
+   00CB                     246 patrol_single_61:
+                            247 	
+                            248 
+   00CB 24 18               249 	.db 36,24
+   00CD 08 18               250 	.db 8,24
+   00CF 08 88               251 	.db 8,136
+   00D1 24 88               252 	.db 36,136
+                            253 
+                            254 
+                            255 
+                            256 
+                            257 
+                            258 
+   00D3 FF                  259 	.db patrol_invalid_move_x
+   00D4 CB 00               260 	.dw patrol_single_61
+                            261 
+   00D6                     262 patrol_single_62:
+                            263 		
+                            264 
+   00D6 44 18               265 	.db 68,24
+   00D8 28 18               266 	.db 40,24
+   00DA 28 50               267 	.db 40,80
+   00DC 44 50               268 	.db 68,80
+   00DE 44 88               269 	.db 68,136
+   00E0 28 88               270 	.db 40,136
+   00E2 28 50               271 	.db 40,80
+   00E4 44 50               272 	.db 68,80
+                            273 
+                            274 
+                            275 
+                            276 
+                            277 
+                            278 
+                            279 
+                            280 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                            281 
+                            282 
+   00E6 FF                  283 	.db patrol_invalid_move_x
+   00E7 D6 00               284 	.dw patrol_single_62
+                            285 
+   00E9                     286 patrol_single_63:
+                            287 	
+                            288 
+   00E9 04 10               289 	.db 4,16
+   00EB 04 90               290 	.db 4,144
+   00ED 48 90               291 	.db 72,144
+   00EF 48 10               292 	.db 72,16
+                            293 
+                            294 
+                            295 
+                            296 
+                            297 
+   00F1 FF                  298 	.db patrol_invalid_move_x
+   00F2 E9 00               299 	.dw patrol_single_63
+                            300 
+                            301 
+                            302 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            303 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            304 ;;;Patrones para el multi;;;;
+                            305 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            306 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            307 
+                            308 
+                            309 ;;;;;;;;;;;;;;;;
+                            310 ;;Mapa 1 multi;;
+                            311 ;;;;;;;;;;;;;;;;
+   00F4                     312 patrol_multi_11:
+   00F4 10 50               313 	.db 16, 80
+   00F6 14 40               314 	.db 20, 64
+   00F8 20 50               315 	.db 32, 80
+   00FA 28 70               316 	.db 40, 112	
+                            317 
+   00FC FF                  318 	.db patrol_invalid_move_x
+   00FD F4 00               319 	.dw patrol_multi_11
+                            320 
+   00FF                     321 patrol_multi_12:
+                            322 	
+   00FF 38 38               323 	.db 56, 56	
+   0101 2C 68               324 	.db 44, 104
+   0103 04 68               325 	.db 4, 104	
+   0105 10 10               326 	.db 16, 16
+   0107 1C 10               327 	.db 28, 16	
+   0109 2C 30               328 	.db 44, 48
+   010B FF                  329 	.db patrol_invalid_move_x
+   010C FF 00               330 	.dw patrol_multi_12
+                            331 
+   010E                     332 patrol_multi_13:
+                            333 	
+   010E 48 88               334 	.db 72,136	
+   0110 30 30               335 	.db 48,48
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+   0112 2C 30               336 	.db 44,48
+   0114 30 30               337 	.db 48,48
+   0116 30 88               338 	.db 48,136
+   0118 FF                  339 	.db patrol_invalid_move_x
+   0119 0E 01               340 	.dw patrol_multi_13
+                            341 
+                            342 
+                            343 
+                            344 ;;;;;;;;;;;;;;;;
+                            345 ;;Mapa 1 multi;;
+                            346 ;;;;;;;;;;;;;;;;
+   011B                     347 patrol_multi_21:
+   011B 0C 28               348 	.db 12,40
+   011D 44 78               349 	.db 68,120
+                            350 	
+                            351 
+   011F FF                  352 	.db patrol_invalid_move_x
+   0120 1B 01               353 	.dw patrol_multi_21
+                            354 
+   0122                     355 patrol_multi_22:
+                            356 	
+   0122 24 54               357 	.db 36, 84
+   0124 0A 20               358 	.db 10, 32
+                            359 
+                            360 	
+   0126 FF                  361 	.db patrol_invalid_move_x
+   0127 22 01               362 	.dw patrol_multi_22
+                            363 
+   0129                     364 patrol_multi_23:
+                            365 	
+   0129 48 78               366 	.db 72,120
+   012B 24 78               367 	.db 36,120	
+                            368 
+                            369 	
+   012D FF                  370 	.db patrol_invalid_move_x
+   012E 29 01               371 	.dw patrol_multi_23
+                            372 
+                            373 ;;;;;;;;;;;;;;;;
+                            374 ;;Mapa 3 multi;;
+                            375 ;;;;;;;;;;;;;;;;
+                            376 
+                            377 
+   0130                     378 patrol_multi_31:
+   0130 24 50               379 	.db 36,80
+   0132 08 78               380 	.db 8,120
+   0134 20 50               381 	.db 32,80
+                            382 
+   0136 FF                  383 	.db patrol_invalid_move_x
+   0137 30 01               384 	.dw patrol_multi_31
+                            385 
+   0139                     386 patrol_multi_32:
+   0139 28 50               387 	.db 40,80
+   013B 48 48               388 	.db 72,72
+   013D 48 80               389 	.db 72,128
+                            390 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+                            391 
+                            392 	
+   013F FF                  393 	.db patrol_invalid_move_x
+   0140 39 01               394 	.dw patrol_multi_32
+                            395 
+   0142                     396 patrol_multi_33:
+   0142 40 50               397 	.db 64,80
+   0144 28 90               398 	.db 40,144
+   0146 26 50               399 	.db 38,80
+                            400 	
+                            401 
+                            402 	
+   0148 FF                  403 	.db patrol_invalid_move_x
+   0149 42 01               404 	.dw patrol_multi_33
+                            405 
+                            406 
+                            407 ;;;;;;;;;;;;;;;;
+                            408 ;;Mapa 4 multi;;
+                            409 ;;;;;;;;;;;;;;;;
+                            410 
+   014B                     411 patrol_multi_41:
+   014B 18 60               412 	.db 24,96
+   014D 28 90               413 	.db 40,144
+   014F 38 70               414 	.db 56,112
+   0151 28 90               415 	.db 40,144
+   0153 18 90               416 	.db 24,144
+                            417 
+   0155 FF                  418 	.db patrol_invalid_move_x
+   0156 4B 01               419 	.dw patrol_multi_41
+                            420 
+   0158                     421 patrol_multi_42:
+                            422 	
+   0158 3E 50               423 	.db 62,80
+   015A 38 10               424 	.db 56,16
+   015C 14 30               425 	.db 20,48
+   015E 04 10               426 	.db 4,16
+   0160 14 10               427 	.db 20,16
+   0162 2C 30               428 	.db 44,48
+   0164 30 10               429 	.db 48,16
+                            430 	
+                            431 
+                            432 
+                            433 	
+   0166 FF                  434 	.db patrol_invalid_move_x
+   0167 58 01               435 	.dw patrol_multi_42
+                            436 
+   0169                     437 patrol_multi_43:
+   0169 36 90               438 	.db 54,144
+   016B 22 70               439 	.db 34,112
+   016D 1C 90               440 	.db 28,144
+   016F 30 70               441 	.db 48,112
+                            442 
+                            443 	
+                            444 	
+   0171 FF                  445 	.db patrol_invalid_move_x
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+   0172 69 01               446 	.dw patrol_multi_43
+                            447 
+                            448 ;;;;;;;;;;;;;;;;
+                            449 ;;Mapa 5 multi;;
+                            450 ;;;;;;;;;;;;;;;;
+                            451 
+   0174                     452 patrol_multi_51:
+   0174 14 10               453 	.db 20,16
+   0176 20 90               454 	.db 32,144
+   0178 28 48               455 	.db 40,72
+   017A 20 48               456 	.db 32,72
+   017C 14 90               457 	.db 20,144
+                            458 	
+                            459 
+   017E FF                  460 	.db patrol_invalid_move_x
+   017F 74 01               461 	.dw patrol_multi_51
+                            462 
+   0181                     463 patrol_multi_52:
+   0181 38 90               464 	.db 56,144
+   0183 2C 10               465 	.db 44,16
+   0185 28 48               466 	.db 40,72
+   0187 2C 48               467 	.db 44,72
+   0189 38 10               468 	.db 56,16
+                            469 	
+                            470 
+                            471 	
+   018B FF                  472 	.db patrol_invalid_move_x
+   018C 81 01               473 	.dw patrol_multi_52
+                            474 
+   018E                     475 patrol_multi_53:
+                            476 	
+   018E 30 58               477 	.db 48,88
+   0190 24 58               478 	.db 36,88
+   0192 24 10               479 	.db 36,16
+   0194 1C 58               480 	.db 28,88
+                            481 
+                            482 		
+                            483 
+                            484 	
+   0196 FF                  485 	.db patrol_invalid_move_x
+   0197 8E 01               486 	.dw patrol_multi_53
+                            487 
+                            488 ;;;;;;;;;;;;;;;;
+                            489 ;;Mapa 6 multi;;
+                            490 ;;;;;;;;;;;;;;;;
+                            491 
+                            492 
+   0199                     493 patrol_multi_61:
+   0199 1C 68               494 	.db 28,104
+   019B 10 10               495 	.db 16,16
+   019D 38 80               496 	.db 56,128
+   019F 10 20               497 	.db 16,32
+   01A1 14 90               498 	.db 20,144
+                            499 
+                            500 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
+Hexadecimal [16-Bits]
+
+
+
+                            501 
+   01A3 FF                  502 	.db patrol_invalid_move_x
+   01A4 99 01               503 	.dw patrol_multi_61
+                            504 
+   01A6                     505 patrol_multi_62:
+   01A6 34 28               506 	.db 52,40
+   01A8 34 78               507 	.db 52,120
+   01AA 18 28               508 	.db 24,40
+   01AC 18 78               509 	.db 24,120
+                            510 	
+                            511 	
+                            512 
+                            513 	
+   01AE FF                  514 	.db patrol_invalid_move_x
+   01AF A6 01               515 	.dw patrol_multi_62
+                            516 
+   01B1                     517 patrol_multi_63:
+   01B1 30 68               518 	.db 48,104
+   01B3 48 90               519 	.db 72,144
+   01B5 2C 90               520 	.db 44,144
+                            521 	
+                            522 
+                            523 	
+   01B7 FF                  524 	.db patrol_invalid_move_x
+   01B8 B1 01               525 	.dw patrol_multi_63
+                            526 
+                            527 
+                            528 
+                            529 
+                            530 
+                            531 
+                            532 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            533 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            534 ;; LLAMADAS PARA EL SINGLE;;;
+                            535 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            536 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            537 
+   01BA                     538 man_patrol_single_11_get::
+   01BA 21 00 00      [10]  539 	ld hl, #patrol_single_11
+   01BD C9            [10]  540 	ret
+   01BE                     541 man_patrol_single_12_get::
+   01BE 21 03 00      [10]  542 	ld hl, #patrol_single_12
+   01C1 C9            [10]  543 	ret
+   01C2                     544 man_patrol_single_13_get::
+   01C2 21 06 00      [10]  545 	ld hl, #patrol_single_13
+   01C5 C9            [10]  546 	ret
+   01C6                     547 man_patrol_single_21_get::
+   01C6 21 13 00      [10]  548 	ld hl, #patrol_single_21
+   01C9 C9            [10]  549 	ret
+   01CA                     550 man_patrol_single_22_get::
+   01CA 21 24 00      [10]  551 	ld hl, #patrol_single_22
+   01CD C9            [10]  552 	ret
+   01CE                     553 man_patrol_single_23_get::
+   01CE 21 27 00      [10]  554 	ld hl, #patrol_single_23
+   01D1 C9            [10]  555 	ret
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
+Hexadecimal [16-Bits]
+
+
+
+   01D2                     556 man_patrol_single_31_get::
+   01D2 21 3A 00      [10]  557 	ld hl, #patrol_single_31
+   01D5 C9            [10]  558 	ret
+   01D6                     559 man_patrol_single_32_get::
+   01D6 21 45 00      [10]  560 	ld hl, #patrol_single_32
+   01D9 C9            [10]  561 	ret
+   01DA                     562 man_patrol_single_33_get::
+   01DA 21 5C 00      [10]  563 	ld hl, #patrol_single_33
+   01DD C9            [10]  564 	ret
+   01DE                     565 man_patrol_single_41_get::
+   01DE 21 63 00      [10]  566 	ld hl, #patrol_single_41
+   01E1 C9            [10]  567 	ret
+   01E2                     568 man_patrol_single_42_get::
+   01E2 21 6E 00      [10]  569 	ld hl, #patrol_single_42
+   01E5 C9            [10]  570 	ret
+   01E6                     571 man_patrol_single_43_get::
+   01E6 21 75 00      [10]  572 	ld hl, #patrol_single_43
+   01E9 C9            [10]  573 	ret
+   01EA                     574 man_patrol_single_51_get::
+   01EA 21 88 00      [10]  575 	ld hl, #patrol_single_51
+   01ED C9            [10]  576 	ret
+   01EE                     577 man_patrol_single_52_get::
+   01EE 21 A1 00      [10]  578 	ld hl, #patrol_single_52
+   01F1 C9            [10]  579 	ret
+   01F2                     580 man_patrol_single_53_get::
+   01F2 21 B4 00      [10]  581 	ld hl, #patrol_single_53
+   01F5 C9            [10]  582 	ret
+   01F6                     583 man_patrol_single_61_get::
+   01F6 21 CB 00      [10]  584 	ld hl, #patrol_single_61
+   01F9 C9            [10]  585 	ret
+   01FA                     586 man_patrol_single_62_get::
+   01FA 21 D6 00      [10]  587 	ld hl, #patrol_single_62
+   01FD C9            [10]  588 	ret
+   01FE                     589 man_patrol_single_63_get::
+   01FE 21 E9 00      [10]  590 	ld hl, #patrol_single_63
+   0201 C9            [10]  591 	ret
+                            592 
+                            593 
+                            594 
+                            595 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            596 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            597 ;; LLAMADAS PARA EL MULTI;;;;
+                            598 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            599 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   0202                     600 man_patrol_multi_11_get::
+   0202 21 F4 00      [10]  601 	ld hl, #patrol_multi_11
+   0205 C9            [10]  602 	ret
+                            603 
+   0206                     604 man_patrol_multi_12_get::
+   0206 21 FF 00      [10]  605 	ld hl, #patrol_multi_12
+   0209 C9            [10]  606 	ret
+                            607 
+   020A                     608 man_patrol_multi_13_get::
+   020A 21 0E 01      [10]  609 	ld hl, #patrol_multi_13
+   020D C9            [10]  610 	ret
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
+Hexadecimal [16-Bits]
+
+
+
+                            611 
+                            612 
+   020E                     613 man_patrol_multi_21_get::
+   020E 21 1B 01      [10]  614 	ld hl, #patrol_multi_21
+   0211 C9            [10]  615 	ret
+                            616 
+   0212                     617 man_patrol_multi_22_get::
+   0212 21 22 01      [10]  618 	ld hl, #patrol_multi_22
+   0215 C9            [10]  619 	ret
+                            620 
+   0216                     621 man_patrol_multi_23_get::
+   0216 21 29 01      [10]  622 	ld hl, #patrol_multi_23
+   0219 C9            [10]  623 	ret
+                            624 
+                            625 
+   021A                     626 man_patrol_multi_31_get::
+   021A 21 30 01      [10]  627 	ld hl, #patrol_multi_31
+   021D C9            [10]  628 	ret
+                            629 
+   021E                     630 man_patrol_multi_32_get::
+   021E 21 39 01      [10]  631 	ld hl, #patrol_multi_32
+   0221 C9            [10]  632 	ret
+                            633 
+   0222                     634 man_patrol_multi_33_get::
+   0222 21 42 01      [10]  635 	ld hl, #patrol_multi_33
+   0225 C9            [10]  636 	ret
+                            637 
+                            638 
+   0226                     639 man_patrol_multi_41_get::
+   0226 21 4B 01      [10]  640 	ld hl, #patrol_multi_41
+   0229 C9            [10]  641 	ret
+                            642 
+   022A                     643 man_patrol_multi_42_get::
+   022A 21 58 01      [10]  644 	ld hl, #patrol_multi_42
+   022D C9            [10]  645 	ret
+                            646 
+   022E                     647 man_patrol_multi_43_get::
+   022E 21 69 01      [10]  648 	ld hl, #patrol_multi_43
+   0231 C9            [10]  649 	ret
+                            650 
+   0232                     651 man_patrol_multi_51_get::
+   0232 21 74 01      [10]  652 	ld hl, #patrol_multi_51
+   0235 C9            [10]  653 	ret
+                            654 
+   0236                     655 man_patrol_multi_52_get::
+   0236 21 81 01      [10]  656 	ld hl, #patrol_multi_52
+   0239 C9            [10]  657 	ret
+                            658 
+   023A                     659 man_patrol_multi_53_get::
+   023A 21 8E 01      [10]  660 	ld hl, #patrol_multi_53
+   023D C9            [10]  661 	ret
+                            662 
+   023E                     663 man_patrol_multi_61_get::
+   023E 21 99 01      [10]  664 	ld hl, #patrol_multi_61
+   0241 C9            [10]  665 	ret
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+                            666 
+   0242                     667 man_patrol_multi_62_get::
+   0242 21 A6 01      [10]  668 	ld hl, #patrol_multi_62
+   0245 C9            [10]  669 	ret
+                            670 
+   0246                     671 man_patrol_multi_63_get::
+   0246 21 B1 01      [10]  672 	ld hl, #patrol_multi_63
+   0249 C9            [10]  673 	ret

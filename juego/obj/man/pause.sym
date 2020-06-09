@@ -1,0 +1,41 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 Pause      000F GR  |     _bala_sp   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _gamemod   **** GX
+    _mapa1     **** GX  |     _mapa2     **** GX  |     _mapa3     **** GX
+    _mapa4     **** GX  |     _mapa5     **** GX  |     _mapa6     **** GX
+    _pausa     **** GX  |     _plant_s   **** GX  |     _player_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _spr2      **** GX  |     _spr3      **** GX  |     _spr4      **** GX
+    _tileset   **** GX  |     cambiar_   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_dis   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_etm   **** GX  |     cpct_etm   **** GX  |     cpct_get   **** GX
+    cpct_get   **** GX  |     cpct_isK   **** GX  |     cpct_sca   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_wai   **** GX
+    cpct_wai   **** GX  |     cpct_zx7   **** GX  |     draw_map   **** GX
+    draw_map   **** GX  |     get_game   **** GX  |     jugandos   **** GX
+    manage_g   **** GX  |     next_map   **** GX  |   0 pausestr   0000 R
+    reset_lv   **** GX  |     set_Game   **** GX  |     set_Inga   **** GX
+    set_Inic   **** GX  |   0 unPause    0006 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   37   flags    0
+

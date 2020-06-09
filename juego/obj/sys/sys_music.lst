@@ -1,0 +1,520 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;sys_music
+                              3 ;;
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              4 .include "cpct_functions.h.s"
+                              1 ;;
+                              2 ;;CPCTELERA FUNCTION
+                              3 ;;
+                              4 
+                              5 
+                              6 .globl cpct_getScreenPtr_asm
+                              7 .globl cpct_drawSolidBox_asm
+                              8 .globl cpct_setDrawCharM0_asm 
+                              9 .globl cpct_drawStringM0_asm
+                             10 .globl cpct_disableFirmware_asm
+                             11 .globl cpct_scanKeyboard_asm
+                             12 .globl cpct_isKeyPressed_asm
+                             13 .globl cpct_setVideoMode_asm
+                             14 .globl cpct_drawSprite_asm
+                             15 .globl cpct_setPalette_asm
+                             16 .globl cpct_setVideoMemoryPage_asm
+                             17 .globl cpct_waitVSYNC_asm
+                             18 .globl cpct_zx7b_decrunch_s_asm
+                             19 .globl cpct_etm_setDrawTilemap4x8_ag_asm
+                             20 .globl cpct_etm_drawTilemap4x8_ag_asm	
+                             21 .globl cpct_waitHalts_asm
+                             22 
+                             23 .globl cpct_akp_musicPlay_asm
+                             24 .globl cpct_akp_musicInit_asm
+                             25 .globl cpct_setInterruptHandler_asm
+                             26 .globl cpct_getRandom_mxor_u8_asm
+                             27 
+                             28 
+                             29 
+                             30 
+                             31 
+                             32 
+                             33 
+                             34 .globl cpct_akp_SFXPlay_asm
+                             35 .globl cpct_akp_SFXInit_asm
+                             36 .globl cpct_akp_SFXStopAll_asm
+                             37 .globl cpct_akp_stop_asm
+                             38 
+                             39 
+                             40 
+                             41 
+                             42 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "sys_music.h.s"
+                              1 ;;
+                              2 ;;sys_music h
+                              3 ;;
+                              4 .globl sfxdisp
+                              5 .globl sfxdead
+                              6 .globl sfxwin
+                              7 .globl sfxinteraccion
+                              8 
+                     0000     9 _parar=0
+                     0001    10 _empezar=1
+                     0002    11 _continuar=2
+                             12 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              6 
+                              7 
+                              8 ;;(1B L ) sfx_num	Number of the instrument in the SFX Song (>0), same as the number given to the instrument in Arkos Tracker.
+                              9 ;;(1B H ) volume	Volume [0-15], 0 = off, 15 = maximum volume.
+                             10 ;;(1B E ) note	Note to be played with the given instrument [0-143]
+                             11 ;;(1B D ) speed	Speed (0 = As original, [1-255] = new Speed (1 is fastest))
+                             12 ;;(2B BC) inverted_pitch	Inverted Pitch (-0xFFFF -> 0xFFFF).  0 is no pitch.  The higher the pitch, the lower the sound.
+                             13 ;;(1B A ) channel_bitmask	Bitmask representing channels to use for reproducing the sound (Ch.A = 001 (1), Ch.B = 010 (2), Ch.C = 100 (4))
+                             14 
+                             15 
+                             16 
+   0000                      17 sfxinteraccion::
+                             18 
+   0000 FE 01         [ 7]   19 cp #1
+   0002 20 07         [12]   20 jr nz, _Noinicializar_intera
+                             21 
+   0004                      22 _inicializar_intera:
+                             23 
+   0004 11 0E 00      [10]   24 ld de, #_estado4_1
+   0007 ED 53 0C 00   [20]   25 ld(_siguiente_puntero_intera),de
+                             26 
+   000B                      27 _Noinicializar_intera:
+                             28 
+                     000C    29 _siguiente_puntero_intera=.+1
+   000B C3 00 00      [10]   30 jp 0000
+                             31 
+                             32 
+                             33 
+   000E                      34 	_estado4_1:
+   000E 2E 02         [ 7]   35 		ld l ,#2
+   0010 26 0F         [ 7]   36 		ld h, #15
+   0012 1E 46         [ 7]   37 		ld e, #70
+   0014 16 0A         [ 7]   38 		ld d, #10
+   0016 01 00 00      [10]   39 		ld bc, #0000
+   0019 3E 02         [ 7]   40 		ld a, #2
+   001B CD 00 00      [17]   41 		call cpct_akp_SFXPlay_asm
+                             42 
+   001E 11 28 00      [10]   43 		ld de, #_estado4_2
+   0021 ED 53 0C 00   [20]   44 		ld(_siguiente_puntero_intera),de
+   0025 3E 02         [ 7]   45 		ld a, #_continuar
+   0027 C9            [10]   46 		ret
+                             47 		
+                             48 
+   0028                      49 	_estado4_2:
+   0028 2E 02         [ 7]   50 		ld l ,#2
+   002A 26 0F         [ 7]   51 		ld h, #15
+   002C 1E 4B         [ 7]   52 		ld e, #75
+   002E 16 01         [ 7]   53 		ld d, #1
+   0030 01 00 00      [10]   54 		ld bc, #0000
+   0033 3E 02         [ 7]   55 		ld a, #2
+   0035 CD 00 00      [17]   56 		call cpct_akp_SFXPlay_asm
+                             57 
+                             58 		
+   0038 3E 00         [ 7]   59 		ld a, #_parar
+                             60 		
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                             61 
+   003A C9            [10]   62 ret
+                             63 
+                             64 
+                             65 
+   003B                      66 sfxdisp::
+                             67 
+                             68 
+   003B FE 01         [ 7]   69 	cp #1
+   003D 20 07         [12]   70 jr nz, _Noinicializar_dis
+                             71 
+   003F                      72 _inicializar_disp:
+                             73 
+   003F 11 49 00      [10]   74 ld de, #_estado_1
+   0042 ED 53 47 00   [20]   75 ld(_siguiente_puntero_disp),de
+                             76 
+   0046                      77 _Noinicializar_dis:
+                             78 
+                     0047    79 _siguiente_puntero_disp=.+1
+   0046 C3 00 00      [10]   80 jp 0000
+                             81 
+                             82 
+                             83 
+                             84 	
+   0049                      85 	_estado_1:
+   0049 2E 02         [ 7]   86 		ld l ,#2
+   004B 26 0F         [ 7]   87 		ld h, #15
+   004D 1E 3C         [ 7]   88 		ld e, #60
+   004F 16 00         [ 7]   89 		ld d, #0
+   0051 01 00 00      [10]   90 		ld bc, #0000
+   0054 3E 02         [ 7]   91 		ld a, #2
+   0056 CD 00 00      [17]   92 		call cpct_akp_SFXPlay_asm
+                             93 
+   0059 11 63 00      [10]   94 		ld de, #_estado_2
+   005C ED 53 47 00   [20]   95 		ld(_siguiente_puntero_disp),de
+   0060 3E 02         [ 7]   96 		ld a, #_continuar
+   0062 C9            [10]   97 		ret
+                             98 		
+                             99 
+   0063                     100 	_estado_2:
+   0063 2E 02         [ 7]  101 		ld l ,#2
+   0065 26 0F         [ 7]  102 		ld h, #15
+   0067 1E 3F         [ 7]  103 		ld e, #63
+   0069 16 00         [ 7]  104 		ld d, #0
+   006B 01 00 00      [10]  105 		ld bc, #0000
+   006E 3E 02         [ 7]  106 		ld a, #2
+   0070 CD 00 00      [17]  107 		call cpct_akp_SFXPlay_asm
+                            108 
+   0073 11 7D 00      [10]  109 		ld de, #_estado_3
+   0076 ED 53 47 00   [20]  110 		ld(_siguiente_puntero_disp),de
+   007A 3E 02         [ 7]  111 		ld a, #_continuar
+   007C C9            [10]  112 		ret
+                            113 
+   007D                     114 	_estado_3:
+   007D 2E 02         [ 7]  115 		ld l ,#2
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+   007F 26 0F         [ 7]  116 		ld h, #15
+   0081 1E 40         [ 7]  117 		ld e, #64
+   0083 16 00         [ 7]  118 		ld d, #0
+   0085 01 00 00      [10]  119 		ld bc, #0000
+   0088 3E 02         [ 7]  120 		ld a, #2
+   008A CD 00 00      [17]  121 		call cpct_akp_SFXPlay_asm
+                            122 		
+   008D 11 97 00      [10]  123 		ld de, #_estado_4
+   0090 ED 53 47 00   [20]  124 		ld(_siguiente_puntero_disp),de
+   0094 3E 02         [ 7]  125 		ld a, #_continuar
+   0096 C9            [10]  126 		ret
+                            127 
+   0097                     128 	_estado_4:
+                            129 
+   0097 2E 02         [ 7]  130 		ld l ,#2
+   0099 26 0F         [ 7]  131 		ld h, #15
+   009B 1E 41         [ 7]  132 		ld e, #65
+   009D 16 00         [ 7]  133 		ld d, #0
+   009F 01 00 00      [10]  134 		ld bc, #0000
+   00A2 3E 02         [ 7]  135 		ld a, #2
+   00A4 CD 00 00      [17]  136 		call cpct_akp_SFXPlay_asm
+                            137 
+                            138 		
+   00A7 ED 53 47 00   [20]  139 		ld(_siguiente_puntero_disp),de
+   00AB 3E 00         [ 7]  140 		ld a, #_parar
+                            141 
+                            142 
+                            143 
+                            144 
+                            145 
+   00AD C9            [10]  146 	ret
+                            147 
+                            148 
+   00AE                     149 sfxdead::
+                            150 
+                            151 
+                            152 
+   00AE FE 01         [ 7]  153 	cp #1
+   00B0 20 07         [12]  154 jr nz, _no_inicializar_muerte
+   00B2                     155 _inicializar_muerte:
+                            156 
+   00B2 11 BC 00      [10]  157  ld de, #_estado2_1
+   00B5 ED 53 BA 00   [20]  158  ld(_siguiente_puntero_muerte),de
+                            159 
+   00B9                     160 _no_inicializar_muerte:
+                            161 
+                            162 
+                     00BA   163 _siguiente_puntero_muerte=.+1
+   00B9 C3 00 00      [10]  164 	jp 0000
+                            165 
+                            166 	
+   00BC                     167 	_estado2_1:
+   00BC 2E 02         [ 7]  168 		ld l ,#2
+   00BE 26 0F         [ 7]  169 		ld h, #15
+   00C0 1E 46         [ 7]  170 		ld e, #70
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+   00C2 16 00         [ 7]  171 		ld d, #0
+   00C4 01 00 00      [10]  172 		ld bc, #0000
+   00C7 3E 02         [ 7]  173 		ld a, #2
+   00C9 CD 00 00      [17]  174 		call cpct_akp_SFXPlay_asm
+                            175 		
+   00CC 11 D6 00      [10]  176 		ld de, #_estado2_2
+   00CF ED 53 BA 00   [20]  177 		ld(_siguiente_puntero_muerte),de
+   00D3 3E 02         [ 7]  178 		ld a, #_continuar
+                            179 
+   00D5 C9            [10]  180 		ret
+                            181 
+   00D6                     182 	_estado2_2:
+   00D6 2E 02         [ 7]  183 		ld l ,#2
+   00D8 26 0F         [ 7]  184 		ld h, #15
+   00DA 1E 3C         [ 7]  185 		ld e, #60
+   00DC 16 00         [ 7]  186 		ld d, #0
+   00DE 01 00 00      [10]  187 		ld bc, #0000
+   00E1 3E 02         [ 7]  188 		ld a, #2
+   00E3 CD 00 00      [17]  189 		call cpct_akp_SFXPlay_asm
+                            190 
+   00E6 11 F0 00      [10]  191 		ld de, #_estado2_3
+   00E9 ED 53 BA 00   [20]  192 		ld(_siguiente_puntero_muerte),de
+   00ED 3E 02         [ 7]  193 		ld a, #_continuar
+                            194 		
+   00EF C9            [10]  195 		ret
+   00F0                     196 	_estado2_3:
+   00F0 2E 02         [ 7]  197 		ld l ,#2
+   00F2 26 0F         [ 7]  198 		ld h, #15
+   00F4 1E 32         [ 7]  199 		ld e, #50
+   00F6 16 00         [ 7]  200 		ld d, #0
+   00F8 01 00 00      [10]  201 		ld bc, #0000
+   00FB 3E 02         [ 7]  202 		ld a, #2
+   00FD CD 00 00      [17]  203 		call cpct_akp_SFXPlay_asm
+                            204 
+   0100 11 0A 01      [10]  205 		ld de, #_estado2_4
+   0103 ED 53 BA 00   [20]  206 		ld(_siguiente_puntero_muerte),de
+   0107 3E 02         [ 7]  207 		ld a, #_continuar
+                            208 		
+   0109 C9            [10]  209 		ret
+   010A                     210 	_estado2_4:
+                            211 
+   010A 2E 02         [ 7]  212 		ld l ,#2
+   010C 26 0F         [ 7]  213 		ld h, #15
+   010E 1E 28         [ 7]  214 		ld e, #40
+   0110 16 00         [ 7]  215 		ld d, #0
+   0112 01 00 00      [10]  216 		ld bc, #0000
+   0115 3E 02         [ 7]  217 		ld a, #2
+   0117 CD 00 00      [17]  218 		call cpct_akp_SFXPlay_asm		
+                            219 		
+   011A 3E 00         [ 7]  220 		ld a, #_parar
+                            221 
+   011C C9            [10]  222 		ret
+                            223 
+                            224 
+                            225 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                            226 
+                            227 
+                            228 
+   011D C9            [10]  229 	ret
+                            230 
+                            231 
+                            232 
+   011E                     233 sfxwin::
+                            234 
+                            235 
+   011E FE 01         [ 7]  236 	cp #1
+   0120 20 07         [12]  237 jr nz, _no_inicializar_win
+   0122                     238 _inicializar_win:
+                            239 
+   0122 11 2C 01      [10]  240  ld de, #_estado3_1
+   0125 ED 53 2A 01   [20]  241  ld(_siguiente_puntero_win),de
+                            242 
+   0129                     243 _no_inicializar_win:
+                            244 
+                            245 
+                     012A   246 _siguiente_puntero_win=.+1
+   0129 C3 00 00      [10]  247 	jp 0000
+                            248 
+                            249 
+                            250 
+                            251 	
+   012C                     252 	_estado3_1:
+   012C 2E 01         [ 7]  253 		ld l ,#1
+   012E 26 0F         [ 7]  254 		ld h, #15
+   0130 1E 3C         [ 7]  255 		ld e, #60
+   0132 16 00         [ 7]  256 		ld d, #0
+   0134 01 00 00      [10]  257 		ld bc, #0000
+   0137 3E 00         [ 7]  258 		ld a, #0
+   0139 CD 00 00      [17]  259 		call cpct_akp_SFXPlay_asm
+                            260 		
+   013C 11 46 01      [10]  261 		ld de, #_estado3_2
+   013F ED 53 2A 01   [20]  262 		ld(_siguiente_puntero_win),de
+   0143 3E 02         [ 7]  263 		ld a, #_continuar
+                            264 		
+                            265 
+   0145 C9            [10]  266 		ret
+                            267 
+   0146                     268 	_estado3_2:
+   0146 2E 01         [ 7]  269 		ld l ,#1
+   0148 26 0F         [ 7]  270 		ld h, #15
+   014A 1E 3F         [ 7]  271 		ld e, #63
+   014C 16 00         [ 7]  272 		ld d, #0
+   014E 01 00 00      [10]  273 		ld bc, #0000
+   0151 3E 02         [ 7]  274 		ld a, #2
+   0153 CD 00 00      [17]  275 		call cpct_akp_SFXPlay_asm
+                            276 		
+   0156 11 60 01      [10]  277 		ld de, #_estado3_3
+   0159 ED 53 2A 01   [20]  278 		ld(_siguiente_puntero_win),de
+   015D 3E 02         [ 7]  279 		ld a, #_continuar
+                            280 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+   015F C9            [10]  281 		ret
+                            282 
+   0160                     283 	_estado3_3:
+   0160 2E 01         [ 7]  284 		ld l ,#1
+   0162 26 0F         [ 7]  285 		ld h, #15
+   0164 1E 41         [ 7]  286 		ld e, #65
+   0166 16 00         [ 7]  287 		ld d, #0
+   0168 01 00 00      [10]  288 		ld bc, #0000
+   016B 3E 02         [ 7]  289 		ld a, #2
+   016D CD 00 00      [17]  290 		call cpct_akp_SFXPlay_asm
+                            291 		
+   0170 11 7A 01      [10]  292 		ld de, #_estado3_4
+   0173 ED 53 2A 01   [20]  293 		ld(_siguiente_puntero_win),de
+   0177 3E 02         [ 7]  294 		ld a, #_continuar
+                            295 
+   0179 C9            [10]  296 		ret
+                            297 
+   017A                     298 	_estado3_4:
+   017A 2E 01         [ 7]  299 		ld l ,#1
+   017C 26 0F         [ 7]  300 		ld h, #15
+   017E 1E 3F         [ 7]  301 		ld e, #63
+   0180 16 00         [ 7]  302 		ld d, #0
+   0182 01 00 00      [10]  303 		ld bc, #0000
+   0185 3E 02         [ 7]  304 		ld a, #2
+   0187 CD 00 00      [17]  305 		call cpct_akp_SFXPlay_asm
+                            306 		
+   018A 11 94 01      [10]  307 		ld de, #_estado3_5
+   018D ED 53 2A 01   [20]  308 		ld(_siguiente_puntero_win),de
+   0191 3E 02         [ 7]  309 		ld a, #_continuar
+                            310 
+   0193 C9            [10]  311 		ret
+                            312 
+   0194                     313 	_estado3_5:
+   0194 2E 01         [ 7]  314 		ld l ,#1
+   0196 26 0F         [ 7]  315 		ld h, #15
+   0198 1E 3C         [ 7]  316 		ld e, #60
+   019A 16 00         [ 7]  317 		ld d, #0
+   019C 01 00 00      [10]  318 		ld bc, #0000
+   019F 3E 02         [ 7]  319 		ld a, #2
+   01A1 CD 00 00      [17]  320 		call cpct_akp_SFXPlay_asm
+                            321 
+   01A4 11 AE 01      [10]  322 		ld de, #_estado3_6
+   01A7 ED 53 2A 01   [20]  323 		ld(_siguiente_puntero_win),de
+   01AB 3E 02         [ 7]  324 		ld a, #_continuar
+                            325 		
+   01AD C9            [10]  326 		ret
+                            327 
+   01AE                     328 	_estado3_6:
+                            329 
+   01AE 2E 01         [ 7]  330 		ld l ,#1
+   01B0 26 0F         [ 7]  331 		ld h, #15
+   01B2 1E 3F         [ 7]  332 		ld e, #63
+   01B4 16 00         [ 7]  333 		ld d, #0
+   01B6 01 00 00      [10]  334 		ld bc, #0000
+   01B9 3E 02         [ 7]  335 		ld a, #2
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+   01BB CD 00 00      [17]  336 		call cpct_akp_SFXPlay_asm
+                            337 			
+   01BE 11 C8 01      [10]  338 		ld de, #_estado3_7
+   01C1 ED 53 2A 01   [20]  339 		ld(_siguiente_puntero_win),de
+   01C5 3E 02         [ 7]  340 		ld a, #_continuar
+                            341 
+   01C7 C9            [10]  342 		ret
+                            343 
+   01C8                     344 	_estado3_7:
+                            345 
+   01C8 2E 01         [ 7]  346 		ld l ,#1
+   01CA 26 0F         [ 7]  347 		ld h, #15
+   01CC 1E 43         [ 7]  348 		ld e, #67
+   01CE 16 00         [ 7]  349 		ld d, #0
+   01D0 01 00 00      [10]  350 		ld bc, #0000
+   01D3 3E 02         [ 7]  351 		ld a, #2
+   01D5 CD 00 00      [17]  352 		call cpct_akp_SFXPlay_asm
+                            353 		
+   01D8 11 E2 01      [10]  354 		ld de, #_estado3_8
+   01DB ED 53 2A 01   [20]  355 		ld(_siguiente_puntero_win),de
+   01DF 3E 02         [ 7]  356 		ld a, #_continuar
+                            357 
+   01E1 C9            [10]  358 		ret
+                            359 
+   01E2                     360 	_estado3_8:
+                            361 
+   01E2 2E 01         [ 7]  362 		ld l ,#1
+   01E4 26 0F         [ 7]  363 		ld h, #15
+   01E6 1E 00         [ 7]  364 		ld e, #0
+   01E8 16 00         [ 7]  365 		ld d, #0
+   01EA 01 00 00      [10]  366 		ld bc, #0000
+   01ED 3E 02         [ 7]  367 		ld a, #2
+   01EF CD 00 00      [17]  368 		call cpct_akp_SFXPlay_asm
+                            369 
+   01F2 11 FC 01      [10]  370 		ld de, #_estado3_9
+   01F5 ED 53 2A 01   [20]  371 		ld(_siguiente_puntero_win),de
+   01F9 3E 02         [ 7]  372 		ld a, #_continuar
+                            373 		
+   01FB C9            [10]  374 		ret
+   01FC                     375 	_estado3_9:
+                            376 
+   01FC 2E 01         [ 7]  377 		ld l ,#1
+   01FE 26 0F         [ 7]  378 		ld h, #15
+   0200 1E 41         [ 7]  379 		ld e, #65
+   0202 16 00         [ 7]  380 		ld d, #0
+   0204 01 00 00      [10]  381 		ld bc, #0000
+   0207 3E 02         [ 7]  382 		ld a, #2
+   0209 CD 00 00      [17]  383 		call cpct_akp_SFXPlay_asm
+                            384 
+   020C 11 16 02      [10]  385 		ld de, #_estado3_10
+   020F ED 53 2A 01   [20]  386 		ld(_siguiente_puntero_win),de
+   0213 3E 02         [ 7]  387 		ld a, #_continuar
+                            388 		
+   0215 C9            [10]  389 		ret
+                            390 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+   0216                     391 	_estado3_10:
+                            392 
+   0216 2E 01         [ 7]  393 		ld l ,#1
+   0218 26 0F         [ 7]  394 		ld h, #15
+   021A 1E 44         [ 7]  395 		ld e, #68
+   021C 16 00         [ 7]  396 		ld d, #0
+   021E 01 00 00      [10]  397 		ld bc, #0000
+   0221 3E 02         [ 7]  398 		ld a, #2
+   0223 CD 00 00      [17]  399 		call cpct_akp_SFXPlay_asm
+                            400 		
+                            401 
+   0226 3E 00         [ 7]  402 		ld a, #_parar
+                            403 		
+                            404 
+                            405 
+                            406 
+                            407 
+                            408 
+                            409 
+                            410 
+   0228 C9            [10]  411 	ret

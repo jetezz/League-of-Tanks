@@ -1,0 +1,138 @@
+XL2
+H 1 areas 65 global symbols
+S _plant_sp Ref0000
+S cpct_setInterruptHandler_asm Ref0000
+S cpct_setPalette_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S print_selected_green Ref0000
+S set_Inicio Ref0000
+S _song2 Ref0000
+S _song3 Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S _song4 Ref0000
+S cpct_akp_stop_asm Ref0000
+S generate_music Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S cancion1 Ref0000
+S cancion2 Ref0000
+S cancion3 Ref0000
+S cpct_drawSprite_asm Ref0000
+S cancion4 Ref0000
+S _single_mapa1 Ref0000
+S _cannons_sp_00 Ref0000
+S _single_mapa2 Ref0000
+S _cannons_sp_10 Ref0000
+S _cannons_sp_01 Ref0000
+S _single_mapa3 Ref0000
+S _cannons_sp_11 Ref0000
+S _cannons_sp_02 Ref0000
+S _single_mapa4 Ref0000
+S _cannons_sp_12 Ref0000
+S _cannons_sp_03 Ref0000
+S cpct_etm_drawTilemap4x8_ag_asm Ref0000
+S _single_mapa5 Ref0000
+S _cannons_sp_13 Ref0000
+S _cannons_sp_04 Ref0000
+S next_song Ref0000
+S _single_mapa6 Ref0000
+S _cannons_sp_14 Ref0000
+S _cannons_sp_05 Ref0000
+S _song Ref0000
+S _cannons_sp_15 Ref0000
+S _cannons_sp_06 Ref0000
+S _cannons_sp_16 Ref0000
+S _cannons_sp_07 Ref0000
+S _tileset_00 Ref0000
+S _cannons_sp_17 Ref0000
+S _cannons_sp_08 Ref0000
+S _cannons_sp_18 Ref0000
+S _cannons_sp_09 Ref0000
+S _cannons_sp_19 Ref0000
+S cpct_waitHalts_asm Ref0000
+S check_Pause Ref0000
+S check_game_begin Ref0000
+S jugandostate_init Ref0000
+S sonido_disparo Ref0000
+S get_gamemode Ref0000
+S _gamemode Ref0000
+S .__.ABS. Def0000
+S set_Gameover Ref0000
+S manage_game Ref0000
+S check_restart Ref0000
+S cpct_setVideoMemoryPage_asm Ref0000
+S check_key Ref0000
+S _spr2 Ref0000
+S stopmusic Ref0000
+S _spr3 Ref0000
+S _spr4 Ref0000
+S off_muerte Ref0000
+S _player_sp Ref0000
+S _mapa1 Ref0000
+S _mapa2 Ref0000
+S _bala_sp Ref0000
+S _mapa3 Ref0000
+S cpct_zx7b_decrunch_s_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S _mapa4 Ref0000
+S _mapa5 Ref0000
+S zerostate_init Ref0000
+S _mapa6 Ref0000
+S cpct_akp_SFXStopAll_asm Ref0000
+S check_Esc Ref0000
+S sonido_win Ref0000
+S _pausa Ref0000
+S check_key_init Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S sonido_interaccion Ref0000
+S cpct_disableFirmware_asm Ref0000
+S check_nextGamemode Ref0000
+S cpct_getRandom_mxor_u8_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S set_Ingame Ref0000
+S sonido_muerte Ref0000
+S check_unPause Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_etm_setDrawTilemap4x8_ag_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size 8E flags 0 addr 0
+S zerostate_update Def006B
+S next_gamemode Def0072
+S init_zerostate Def0067
+T 00 00 4C 45 41 47 55 45 20 4F 46 20 54 41 4E 4B
+R 00 00 00 00
+T 0E 00 53 00 50 52 45 53 53 20 45 4E 54 45 52 20
+R 00 00 00 00
+T 1C 00 54 4F 20 50 4C 41 59 00 53 69 6E 67 6C 65
+R 00 00 00 00
+T 2A 00 20 70 6C 61 79 65 72 00 42 61 74 74 6C 65
+R 00 00 00 00
+T 38 00 20 52 6F 79 61 6C 65 00 31 20 50 6C 61 79
+R 00 00 00 00
+T 46 00 65 72 00 32 20 50 6C 61 79 65 72 73 00 33
+R 00 00 00 00
+T 54 00 20 50 6C 61 79 65 72 73 00 34 20 50 6C 61
+R 00 00 00 00
+T 62 00 79 65 72 73 00
+R 00 00 00 00
+T 67 00
+R 00 00 00 00
+T 67 00 CD 00 00 C9
+R 00 00 00 00 02 03 4D 00
+T 6B 00
+R 00 00 00 00
+T 6B 00 CD 00 00 CD 00 00 C9
+R 00 00 00 00 02 03 33 00 02 06 57 00
+T 72 00
+R 00 00 00 00
+T 72 00 3A 00 00 3C 06 06 B8 20 02 3E 01
+R 00 00 00 00 02 03 37 00
+T 7D 00
+R 00 00 00 00
+T 7D 00 32 00 00 CD 00 00 26 00 2E 01 CD 00 00 CD
+R 00 00 00 00 02 03 37 00 02 06 04 00 02 0D 5E 00
+T 8B 00 00 00 C9
+R 00 00 00 00 02 02 55 00

@@ -1,0 +1,12 @@
+XL2
+H 1 areas 9 global symbols
+S check_Pause Ref0000
+S check_game_begin Ref0000
+S .__.ABS. Def0000
+S check_restart Ref0000
+S check_key Ref0000
+S check_Esc Ref0000
+S check_key_init Ref0000
+S check_nextGamemode Ref0000
+S check_unPause Ref0000
+A _CODE size 0 flags 0 addr 0

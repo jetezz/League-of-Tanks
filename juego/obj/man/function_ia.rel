@@ -1,0 +1,42 @@
+XL2
+H 1 areas D global symbols
+S cambiar_velocidad_ia Ref0000
+S sys_ai_control_update Ref0000
+S .__.ABS. Def0000
+S _max_function Def000A
+S cambiar_dificultad_ia Ref0000
+S sys_ai_patrol Ref0000
+S sys_ia_stand_by Ref0000
+S sys_ai_control_init Ref0000
+A _CODE size 3E flags 0 addr 0
+S name Def0003
+S man_entity_get_funcion_array Def003A
+S function_inc_puntero Def0026
+S funcion_ia_init Def0017
+S create_function_array Def0003
+T 00 00 00 00 00
+R 00 00 00 00
+T 03 00
+R 00 00 00 00
+T 03 00
+R 00 00 00 00
+T 03 00 FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+R 00 00 00 00
+T 11 00 FF FF FF FF FF FF
+R 00 00 00 00
+T 17 00
+R 00 00 00 00
+T 17 00 21 03 00 11 03 00 13 36 00 01 14 00 ED B0
+R 00 00 00 00 00 03 00 00 00 06 00 00
+T 25 00 C9
+R 00 00 00 00
+T 26 00
+R 00 00 00 00
+T 26 00 DD 2A 01 00 DD 75 00 DD 74 01 01 02 00 DD
+R 00 00 00 00 00 04 00 00
+T 34 00 09 DD 22 01 00 C9
+R 00 00 00 00 00 05 00 00
+T 3A 00
+R 00 00 00 00
+T 3A 00 21 03 00 C9
+R 00 00 00 00 00 03 00 00

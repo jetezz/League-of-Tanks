@@ -1,0 +1,186 @@
+XL2
+H 1 areas 57 global symbols
+S _plant_sp Ref0000
+S cpct_setInterruptHandler_asm Ref0000
+S kill_all Ref0000
+S cpct_setPalette_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S set_Inicio Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S _mapa1_SIZE Def01F4
+S cpct_akp_stop_asm Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S cpct_drawSprite_asm Ref0000
+S _single_mapa1 Ref0000
+S _cannons_sp_00 Ref0000
+S _single_mapa2 Ref0000
+S _cannons_sp_10 Ref0000
+S _cannons_sp_01 Ref0000
+S _single_mapa3 Ref0000
+S _cannons_sp_11 Ref0000
+S _cannons_sp_02 Ref0000
+S _single_mapa4 Ref0000
+S _cannons_sp_12 Ref0000
+S _cannons_sp_03 Ref0000
+S cpct_etm_drawTilemap4x8_ag_asm Ref0000
+S estado_game_over Ref0000
+S _single_mapa5 Ref0000
+S _cannons_sp_13 Ref0000
+S _cannons_sp_04 Ref0000
+S _single_mapa6 Ref0000
+S _cannons_sp_14 Ref0000
+S _cannons_sp_05 Ref0000
+S _cannons_sp_15 Ref0000
+S _cannons_sp_06 Ref0000
+S _mapa1_H Def0019
+S _cannons_sp_16 Ref0000
+S _cannons_sp_07 Ref0000
+S _tileset_00 Ref0000
+S _cannons_sp_17 Ref0000
+S _cannons_sp_08 Ref0000
+S updategameover Ref0000
+S _cannons_sp_18 Ref0000
+S _cannons_sp_09 Ref0000
+S _cannons_sp_19 Ref0000
+S cpct_waitHalts_asm Ref0000
+S jugandostate_init Ref0000
+S get_gamemode Ref0000
+S _gamemode Ref0000
+S .__.ABS. Def0000
+S set_Gameover Ref0000
+S manage_game Ref0000
+S cpct_setVideoMemoryPage_asm Ref0000
+S _mapa1_W Def0014
+S _spr2 Ref0000
+S _spr3 Ref0000
+S _spr4 Ref0000
+S single_end_init Ref0000
+S reiniciar_gameover Ref0000
+S updategameover_init Ref0000
+S _player_sp Ref0000
+S set_winner_pos Ref0000
+S _mapa1 Ref0000
+S _mapa2 Ref0000
+S _bala_sp Ref0000
+S _mapa3 Ref0000
+S cpct_zx7b_decrunch_s_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S _mapa4 Ref0000
+S _mapa5 Ref0000
+S _mapa6 Ref0000
+S cpct_akp_SFXStopAll_asm Ref0000
+S _pausa Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S single_end_update Ref0000
+S cpct_disableFirmware_asm Ref0000
+S cpct_getRandom_mxor_u8_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S set_Ingame Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_etm_setDrawTilemap4x8_ag_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size 112 flags 0 addr 0
+S draw_map Def0002
+S reset_lvl Def004A
+S next_map Def0050
+S draw_map_sinhud Def0024
+T 00 00 00 00
+R 00 00 00 00
+T 02 00
+R 00 00 00 00
+T 02 00 0E 14 06 19 11 14 00 21 00 00 CD 00 00 21
+R 00 00 00 00 02 0A 24 00 02 0D 50 00
+T 10 00 00 C0 ED 5B 00 00 CD 00 00 21 00 80 ED 5B
+R 00 00 00 00 00 06 00 00 02 09 17 00
+T 1E 00 00 00 CD 00 00 C9
+R 00 00 00 00 00 02 00 00 02 05 17 00
+T 24 00
+R 00 00 00 00
+T 24 00 0E 14 06 19 05 05 05 11 14 00 21 00 00 CD
+R 00 00 00 00 02 0D 24 00
+T 32 00 00 00 21 00 C0 ED 5B 00 00 CD 00 00 21
+R 00 00 00 00 02 02 50 00 00 09 00 00 02 0C 17 00
+T 3F 00 00 80 ED 5B 00 00 CD 00 00 C9 00
+R 00 00 00 00 00 06 00 00 02 09 17 00
+T 4A 00
+R 00 00 00 00
+T 4A 00 3E 00 32 49 00 C9
+R 00 00 00 00 00 05 00 00
+T 50 00
+R 00 00 00 00
+T 50 00 CD 00 00 3D 28 AC 3A 49 00 3C 32 49 00 3A
+R 00 00 00 00 02 03 18 00 00 09 00 00 00 0D 00 00
+T 5E 00 00 00 FE 05 CC C6 00 3A 00 00 FE 05 CC
+R 00 00 00 00 02 02 2E 00 00 07 00 00 02 0A 2E 00
+T 6B 00 02 00 3A 00 00 FE 05 C8 CD 7A 00 CD
+R 00 00 00 00 00 02 00 00 02 05 2E 00 00 0B 00 00
+T 77 00 02 00 C9
+R 00 00 00 00 00 02 00 00
+T 7A 00
+R 00 00 00 00
+T 7A 00 3A 49 00 3D CC 9C 00 C8 3D CC A3 00 C8 3D
+R 00 00 00 00 00 03 00 00 00 07 00 00 00 0C 00 00
+T 88 00 CC AA 00 C8 3D CC B1 00 C8 3D CC B8 00 C8
+R 00 00 00 00 00 03 00 00 00 08 00 00 00 0D 00 00
+T 96 00 3D CC BF 00 C8 C9
+R 00 00 00 00 00 04 00 00
+T 9C 00
+R 00 00 00 00
+T 9C 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 3C 00 00 06 00 00
+T A3 00
+R 00 00 00 00
+T A3 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 3D 00 00 06 00 00
+T AA 00
+R 00 00 00 00
+T AA 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 3F 00 00 06 00 00
+T B1 00
+R 00 00 00 00
+T B1 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 43 00 00 06 00 00
+T B8 00
+R 00 00 00 00
+T B8 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 44 00 00 06 00 00
+T BF 00
+R 00 00 00 00
+T BF 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 45 00 00 06 00 00
+T C6 00
+R 00 00 00 00
+T C6 00 3A 49 00 3D CC E8 00 C8 3D CC EF 00 C8 3D
+R 00 00 00 00 00 03 00 00 00 07 00 00 00 0C 00 00
+T D4 00 CC F6 00 C8 3D CC FD 00 C8 3D CC 04 01 C8
+R 00 00 00 00 00 03 00 00 00 08 00 00 00 0D 00 00
+T E2 00 3D CC 0B 01 C8 C9
+R 00 00 00 00 00 04 00 00
+T E8 00
+R 00 00 00 00
+T E8 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 0C 00 00 06 00 00
+T EF 00
+R 00 00 00 00
+T EF 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 0E 00 00 06 00 00
+T F6 00
+R 00 00 00 00
+T F6 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 11 00 00 06 00 00
+T FD 00
+R 00 00 00 00
+T FD 00 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 14 00 00 06 00 00
+T 04 01
+R 00 00 00 00
+T 04 01 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 19 00 00 06 00 00
+T 0B 01
+R 00 00 00 00
+T 0B 01 21 00 00 22 00 00 C9
+R 00 00 00 00 02 03 1C 00 00 06 00 00

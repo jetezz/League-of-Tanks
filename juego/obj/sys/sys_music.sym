@@ -1,0 +1,36 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 _Noinici   0046 R   |   0 _Noinici   000B R
+    _continu=  0002     |     _empezar=  0001     |   0 _estado2   00BC R
+  0 _estado2   00D6 R   |   0 _estado2   00F0 R   |   0 _estado2   010A R
+  0 _estado3   012C R   |   0 _estado3   0216 R   |   0 _estado3   0146 R
+  0 _estado3   0160 R   |   0 _estado3   017A R   |   0 _estado3   0194 R
+  0 _estado3   01AE R   |   0 _estado3   01C8 R   |   0 _estado3   01E2 R
+  0 _estado3   01FC R   |   0 _estado4   000E R   |   0 _estado4   0028 R
+  0 _estado_   0049 R   |   0 _estado_   0063 R   |   0 _estado_   007D R
+  0 _estado_   0097 R   |   0 _inicial   003F R   |   0 _inicial   0004 R
+  0 _inicial   00B2 R   |   0 _inicial   0122 R   |   0 _no_inic   00B9 R
+  0 _no_inic   0129 R   |     _parar  =  0000     |   0 _siguien=  0047 R
+  0 _siguien=  000C R   |   0 _siguien=  00BA R   |   0 _siguien=  012A R
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_dis   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_etm   **** GX  |     cpct_etm   **** GX
+    cpct_get   **** GX  |     cpct_get   **** GX  |     cpct_isK   **** GX
+    cpct_sca   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_wai   **** GX  |     cpct_wai   **** GX  |     cpct_zx7   **** GX
+  0 sfxdead    00AE GR  |   0 sfxdisp    003B GR  |   0 sfxinter   0000 GR
+  0 sfxwin     011E GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  229   flags    0
+

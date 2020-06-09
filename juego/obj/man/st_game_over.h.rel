@@ -1,0 +1,12 @@
+XL2
+H 1 areas 9 global symbols
+S kill_all Ref0000
+S estado_game_over Ref0000
+S updategameover Ref0000
+S .__.ABS. Def0000
+S single_end_init Ref0000
+S reiniciar_gameover Ref0000
+S updategameover_init Ref0000
+S set_winner_pos Ref0000
+S single_end_update Ref0000
+A _CODE size 0 flags 0 addr 0

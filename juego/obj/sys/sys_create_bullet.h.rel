@@ -1,0 +1,8 @@
+XL2
+H 1 areas 5 global symbols
+S create_bullets_array Ref0000
+S velocidad_balas Ref0000
+S hacer_disparo Ref0000
+S .__.ABS. Def0000
+S sys_create_bullet_init Ref0000
+A _CODE size 0 flags 0 addr 0

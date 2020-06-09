@@ -1,0 +1,38 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _gamemod   **** GX  |   0 _jug2ia    000E R
+  0 _jug2x     0003 R   |   0 _jug2y     0004 R   |   0 _jug3ia    000F R
+  0 _jug3x     0005 R   |   0 _jug3y     0006 R   |   0 _jug4ia    0010 R
+  0 _jug4x     0007 R   |   0 _jug4y     0008 R   |   0 _jugdead   000C R
+  0 _jugdir    000B R   |   0 _jugia     000D R   |   0 _jugshot   000A R
+  0 _jugv      0009 R   |   0 _jugx      0001 R   |   0 _jugy      0002 R
+  0 _num_ent   0000 GR  |     _pausa     **** GX  |   0 create_e   0150 GR
+    e_alto  =  0015     |     e_ancho =  0014     |     e_clock =  0016 
+    e_dead  =  000C     |     e_dir   =  000A     |     e_dir_bo=  0004 
+    e_dir_le=  0001     |     e_dir_ri=  0003     |     e_dir_to=  0002 
+    e_ia_pun=  0010     |     e_ia_pun=  0011     |     e_ia_pun=  0012 
+    e_ia_pun=  0013     |     e_ia_st =  0009     |     e_ia_st_=  0002 
+    e_ia_st_=  0000     |     e_ia_st_=  0003     |     e_ia_st_=  000F 
+    e_ia_st_=  0001     |     e_ia_x  =  000D     |     e_ia_y  =  000E 
+    e_sh    =  000B     |     e_vx    =  0006     |     e_vy    =  0007 
+    e_x     =  0000     |     e_xl    =  0002     |     e_xll   =  0004 
+    e_y     =  0001     |     e_yl    =  0003     |     e_yll   =  0005 
+  0 enemigo    017E GR  |   0 enemigo2   0195 GR  |   0 entityma   01AD GR
+  0 entityma   01B2 GR  |     get_game   **** GX  |   0 init_ent   006E GR
+  0 jugador    0150 GR  |   0 jugador2   0167 GR  |     jugandos   **** GX
+    manage_g   **** GX  |   0 set_1pla   002E R   |   0 set_2pla   003A R
+  0 set_3pla   0048 R   |   0 set_4pla   0056 R   |     set_Game   **** GX
+    set_Inga   **** GX  |     set_Inic   **** GX  |   0 set_game   0011 GR
+  0 set_sing   0062 R   |     siceof_e=  0017 
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  1B6   flags    0
+

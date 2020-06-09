@@ -1,0 +1,289 @@
+XL2
+H 1 areas 91 global symbols
+M cpct_keyboard
+S cpct_setInterruptHandler_asm Ref0000
+S rendersys_update Ref0000
+S cambiar_velocidad_ia Ref0000
+S zerostate_update Ref0000
+S kill_all Ref0000
+S render_entities Ref0000
+S cpct_setPalette_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S print_selected_green Ref0000
+S hacer_disparo2 Ref0000
+S clean_entities Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S map_getVideoPrt Ref0000
+S sys_ai_control_update Ref0000
+S cpct_akp_stop_asm Ref0000
+S draw_map Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S entityman_num_entities Ref0000
+S create_bullets_array Ref0000
+S velocidad_balas Ref0000
+S move_entities_init Ref0000
+S cpct_drawSprite_asm Ref0000
+S sys_comp_disp_init Ref0000
+S ingame_render Ref0000
+S reset_lvl Ref0000
+S ingame_update Ref0000
+S kill_bullet Ref0000
+S cpct_etm_drawTilemap4x8_ag_asm Ref0000
+S crear_nivel_multi Ref0000
+S estado_game_over Ref0000
+S hacer_disparo Ref0000
+S man_patrol_multi_11_get Ref0000
+S man_patrol_multi_21_get Ref0000
+S man_patrol_multi_12_get Ref0000
+S updategameover Ref0000
+S man_patrol_multi_31_get Ref0000
+S man_patrol_multi_22_get Ref0000
+S man_patrol_multi_13_get Ref0000
+S limpiar_ultima Ref0000
+S plantman_getPlanta Ref0000
+S man_patrol_multi_41_get Ref0000
+S man_patrol_multi_32_get Ref0000
+S man_patrol_multi_23_get Ref0000
+S clean_entities_init Ref0000
+S cpct_waitHalts_asm Ref0000
+S man_patrol_multi_51_get Ref0000
+S man_patrol_multi_42_get Ref0000
+S man_patrol_multi_33_get Ref0000
+S check_Pause Ref0000
+S check_game_begin Ref0000
+S man_patrol_multi_61_get Ref0000
+S man_patrol_multi_52_get Ref0000
+S man_patrol_multi_43_get Ref0000
+S next_map Ref0000
+S next_gamemode Ref0000
+S man_patrol_multi_62_get Ref0000
+S man_patrol_multi_53_get Ref0000
+S estado_nivel_single Ref0000
+S man_patrol_multi_63_get Ref0000
+S sys_comp_disp_update Ref0000
+S sys_create_bullet_init2 Ref0000
+S .__.ABS. Def0000
+S map_firstBuffer Ref0000
+S sistema_reiniciar_niveles Ref0000
+S check_restart Ref0000
+S cpct_setVideoMemoryPage_asm Ref0000
+S kill_bullet_2 Ref0000
+S cambiar_colisiones Ref0000
+S kill_bullet_init Ref0000
+S check_key Ref0000
+S limpiar_ultimo Ref0000
+S jugador_muerto Ref0000
+S entityman_getEntityVector_IX Ref0000
+S crear_nivel_single Ref0000
+S single_end_init Ref0000
+S reiniciar_gameover Ref0000
+S kill_bullet_all Ref0000
+S updategameover_init Ref0000
+S sys_create_bullet_init Ref0000
+S man_patrol_single_11_get Ref0000
+S pintar_hud Ref0000
+S set_winner_pos Ref0000
+S man_patrol_single_21_get Ref0000
+S man_patrol_single_12_get Ref0000
+S man_patrol_single_31_get Ref0000
+S man_patrol_single_22_get Ref0000
+S man_patrol_single_13_get Ref0000
+S cambiar_dificultad_ia Ref0000
+S man_patrol_single_41_get Ref0000
+S man_patrol_single_32_get Ref0000
+S man_patrol_single_23_get Ref0000
+S cpct_zx7b_decrunch_s_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S create_plant Ref0000
+S man_patrol_single_51_get Ref0000
+S man_patrol_single_42_get Ref0000
+S man_patrol_single_33_get Ref0000
+S rendersys_init Ref0000
+S _num_entities Ref0000
+S man_patrol_single_61_get Ref0000
+S man_patrol_single_52_get Ref0000
+S man_patrol_single_43_get Ref0000
+S check_gameover Ref0000
+S init_zerostate Ref0000
+S man_patrol_single_62_get Ref0000
+S man_patrol_single_53_get Ref0000
+S zerostate_init Ref0000
+S cpct_akp_SFXStopAll_asm Ref0000
+S man_patrol_single_63_get Ref0000
+S draw_map_sinhud Ref0000
+S kill_bullet_init_2 Ref0000
+S init_entities Ref0000
+S create_entities Ref0000
+S check_Esc Ref0000
+S pintar_letras Ref0000
+S sys_ai_patrol Ref0000
+S check_key_init Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S single_end_update Ref0000
+S cpct_disableFirmware_asm Ref0000
+S sys_ia_stand_by Ref0000
+S sys_ai_control_init Ref0000
+S move_entities Ref0000
+S check_nextGamemode Ref0000
+S cpct_getRandom_mxor_u8_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S map_switchBuffers Ref0000
+S check_unPause Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_etm_setDrawTilemap4x8_ag_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size 16B flags 0 addr 0
+S _state Def0069
+S set_Inicio Def007A
+S jugandostate_init Def00BB
+S get_gamemode Def0167
+S _gamemode Def0067
+S set_Gameover Def00B2
+S manage_game Def006A
+S _pausa Def0068
+S render_overstate Def0153
+S set_Ingame Def0088
+T 00 00 4C 45 41 47 55 45 20 4F 46 20 54 41 4E 4B
+R 00 00 00 00
+T 0E 00 53 00 50 52 45 53 53 20 45 4E 54 45 52 20
+R 00 00 00 00
+T 1C 00 54 4F 20 50 4C 41 59 00 53 69 6E 67 6C 65
+R 00 00 00 00
+T 2A 00 20 70 6C 61 79 65 72 00 42 61 74 74 6C 65
+R 00 00 00 00
+T 38 00 20 52 6F 79 61 6C 65 00 31 20 50 6C 61 79
+R 00 00 00 00
+T 46 00 65 72 00 32 20 50 6C 61 79 65 72 73 00 33
+R 00 00 00 00
+T 54 00 20 50 6C 61 79 65 72 73 00 34 20 50 6C 61
+R 00 00 00 00
+T 62 00 79 65 72 73 00 05 00 00
+R 00 00 00 00
+T 6A 00
+R 00 00 00 00
+T 6A 00 3A 69 00 B7 CA 06 01 3D CA 12 01 3D CA
+R 00 00 00 00 00 03 00 00 00 07 00 00 00 0B 00 00
+T 77 00 3D 01 C9
+R 00 00 00 00 00 02 00 00
+T 7A 00
+R 00 00 00 00
+T 7A 00 21 69 00 36 00 21 67 00 36 05 CD 00 00 C9
+R 00 00 00 00 00 03 00 00 00 08 00 00 02 0D 6C 00
+T 88 00
+R 00 00 00 00
+T 88 00 21 69 00 36 01 CD 00 00 CD 00 00 CD
+R 00 00 00 00 00 03 00 00 02 08 71 00 02 0B 49 00
+T 94 00 00 00 CD 00 00 CD 00 00 3A
+R 00 00 00 00 02 02 7B 00 02 05 49 00 02 08 17 00
+T 9D 00 67 00 FE 05 28 05
+R 00 00 00 00 00 02 00 00
+T A3 00
+R 00 00 00 00
+T A3 00 CD 00 00 18 03
+R 00 00 00 00 02 03 1D 00
+T A8 00
+R 00 00 00 00
+T A8 00 CD 00 00
+R 00 00 00 00 02 03 4A 00
+T AB 00
+R 00 00 00 00
+T AB 00 CD 00 00 CD 00 00 C9
+R 00 00 00 00 02 03 74 00 02 06 51 00
+T B2 00
+R 00 00 00 00
+T B2 00 21 69 00 36 02 CD 00 00 C9
+R 00 00 00 00 00 03 00 00 02 08 4E 00
+T BB 00
+R 00 00 00 00
+T BB 00 21 69 00 36 01 CD 00 00 CD 00 00 CD
+R 00 00 00 00 00 03 00 00 02 08 63 00 02 0B 72 00
+T C7 00 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 02 5F 00 02 05 71 00 02 08 13 00
+T D0 00 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 02 49 00 02 05 7B 00 02 08 49 00
+T D9 00 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 02 17 00 02 05 2C 00 02 08 15 00
+T E2 00 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 02 4F 00 02 05 3D 00 02 08 45 00
+T EB 00 00 00 CD 00 00 3A 67 00 FE 05 28 05
+R 00 00 00 00 02 02 70 00 02 05 76 00 00 08 00 00
+T F7 00
+R 00 00 00 00
+T F7 00 CD 00 00 18 AF
+R 00 00 00 00 02 03 1D 00
+T FC 00
+R 00 00 00 00
+T FC 00 CD 00 00
+R 00 00 00 00 02 03 4A 00
+T FF 00
+R 00 00 00 00
+T FF 00 CD 00 00 CD 00 00 C9
+R 00 00 00 00 02 03 74 00 02 06 51 00
+T 06 01
+R 00 00 00 00
+T 06 01 CD 0D 01 CD 11 01 C9
+R 00 00 00 00 00 03 00 00 00 06 00 00
+T 0D 01
+R 00 00 00 00
+T 0D 01 CD 00 00 C9
+R 00 00 00 00 02 03 03 00
+T 11 01
+R 00 00 00 00
+T 11 01 C9
+R 00 00 00 00
+T 12 01
+R 00 00 00 00
+T 12 01 3A 68 00 3D CC 00 00 3A 68 00 3D 28 03 CD
+R 00 00 00 00 00 03 00 00 02 07 82 00 00 0A 00 00
+T 20 01 26 01
+R 00 00 00 00 00 02 00 00
+T 22 01
+R 00 00 00 00
+T 22 01 CD 2A 01 C9
+R 00 00 00 00 00 03 00 00
+T 26 01
+R 00 00 00 00
+T 26 01 CD 00 00 C9
+R 00 00 00 00 02 03 1A 00
+T 2A 01
+R 00 00 00 00
+T 2A 01 3A 69 00 B7 CA 39 01 3D 3D CA 39 01 CD
+R 00 00 00 00 00 03 00 00 00 07 00 00 00 0C 00 00
+T 37 01 00 00
+R 00 00 00 00 02 02 18 00
+T 39 01
+R 00 00 00 00
+T 39 01 CD 00 00 C9
+R 00 00 00 00 02 03 81 00
+T 3D 01
+R 00 00 00 00
+T 3D 01 CD 44 01 CD 53 01 C9
+R 00 00 00 00 00 03 00 00 00 06 00 00
+T 44 01
+R 00 00 00 00
+T 44 01 3A 00 00 FE 02 20 04 CD 00 00 C9
+R 00 00 00 00 02 03 3A 00 02 0A 78 00
+T 4F 01
+R 00 00 00 00
+T 4F 01 CD 00 00 C9
+R 00 00 00 00 02 03 23 00
+T 53 01
+R 00 00 00 00
+T 53 01 3A 00 00 FE 02 28 06 CD 00 00 3D 28 03
+R 00 00 00 00 02 03 3A 00 02 0A 1E 00
+T 60 01
+R 00 00 00 00
+T 60 01 CD 00 00
+R 00 00 00 00 02 03 01 00
+T 63 01
+R 00 00 00 00
+T 63 01 CD 00 00 C9
+R 00 00 00 00 02 03 81 00
+T 67 01
+R 00 00 00 00
+T 67 01 3A 67 00 C9
+R 00 00 00 00 00 03 00 00

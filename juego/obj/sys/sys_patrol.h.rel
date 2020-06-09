@@ -1,0 +1,16 @@
+XL2
+H 1 areas D global symbols
+S patrol_nivel_multi1 Ref0000
+S patrol_nivel_multi2 Ref0000
+S patrol_nivel_multi3 Ref0000
+S patrol_nivel_multi4 Ref0000
+S patrol_nivel_multi5 Ref0000
+S patrol_nivel_multi6 Ref0000
+S .__.ABS. Def0000
+S patrol_nivel_single1 Ref0000
+S patrol_nivel_single2 Ref0000
+S patrol_nivel_single3 Ref0000
+S patrol_nivel_single4 Ref0000
+S patrol_nivel_single5 Ref0000
+S patrol_nivel_single6 Ref0000
+A _CODE size 0 flags 0 addr 0

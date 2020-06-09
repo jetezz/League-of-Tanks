@@ -1,0 +1,40 @@
+XL2
+H 1 areas 25 global symbols
+S man_patrol_multi_11_get Ref0000
+S man_patrol_multi_21_get Ref0000
+S man_patrol_multi_12_get Ref0000
+S man_patrol_multi_31_get Ref0000
+S man_patrol_multi_22_get Ref0000
+S man_patrol_multi_13_get Ref0000
+S man_patrol_multi_41_get Ref0000
+S man_patrol_multi_32_get Ref0000
+S man_patrol_multi_23_get Ref0000
+S man_patrol_multi_51_get Ref0000
+S man_patrol_multi_42_get Ref0000
+S man_patrol_multi_33_get Ref0000
+S man_patrol_multi_61_get Ref0000
+S man_patrol_multi_52_get Ref0000
+S man_patrol_multi_43_get Ref0000
+S man_patrol_multi_62_get Ref0000
+S man_patrol_multi_53_get Ref0000
+S man_patrol_multi_63_get Ref0000
+S .__.ABS. Def0000
+S man_patrol_single_11_get Ref0000
+S man_patrol_single_21_get Ref0000
+S man_patrol_single_12_get Ref0000
+S man_patrol_single_31_get Ref0000
+S man_patrol_single_22_get Ref0000
+S man_patrol_single_13_get Ref0000
+S man_patrol_single_41_get Ref0000
+S man_patrol_single_32_get Ref0000
+S man_patrol_single_23_get Ref0000
+S man_patrol_single_51_get Ref0000
+S man_patrol_single_42_get Ref0000
+S man_patrol_single_33_get Ref0000
+S man_patrol_single_61_get Ref0000
+S man_patrol_single_52_get Ref0000
+S man_patrol_single_43_get Ref0000
+S man_patrol_single_62_get Ref0000
+S man_patrol_single_53_get Ref0000
+S man_patrol_single_63_get Ref0000
+A _CODE size 0 flags 0 addr 0

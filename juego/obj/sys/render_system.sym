@@ -1,0 +1,81 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _P1_hudx=  000F     |     _P2_hudx=  0023 
+    _P3_hudx=  0037     |     _P4_hudx=  004B     |     _bala_sp   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |   0 _canon_m   00DA R
+  0 _contado   0000 GR  |   0 _contado=  00E6 R   |     _contado=  0019 
+  0 _contado=  0028 R   |   0 _hay_bal   00ED R   |     _mapa1     **** GX
+    _mapa2     **** GX  |     _mapa3     **** GX  |     _mapa4     **** GX
+    _mapa5     **** GX  |     _mapa6     **** GX  |     _num_ent   **** GX
+  0 _pintar_   0053 R   |   0 _pintar_   0073 R   |   0 _pintar_   0093 R
+  0 _pintar_   00B3 R   |   0 _pintarc   005F R   |   0 _pintarc   0064 R
+  0 _pintarc   0069 R   |   0 _pintarc   006E R   |   0 _pintarc   007F R
+  0 _pintarc   0084 R   |   0 _pintarc   0089 R   |   0 _pintarc   008E R
+  0 _pintarc   009F R   |   0 _pintarc   00A4 R   |   0 _pintarc   00A9 R
+  0 _pintarc   00AE R   |   0 _pintarc   00BF R   |   0 _pintarc   00C4 R
+  0 _pintarc   00C9 R   |   0 _pintarc   00CE R   |     _plant_s   **** GX
+    _player_   **** GX  |   0 _puntero=  00EF R   |   0 _puntero=  002B R
+  0 _renloop   002D R   |   0 _renloop   00F1 R   |   0 _saltar    00D3 R
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _spr2      **** GX  |     _spr3      **** GX  |     _spr4      **** GX
+    _tileset   **** GX  |   0 _tipspri   0001 GR  |     b_canon_=  000D 
+    b_canon_=  000C     |     b_color =  000B     |     b_h     =  0009 
+    b_height=  0008     |     b_inc_po=  0002     |     b_inc_po=  0006 
+    b_no_sho=  0000     |     b_shoot =  0001     |     b_sta   =  0008 
+    b_vx    =  0006     |     b_vy    =  0007     |     b_w     =  000A 
+    b_width =  0002     |     b_x     =  0000     |     b_xl    =  0002 
+    b_xll   =  0004     |     b_y     =  0001     |     b_yl    =  0003 
+    b_yll   =  0005     |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_dis   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_etm   **** GX
+    cpct_etm   **** GX  |     cpct_get   **** GX  |     cpct_get   **** GX
+    cpct_isK   **** GX  |     cpct_sca   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_wai   **** GX  |     cpct_wai   **** GX
+    cpct_zx7   **** GX  |     create_e   **** GX  |   0 dibujarp   0152 R
+  0 dibujarp   01FE R   |   0 dibujarp   017D R   |   0 dibujarp   0229 R
+  0 dibujarp   01A8 R   |   0 dibujarp   0254 R   |   0 dibujarp   01D3 R
+  0 dibujarp   027F R   |     e_alto  =  0015     |     e_ancho =  0014 
+    e_clock =  0016     |     e_dead  =  000C     |     e_dir   =  000A 
+    e_dir_bo=  0004     |     e_dir_le=  0001     |     e_dir_ri=  0003 
+    e_dir_to=  0002     |     e_ia_pun=  0010     |     e_ia_pun=  0011 
+    e_ia_pun=  0012     |     e_ia_pun=  0013     |     e_ia_st =  0009 
+    e_ia_st_=  0002     |     e_ia_st_=  0000     |     e_ia_st_=  0003 
+    e_ia_st_=  000F     |     e_ia_st_=  0001     |     e_ia_x  =  000D 
+    e_ia_y  =  000E     |     e_sh    =  000B     |     e_vx    =  0006 
+    e_vy    =  0007     |     e_x     =  0000     |     e_xl    =  0002 
+    e_xll   =  0004     |     e_y     =  0001     |     e_yl    =  0003 
+    e_yll   =  0005     |     entityma   **** GX  |     entityma   **** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    entityma   **** GX  |     entityma   **** GX  |     init_ent   **** GX
+  0 jugador_   0115 GR  |     map_firs   **** GX  |     map_getV   **** GX
+    map_swit   **** GX  |     max_bale=  0005 G   |     neg_vel_=  FFFFFFFF 
+    neg_vel_=  FFFFFFFC     |   0 pintar_h   0145 GR  |   0 pintar_l   02AA GR
+    plant_re   **** GX  |     pos_vel_=  0001     |     pos_vel_=  0004 
+  0 render_b   00E5 R   |   0 render_e   0027 GR  |   0 rendersy   0002 GR
+  0 rendersy   001D GR  |     reset_bu=  00C0     |     siceof_b=  000E 
+    siceof_e=  0017     |     sin_vel =  0000 
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  3D1   flags    0
+

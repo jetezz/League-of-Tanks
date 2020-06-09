@@ -1,0 +1,625 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;sys map colision
+                              3 ;;
+                              4 
+                              5 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              6 .include "sys/sys_map_creator.h.s"
+                              1 ;;
+                              2 ;;sys_map_creator h
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 
+                              8 .globl draw_map_sinhud
+                              9 .globl draw_map
+                             10 .globl next_map
+                             11 .globl reset_lvl
+                             12 .globl cambiar_colisiones
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              7 .include "assets.h.s"
+                              1 ;;
+                              2 ;;Assets globals
+                              3 ;;
+                              4 
+                              5 .globl _cannons_sp_00
+                              6 .globl _cannons_sp_01
+                              7 .globl _cannons_sp_02
+                              8 .globl _cannons_sp_03
+                              9 .globl _cannons_sp_04
+                             10 .globl _cannons_sp_05
+                             11 .globl _cannons_sp_06
+                             12 .globl _cannons_sp_07
+                             13 .globl _cannons_sp_08
+                             14 .globl _cannons_sp_09
+                             15 .globl _cannons_sp_10
+                             16 .globl _cannons_sp_11
+                             17 .globl _cannons_sp_12
+                             18 .globl _cannons_sp_13
+                             19 .globl _cannons_sp_14
+                             20 .globl _cannons_sp_15
+                             21 .globl _cannons_sp_16
+                             22 .globl _cannons_sp_17
+                             23 .globl _cannons_sp_18
+                             24 .globl _cannons_sp_19
+                             25 .globl _player_sp
+                             26 .globl _spr2
+                             27 .globl _spr3
+                             28 .globl _spr4
+                             29 .globl _mapa1
+                             30 .globl _mapa2
+                             31 .globl _mapa3
+                             32 .globl _mapa4
+                             33 .globl _mapa5
+                             34 .globl _mapa6
+                             35 .globl _single_mapa1
+                             36 .globl _single_mapa2
+                             37 .globl _single_mapa3
+                             38 .globl _single_mapa4
+                             39 .globl _single_mapa5
+                             40 .globl _single_mapa6
+                             41 .globl _plant_sp
+                             42 
+                             43 .globl _tileset_00
+                             44 .globl _bala_sp
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              8 .include "man/state_manager.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl manage_game
+                              8 .globl jugandostate_init
+                              9 .globl set_Ingame
+                             10 .globl set_Gameover
+                             11 .globl set_Inicio
+                             12 .globl _pausa
+                             13 .globl _gamemode
+                             14 
+                             15 .globl get_gamemode
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                              9 .include "sys_map_colision.h.s"
+                              1 ;;
+                              2 ;;sys map colision h
+                              3 ;;
+                              4 
+                              5 
+                     0000     6 sin_inicializar=0
+                     0001     7 siguiente_colision=1
+                     0002     8 partida_terminada=2
+                              9 
+                             10 .globl comp_colisiones
+                             11 .globl buscar_tile
+                             12 .globl reiniciar_colisiones
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                             10 .include "man/st_game_over.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 .globl updategameover_init
+                              6 .globl updategameover
+                              7 .globl set_winner_pos
+                              8 .globl estado_game_over
+                              9 .globl reiniciar_gameover
+                             10 .globl single_end_init
+                             11 .globl single_end_update
+                             12 .globl kill_all
+                             13 
+                     0001    14 single_muere=1
+                     0000    15 mueren_todos=0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+                             11 
+                             12 
+                             13 
+                             14 
+   0000 00 00                15 _puntero_mapa: .dw #_mapa1
+   0002 00                   16 estado_colisiones: .db #00
+                             17 
+                             18 ;;INPUT:
+                             19 
+                             20 ;;B POSICION EN X
+                             21 ;;C POSICION EN Y
+                             22 ;;D ANCHO
+                             23 ;;E ALTO
+                             24 ;;H direcion que mira el canon  (solo para canon) en balas h 0
+                             25 
+                             26 ;; comprobar colisiones 
+   0003                      27 comp_colisiones::
+                             28 
+                             29 
+                             30 ;; en b tengo x
+                             31 ;; en c tengo y	
+                             32 
+   0003 7C            [ 4]   33 	ld a ,h
+                             34 		
+   0004 FE 01         [ 7]   35 		cp #1
+   0006 28 24         [12]   36 		jr z, _left
+   0008 FE 02         [ 7]   37 		cp #2
+   000A 28 47         [12]   38 		jr z, _up
+   000C FE 03         [ 7]   39 		cp #3 
+   000E 28 05         [12]   40 		jr z, _right
+   0010 FE 04         [ 7]   41 		cp #4 
+   0012 28 28         [12]   42 		jr z, _down
+   0014 C9            [10]   43 ret
+                             44 		
+                             45 
+                             46 	
+                             47 	
+                             48 
+   0015                      49 		_right:
+   0015 7A            [ 4]   50 			ld a, d    ;;(4)  	 SUMAMOS EL ANCHO
+   0016 80            [ 4]   51 			add a,b
+   0017 47            [ 4]   52 			ld b ,a
+                             53 
+   0018 C5            [11]   54 			push bc
+   0019 D5            [11]   55 			push de	
+   001A CD 63 00      [17]   56 				call buscar_tile
+   001D D1            [10]   57 			pop de	
+   001E C1            [10]   58 			pop bc
+                             59 			
+   001F 3D            [ 4]   60 			dec a 
+   0020 28 02         [12]   61 			jr z, _el_primero_pasa
+   0022 3C            [ 4]   62 			inc a
+   0023 C9            [10]   63 			ret
+   0024                      64 			_el_primero_pasa:
+   0024 7B            [ 4]   65 			ld a, e      ;; 15 SUMAMOS EL ALTO
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+   0025 3D            [ 4]   66 			dec a
+   0026 81            [ 4]   67 			add a,c
+   0027 4F            [ 4]   68 			ld c ,a	
+                             69 					
+   0028 CD 63 00      [17]   70 			call buscar_tile	
+   002B C9            [10]   71 			ret
+                             72 			
+                             73 
+                             74 			
+                             75 	
+   002C                      76 		_left:
+   002C 3E FF         [ 7]   77 			ld a, #-1
+   002E 80            [ 4]   78 			add a,b
+   002F 47            [ 4]   79 			ld b ,a
+   0030 C5            [11]   80 			push bc
+   0031 D5            [11]   81 			push de	
+   0032 CD 63 00      [17]   82 				call buscar_tile
+   0035 D1            [10]   83 			pop de	
+   0036 C1            [10]   84 			pop bc
+   0037 3D            [ 4]   85 			dec a 
+   0038 28 EA         [12]   86 			jr z, _el_primero_pasa
+   003A 3C            [ 4]   87 			inc a
+   003B C9            [10]   88 			ret
+                             89 		
+                             90 
+                             91 	
+                             92 	
+   003C                      93 		_down:
+   003C 7B            [ 4]   94 			ld a, e    ;;(16)    SUMAMOS EL ALTO
+   003D 81            [ 4]   95 			add a,c
+   003E 4F            [ 4]   96 			ld c ,a
+   003F C5            [11]   97 			push bc
+   0040 D5            [11]   98 			push de	
+   0041 CD 63 00      [17]   99 				call buscar_tile
+   0044 D1            [10]  100 			pop de	
+   0045 C1            [10]  101 			pop bc
+   0046 3D            [ 4]  102 			dec a
+   0047 28 02         [12]  103 			jr z, _el_primero_pasa_y
+   0049 3C            [ 4]  104 			inc a
+   004A C9            [10]  105 			ret
+   004B                     106 			_el_primero_pasa_y:
+   004B 7A            [ 4]  107 			ld a, d   ;;(3)   sumamos el ancho
+   004C 3D            [ 4]  108 			dec a
+   004D 80            [ 4]  109 			add a,b
+   004E 47            [ 4]  110 			ld b ,a
+   004F CD 63 00      [17]  111 			call buscar_tile
+   0052 C9            [10]  112 			ret
+                            113 			
+                            114 		
+   0053                     115 		_up:
+                            116 			
+   0053 3E FF         [ 7]  117 			ld a, #-1
+   0055 81            [ 4]  118 			add a,c
+   0056 4F            [ 4]  119 			ld c ,a
+   0057 C5            [11]  120 			push bc
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+   0058 D5            [11]  121 			push de	
+   0059 CD 63 00      [17]  122 				call buscar_tile
+   005C D1            [10]  123 			pop de	
+   005D C1            [10]  124 			pop bc
+   005E 3D            [ 4]  125 			dec a
+   005F 28 EA         [12]  126 			jr z, _el_primero_pasa_y
+   0061 3C            [ 4]  127 			inc a
+   0062 C9            [10]  128 			ret
+                            129 
+                            130 
+                            131 		
+                            132 
+                            133 	
+                            134 
+                            135 
+                            136 
+                            137 
+                            138 
+                            139 
+   0063                     140 buscar_tile::
+                            141 
+                            142 
+                            143 
+                            144 
+                            145 
+                            146 
+                            147 
+   0063 CB 39         [ 8]  148  srl c
+   0065 CB 39         [ 8]  149  srl c
+   0067 CB 39         [ 8]  150  srl c
+                            151 
+                            152 
+                            153  
+                            154 
+                            155 
+   0069 CB 38         [ 8]  156  srl b
+   006B CB 38         [ 8]  157  srl b
+                            158  	
+                            159 
+                            160  
+   006D CD 8A 00      [17]  161 call coger_puntero
+                            162 
+                            163 
+   0070 79            [ 4]  164 ld a, c
+   0071 B7            [ 4]  165 	or a
+   0072 28 07         [12]  166 		jr z, tile_0
+   0074                     167 		loop_y:
+   0074 11 14 00      [10]  168 			ld de, #20
+   0077 19            [11]  169 			add hl, de
+   0078 3D            [ 4]  170 			dec a	
+   0079 20 F9         [12]  171 		jr nz, loop_y
+                            172 
+   007B                     173 	tile_0:
+                            174 
+   007B 16 00         [ 7]  175 	ld d, #0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+   007D 58            [ 4]  176 	ld e, b
+   007E 19            [11]  177 	add hl, de  ;; aqui tengo el tile que le hemos pedido
+                            178 
+   007F 7E            [ 7]  179 	ld a ,(hl)
+   0080 FE 01         [ 7]  180 	cp #01
+   0082 28 03         [12]  181 	jr z , _puedes_pasar
+   0084 3E 00         [ 7]  182 	ld a ,#0
+   0086 C9            [10]  183 	ret
+   0087                     184 	_puedes_pasar:
+   0087 3E 01         [ 7]  185 	ld a, #1
+                            186 
+   0089 C9            [10]  187 	ret
+                            188 
+                            189 
+                            190 
+   008A                     191 coger_puntero::
+                            192 
+   008A 21 00 00      [10]  193 ld hl, #_puntero_mapa
+   008D 7E            [ 7]  194 ld a, (hl)
+   008E 5F            [ 4]  195 ld e, a
+   008F 23            [ 6]  196 inc hl
+   0090 7E            [ 7]  197 ld a, (hl)
+   0091 57            [ 4]  198 ld d , a
+   0092 62            [ 4]  199 ld h, d
+   0093 6B            [ 4]  200 ld l, e
+                            201 
+   0094 C9            [10]  202 	ret
+                            203 
+                            204 
+                            205 
+                            206 
+                            207 
+                            208 
+                            209 
+                            210 
+                            211 
+                            212 
+                            213 
+                            214 
+                            215 
+                            216 
+   0095                     217 cambiar_colisiones::
+                            218 
+                            219 
+                            220 
+   0095 3A 02 00      [13]  221 ld a, (estado_colisiones)
+   0098 FE 00         [ 7]  222 cp #sin_inicializar
+   009A 20 1A         [12]  223 jr nz,_NO_inicializar_colisiones ;; Comprobamos si el nivel actual es 0 o otro para inicializar o ir al siguiente
+   009C                     224 _inicializar_colisiones:	;; inicializo el nivel y lo pongo en el nivel_1
+                            225 
+   009C CD 00 00      [17]  226 call get_gamemode				;;cojo el gamemode
+   009F FE 05         [ 7]  227 cp #5
+   00A1 28 08         [12]  228 jr z,_colisiones_single			;;inicializo para ir al single o al multi
+   00A3                     229 _colision_multi:
+                            230 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+   00A3 21 46 01      [10]  231 ld hl, #_mapa_1_multi
+   00A6 22 BD 00      [16]  232 ld(_puntero_colision_siguiente),hl
+   00A9 18 06         [12]  233 jr salir
+                            234 
+   00AB                     235 _colisiones_single:
+                            236 
+   00AB 21 C2 00      [10]  237 ld hl, #_mapa_1_single
+   00AE 22 BD 00      [16]  238 ld(_puntero_colision_siguiente),hl
+                            239 
+   00B1                     240 salir:
+   00B1 3E 01         [ 7]  241 ld a, #siguiente_colision ;;pongo el estado a siguiente nivel para que salte a los siguientes y no inicialice
+   00B3 32 02 00      [13]  242 ld (estado_colisiones),a
+                            243 
+   00B6                     244 _NO_inicializar_colisiones: ;; salto al nivel que toca
+                            245 
+                            246 
+   00B6 CD 00 00      [17]  247 call estado_game_over
+   00B9 3D            [ 4]  248 dec a
+   00BA 28 03         [12]  249 jr z,_reiniciar_posiciones
+                            250 
+                     00BD   251  _puntero_colision_siguiente=.+1
+   00BC C3 00 00      [10]  252  jp 0000
+                            253 
+   00BF                     254 _reiniciar_posiciones:
+                     00C0   255  _puntero_repetir_colision=.+1
+   00BF C3 00 00      [10]  256  jp 0000
+                            257 
+                            258 
+                            259 	
+                            260 
+   00C2                     261 	_mapa_1_single:
+                            262 
+   00C2 11 00 00      [10]  263 	ld de, #_single_mapa1
+   00C5 21 00 00      [10]  264 	ld hl , #_puntero_mapa
+   00C8 73            [ 7]  265 	ld (hl), e
+   00C9 23            [ 6]  266 	inc hl
+   00CA 72            [ 7]  267 	ld (hl), d
+                            268 
+                            269 
+                            270 
+   00CB 21 D8 00      [10]  271 	ld hl, #_mapa_2_single		
+   00CE 22 BD 00      [16]  272 	ld(_puntero_colision_siguiente),hl
+                            273 
+   00D1 21 C2 00      [10]  274 	ld hl, #_mapa_1_single		
+   00D4 22 C0 00      [16]  275 	ld(_puntero_repetir_colision),hl
+                            276 
+                            277 
+   00D7 C9            [10]  278 	ret
+   00D8                     279 	_mapa_2_single:
+                            280 
+   00D8 11 00 00      [10]  281 	ld de, #_single_mapa2
+   00DB 21 00 00      [10]  282 	ld hl , #_puntero_mapa
+   00DE 73            [ 7]  283 	ld (hl), e
+   00DF 23            [ 6]  284 	inc hl
+   00E0 72            [ 7]  285 	ld (hl), d
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
+Hexadecimal [16-Bits]
+
+
+
+                            286 
+                            287 
+   00E1 21 EE 00      [10]  288 	ld hl, #_mapa_3_single		
+   00E4 22 BD 00      [16]  289 	ld(_puntero_colision_siguiente),hl
+                            290 
+   00E7 21 D8 00      [10]  291 	ld hl, #_mapa_2_single		
+   00EA 22 C0 00      [16]  292 	ld(_puntero_repetir_colision),hl
+                            293 
+                            294 
+   00ED C9            [10]  295 	ret
+   00EE                     296 	_mapa_3_single:
+                            297 
+   00EE 11 00 00      [10]  298 	ld de, #_single_mapa3
+   00F1 21 00 00      [10]  299 	ld hl , #_puntero_mapa
+   00F4 73            [ 7]  300 	ld (hl), e
+   00F5 23            [ 6]  301 	inc hl
+   00F6 72            [ 7]  302 	ld (hl), d
+                            303 
+                            304 
+   00F7 21 04 01      [10]  305 	ld hl, #_mapa_4_single		
+   00FA 22 BD 00      [16]  306 	ld(_puntero_colision_siguiente),hl
+                            307 
+   00FD 21 EE 00      [10]  308 	ld hl, #_mapa_3_single		
+   0100 22 C0 00      [16]  309 	ld(_puntero_repetir_colision),hl
+                            310 
+                            311 
+   0103 C9            [10]  312 	ret
+   0104                     313 	_mapa_4_single:
+                            314 
+   0104 11 00 00      [10]  315 	ld de, #_single_mapa4
+   0107 21 00 00      [10]  316 	ld hl , #_puntero_mapa
+   010A 73            [ 7]  317 	ld (hl), e
+   010B 23            [ 6]  318 	inc hl
+   010C 72            [ 7]  319 	ld (hl), d
+                            320 
+                            321 
+   010D 21 1A 01      [10]  322 	ld hl, #_mapa_5_single		
+   0110 22 BD 00      [16]  323 	ld(_puntero_colision_siguiente),hl
+                            324 
+   0113 21 04 01      [10]  325 	ld hl, #_mapa_4_single		
+   0116 22 C0 00      [16]  326 	ld(_puntero_repetir_colision),hl
+                            327 
+                            328 
+   0119 C9            [10]  329 	ret
+   011A                     330 	_mapa_5_single:
+                            331 
+   011A 11 00 00      [10]  332 	ld de, #_single_mapa5
+   011D 21 00 00      [10]  333 	ld hl , #_puntero_mapa
+   0120 73            [ 7]  334 	ld (hl), e
+   0121 23            [ 6]  335 	inc hl
+   0122 72            [ 7]  336 	ld (hl), d
+                            337 
+                            338 
+   0123 21 30 01      [10]  339 	ld hl, #_mapa_6_single		
+   0126 22 BD 00      [16]  340 	ld(_puntero_colision_siguiente),hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
+Hexadecimal [16-Bits]
+
+
+
+                            341 
+   0129 21 1A 01      [10]  342 	ld hl, #_mapa_5_single		
+   012C 22 C0 00      [16]  343 	ld(_puntero_repetir_colision),hl
+                            344 
+                            345 
+   012F C9            [10]  346 	ret
+   0130                     347 	_mapa_6_single:
+                            348 
+                            349 
+   0130 11 00 00      [10]  350 	ld de, #_single_mapa6
+   0133 21 00 00      [10]  351 	ld hl , #_puntero_mapa
+   0136 73            [ 7]  352 	ld (hl), e
+   0137 23            [ 6]  353 	inc hl
+   0138 72            [ 7]  354 	ld (hl), d
+                            355 
+   0139 21 C2 00      [10]  356 	ld hl, #_mapa_1_single		
+   013C 22 BD 00      [16]  357 	ld(_puntero_colision_siguiente),hl
+                            358 
+   013F 21 30 01      [10]  359 	ld hl, #_mapa_6_single		
+   0142 22 C0 00      [16]  360 	ld(_puntero_repetir_colision),hl
+   0145 C9            [10]  361 	ret
+                            362 
+                            363 
+                            364 
+                            365 
+                            366 
+                            367 
+                            368 
+                            369 
+                            370 
+                            371 
+   0146                     372 	_mapa_1_multi:
+                            373 
+   0146 11 00 00      [10]  374 	ld de, #_mapa1
+   0149 21 00 00      [10]  375 	ld hl , #_puntero_mapa
+   014C 73            [ 7]  376 	ld (hl), e
+   014D 23            [ 6]  377 	inc hl
+   014E 72            [ 7]  378 	ld (hl), d
+                            379 
+   014F 21 56 01      [10]  380 	ld hl, #_mapa_2_multi		
+   0152 22 BD 00      [16]  381 	ld(_puntero_colision_siguiente),hl
+                            382 
+                            383 
+                            384 
+   0155 C9            [10]  385 	ret
+   0156                     386 	_mapa_2_multi:
+                            387 
+   0156 11 00 00      [10]  388 	ld de, #_mapa2
+   0159 21 00 00      [10]  389 	ld hl , #_puntero_mapa
+   015C 73            [ 7]  390 	ld (hl), e
+   015D 23            [ 6]  391 	inc hl
+   015E 72            [ 7]  392 	ld (hl), d
+                            393 
+   015F 21 66 01      [10]  394 	ld hl, #_mapa_3_multi		
+   0162 22 BD 00      [16]  395 	ld(_puntero_colision_siguiente),hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
+Hexadecimal [16-Bits]
+
+
+
+                            396 
+                            397 
+   0165 C9            [10]  398 	ret
+   0166                     399 	_mapa_3_multi:
+                            400 
+   0166 11 00 00      [10]  401 	ld de, #_mapa3
+   0169 21 00 00      [10]  402 	ld hl , #_puntero_mapa
+   016C 73            [ 7]  403 	ld (hl), e
+   016D 23            [ 6]  404 	inc hl
+   016E 72            [ 7]  405 	ld (hl), d
+                            406 
+                            407 
+   016F 21 76 01      [10]  408 	ld hl, #_mapa_4_multi		
+   0172 22 BD 00      [16]  409 	ld(_puntero_colision_siguiente),hl
+   0175 C9            [10]  410 	ret
+                            411 	
+   0176                     412 	_mapa_4_multi:
+                            413 
+   0176 11 00 00      [10]  414 	ld de, #_mapa4
+   0179 21 00 00      [10]  415 	ld hl , #_puntero_mapa
+   017C 73            [ 7]  416 	ld (hl), e
+   017D 23            [ 6]  417 	inc hl
+   017E 72            [ 7]  418 	ld (hl), d
+                            419 
+                            420 
+   017F 21 86 01      [10]  421 	ld hl, #_mapa_5_multi		
+   0182 22 BD 00      [16]  422 	ld(_puntero_colision_siguiente),hl
+   0185 C9            [10]  423 	ret
+   0186                     424 	_mapa_5_multi:
+                            425 
+   0186 11 00 00      [10]  426 	ld de, #_mapa5
+   0189 21 00 00      [10]  427 	ld hl , #_puntero_mapa
+   018C 73            [ 7]  428 	ld (hl), e
+   018D 23            [ 6]  429 	inc hl
+   018E 72            [ 7]  430 	ld (hl), d
+                            431 
+                            432 
+   018F 21 96 01      [10]  433 	ld hl, #_mapa_6_multi		
+   0192 22 BD 00      [16]  434 	ld(_puntero_colision_siguiente),hl
+   0195 C9            [10]  435 	ret
+   0196                     436 	_mapa_6_multi:
+                            437 
+   0196 11 00 00      [10]  438 	ld de, #_mapa6
+   0199 21 00 00      [10]  439 	ld hl , #_puntero_mapa
+   019C 73            [ 7]  440 	ld (hl), e
+   019D 23            [ 6]  441 	inc hl
+   019E 72            [ 7]  442 	ld (hl), d
+                            443 
+   019F 21 46 01      [10]  444 	ld hl, #_mapa_1_multi		
+   01A2 22 BD 00      [16]  445 	ld(_puntero_colision_siguiente),hl
+   01A5 C9            [10]  446 	ret
+                            447 	
+                            448 
+   01A6                     449 reiniciar_colisiones::
+   01A6 3E 00         [ 7]  450 ld a,#0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+   01A8 32 02 00      [13]  451 ld (estado_colisiones),a
+   01AB C9            [10]  452 	ret

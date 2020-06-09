@@ -1,0 +1,54 @@
+XL2
+H 1 areas 13 global symbols
+S clean_entities Ref0000
+S entityman_num_entities Ref0000
+S entityman_num_Bales Ref0000
+S limpiar_animaciones Ref0000
+S limpiar_ultima Ref0000
+S clean_entities_init Ref0000
+S iniciar_animacion_canon Ref0000
+S iniciar_animacion_bala Ref0000
+S .__.ABS. Def0000
+S limpiar_ultimo Ref0000
+S entityman_getEntityVector_IX Ref0000
+S max_bales Def0005
+S _num_entities Ref0000
+S animar Ref0000
+S init_entities Ref0000
+S create_entities Ref0000
+S entityman_getArray_Bales Ref0000
+A _CODE size 5A flags 0 addr 0
+S kill_bullet_2 Def000E
+S kill_bullet_init_2 Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 22 47 00 DD 22
+R 00 00 00 00 02 03 10 00 02 06 02 00 00 09 00 00
+T 0B 00 1C 00 C9
+R 00 00 00 00 00 02 00 00
+T 0E 00
+R 00 00 00 00
+T 0E 00 F5 CD 00 00 CD 00 00 F1 4F CD 4D 00 DD 21
+R 00 00 00 00 02 04 07 00 02 07 04 00 00 0C 00 00
+T 1C 00 00 00 3D B7 28 08 11 0E 00
+R 00 00 00 00
+T 25 00
+R 00 00 00 00
+T 25 00 DD 19 3D 20 FB
+R 00 00 00 00
+T 2A 00
+R 00 00 00 00
+T 2A 00 DD 22 35 00 CD 4D 00 3E 05 91 11 00 00 2A
+R 00 00 00 00 00 04 00 00 00 07 00 00
+T 38 00 35 00 01 0E 00 09
+R 00 00 00 00 00 02 00 00
+T 3E 00
+R 00 00 00 00
+T 3E 00 01 0E 00 ED B0 3D 20 F8 21 00 00 7E 3D 77
+R 00 00 00 00
+T 4C 00 C9
+R 00 00 00 00
+T 4D 00
+R 00 00 00 00
+T 4D 00 DD 66 0D DD 6E 0C 11 0B 00 19 36 00 C9
+R 00 00 00 00

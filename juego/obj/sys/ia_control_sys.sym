@@ -1,0 +1,78 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 _IA_ent    004D GR  |   0 _arrived   015E R
+  0 _arrived   0194 R   |   0 _canon_m   0072 R   |   0 _canon_m   0115 R
+  0 _compr_s   0080 GR  |   0 _cont_en=  0034 R   |   0 _contado   0001 R
+  0 _continu   0063 R   |     _dificul=  0033     |     _dificul=  0029 
+    _dificul=  0019     |     _dificul=  000F     |   0 _dispara   00D1 R
+  0 _dispara   00E7 R   |   0 _endif_x   0164 R   |   0 _endif_y   01A8 R
+  0 _ent_arr=  003E R   |   0 _ent_arr=  003A R   |   0 _ent_cou=  0073 R
+  0 _equals    0115 R   |   0 _es_ia     00E0 R   |     _gamemod   **** GX
+  0 _hacer_s   0059 R   |   0 _hay_col   00A4 R   |   0 _iteraci   0000 R
+  0 _loop      0040 R   |   0 _loop_in   0024 R   |   0 _loop_sh   0084 R
+  0 _move_to   01EE R   |   0 _nivel_1   020D R   |   0 _nivel_1   022D R
+    _nivel_1=  0001     |     _nivel_1=  FFFFFFFF     |     _nivel_1=  0004 
+    _nivel_1=  FFFFFFFC     |   0 _nivel_2   0213 R   |   0 _nivel_2   0242 R
+    _nivel_2=  0002     |     _nivel_2=  FFFFFFFE     |     _nivel_2=  0008 
+    _nivel_2=  FFFFFFF8     |   0 _nivel_3   0219 R   |   0 _nivel_4   021F R
+  0 _no_coli   00A6 R   |   0 _no_coli   00FA R   |   0 _no_disp   0062 R
+  0 _no_disp   00EA R   |   0 _no_equa   0115 R   |   0 _no_es_i   00DD R
+  0 _no_hago   0057 R   |   0 _no_ia_e   0072 R   |   0 _no_mira   0192 R
+  0 _no_mira   017D R   |   0 _no_mira   015C R   |   0 _no_mira   0147 R
+    _num_ent   **** GX  |   0 _num_pat   0012 R   |   0 _obj_gre   0149 R
+  0 _obj_gre   017F R   |   0 _objx_le   0136 R   |   0 _objx_le   016C R
+  0 _patron    01F3 R   |     _pausa     **** GX  |   0 _posicio   0105 R
+  0 _posicio   010E R   |   0 _posicio   00C8 R   |   0 _posicio   00F1 R
+  0 _puntero=  0070 R   |   0 _reset_p   01D5 R   |   0 _salir_a   01F6 R
+  0 _salir_s   0115 R   |   0 _stan      01E9 R   |   0 _vel_x_i   0002 R
+  0 _vel_x_i   0004 R   |   0 _vel_y_i   0003 R   |   0 _vel_y_i   0005 R
+    abajo   =  0004     |   0 actualiz   01E0 R   |     alto_can=  0010 
+    ancho_ca=  0004     |     arriba  =  0002     |   0 cambiar_   01FD GR
+  0 cambiar_   0225 GR  |     create_b   **** GX  |     create_e   **** GX
+    derecha =  0003     |     e_alto  =  0015     |     e_ancho =  0014 
+    e_clock =  0016     |     e_dead  =  000C     |     e_dir   =  000A 
+    e_dir_bo=  0004     |     e_dir_le=  0001     |     e_dir_ri=  0003 
+    e_dir_to=  0002     |     e_ia_pun=  0010     |     e_ia_pun=  0011 
+    e_ia_pun=  0012     |     e_ia_pun=  0013     |     e_ia_st =  0009 
+    e_ia_st_=  0002     |     e_ia_st_=  0000     |     e_ia_st_=  0003 
+    e_ia_st_=  000F     |     e_ia_st_=  0001     |     e_ia_x  =  000D 
+    e_ia_y  =  000E     |     e_sh    =  000B     |     e_vx    =  0006 
+    e_vy    =  0007     |     e_x     =  0000     |     e_xl    =  0002 
+    e_xll   =  0004     |     e_y     =  0001     |     e_yl    =  0003 
+    e_yll   =  0005     |     entityma   **** GX  |     entityma   **** GX
+    get_game   **** GX  |     hacer_di   **** GX  |     hacer_di   **** GX
+    init_ent   **** GX  |     izquierd=  0001     |     jugandos   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+    man_patr   **** GX  |     man_patr   **** GX  |     man_patr   **** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    manage_g   **** GX  |     patrol_i=  FFFFFFFF     |     set_Game   **** GX
+    set_Inga   **** GX  |     set_Inic   **** GX  |     siceof_e=  0017 
+  0 sys_ai_c   0006 GR  |   0 sys_ai_c   0033 GR  |   0 sys_ai_p   01A9 GR
+    sys_crea   **** GX  |     sys_crea   **** GX  |   0 sys_ia_s   0122 GR
+  0 sys_is_m   012C GR  |     velocida   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  257   flags    0
+

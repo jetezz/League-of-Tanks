@@ -1,0 +1,7 @@
+XL2
+H 1 areas 4 global symbols
+S entityman_num_Bales Ref0000
+S .__.ABS. Def0000
+S max_bales Def0005
+S entityman_getArray_Bales Ref0000
+A _CODE size 0 flags 0 addr 0

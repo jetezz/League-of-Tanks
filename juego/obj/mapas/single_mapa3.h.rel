@@ -1,0 +1,7 @@
+XL2
+H 1 areas 4 global symbols
+S _single_mapa3_W Def0014
+S .__.ABS. Def0000
+S _single_mapa3_SIZE Def01F4
+S _single_mapa3_H Def0019
+A _CODE size 0 flags 0 addr 0

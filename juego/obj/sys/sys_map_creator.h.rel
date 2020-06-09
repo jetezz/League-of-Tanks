@@ -1,0 +1,9 @@
+XL2
+H 1 areas 6 global symbols
+S draw_map Ref0000
+S reset_lvl Ref0000
+S next_map Ref0000
+S .__.ABS. Def0000
+S cambiar_colisiones Ref0000
+S draw_map_sinhud Ref0000
+A _CODE size 0 flags 0 addr 0

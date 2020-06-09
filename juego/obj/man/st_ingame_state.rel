@@ -1,0 +1,123 @@
+XL2
+H 1 areas 6C global symbols
+S _plant_sp Ref0000
+S cpct_setInterruptHandler_asm Ref0000
+S plant_update Ref0000
+S rendersys_update Ref0000
+S cambiar_velocidad_ia Ref0000
+S render_entities Ref0000
+S cpct_setPalette_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S set_Inicio Ref0000
+S clean_entities Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S sys_ai_control_update Ref0000
+S cpct_akp_stop_asm Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S move_entities_init Ref0000
+S cpct_drawSprite_asm Ref0000
+S sys_comp_disp_init Ref0000
+S _single_mapa1 Ref0000
+S _cannons_sp_00 Ref0000
+S _single_mapa2 Ref0000
+S _cannons_sp_10 Ref0000
+S _cannons_sp_01 Ref0000
+S _single_mapa3 Ref0000
+S _cannons_sp_11 Ref0000
+S _cannons_sp_02 Ref0000
+S _single_mapa4 Ref0000
+S _cannons_sp_12 Ref0000
+S _cannons_sp_03 Ref0000
+S cpct_etm_drawTilemap4x8_ag_asm Ref0000
+S limpiar_animaciones Ref0000
+S _single_mapa5 Ref0000
+S _cannons_sp_13 Ref0000
+S _cannons_sp_04 Ref0000
+S _single_mapa6 Ref0000
+S _cannons_sp_14 Ref0000
+S _cannons_sp_05 Ref0000
+S _cannons_sp_15 Ref0000
+S _cannons_sp_06 Ref0000
+S _cannons_sp_16 Ref0000
+S _cannons_sp_07 Ref0000
+S _tileset_00 Ref0000
+S _cannons_sp_17 Ref0000
+S _cannons_sp_08 Ref0000
+S limpiar_ultima Ref0000
+S _cannons_sp_18 Ref0000
+S _cannons_sp_09 Ref0000
+S clean_entities_init Ref0000
+S _cannons_sp_19 Ref0000
+S cpct_waitHalts_asm Ref0000
+S iniciar_animacion_canon Ref0000
+S check_Pause Ref0000
+S check_game_begin Ref0000
+S iniciar_animacion_bala Ref0000
+S jugandostate_init Ref0000
+S sys_comp_disp_update Ref0000
+S get_gamemode Ref0000
+S _gamemode Ref0000
+S .__.ABS. Def0000
+S set_Gameover Ref0000
+S manage_game Ref0000
+S check_restart Ref0000
+S cpct_setVideoMemoryPage_asm Ref0000
+S check_key Ref0000
+S _spr2 Ref0000
+S jugador_muerto Ref0000
+S limpiar_ultimo Ref0000
+S _spr3 Ref0000
+S _spr4 Ref0000
+S pintar_hud Ref0000
+S _player_sp Ref0000
+S _mapa1 Ref0000
+S cambiar_dificultad_ia Ref0000
+S _mapa2 Ref0000
+S _bala_sp Ref0000
+S _mapa3 Ref0000
+S cpct_zx7b_decrunch_s_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S rendersys_init Ref0000
+S _mapa4 Ref0000
+S check_gameover Ref0000
+S _mapa5 Ref0000
+S _mapa6 Ref0000
+S cpct_akp_SFXStopAll_asm Ref0000
+S animar Ref0000
+S pintar_letras Ref0000
+S check_Esc Ref0000
+S sys_ai_patrol Ref0000
+S _pausa Ref0000
+S check_key_init Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S cpct_disableFirmware_asm Ref0000
+S sys_ia_stand_by Ref0000
+S sys_ai_control_init Ref0000
+S move_entities Ref0000
+S check_nextGamemode Ref0000
+S cpct_getRandom_mxor_u8_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S set_Ingame Ref0000
+S check_unPause Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_etm_setDrawTilemap4x8_ag_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size 23 flags 0 addr 0
+S ingame_render Def001C
+S ingame_update Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 03 5F 00 02 06 02 00 02 09 3F 00
+T 0A 00 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 02 37 00 02 05 0B 00 02 08 55 00
+T 13 00 00 00 CD 00 00 CD 00 00 C9
+R 00 00 00 00 02 02 51 00 02 05 33 00 02 08 57 00
+T 1C 00
+R 00 00 00 00
+T 1C 00 CD 00 00 CD 00 00 C9
+R 00 00 00 00 02 03 09 00 02 06 03 00

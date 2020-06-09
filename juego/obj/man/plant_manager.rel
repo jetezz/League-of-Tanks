@@ -1,0 +1,64 @@
+XL2
+H 1 areas 33 global symbols
+S _plant_sp Ref0000
+S set_Inicio Ref0000
+S _single_mapa1 Ref0000
+S _cannons_sp_00 Ref0000
+S _single_mapa2 Ref0000
+S _cannons_sp_10 Ref0000
+S _cannons_sp_01 Ref0000
+S _single_mapa3 Ref0000
+S _cannons_sp_11 Ref0000
+S _cannons_sp_02 Ref0000
+S _single_mapa4 Ref0000
+S _cannons_sp_12 Ref0000
+S _cannons_sp_03 Ref0000
+S _single_mapa5 Ref0000
+S _cannons_sp_13 Ref0000
+S _cannons_sp_04 Ref0000
+S _single_mapa6 Ref0000
+S _cannons_sp_14 Ref0000
+S _cannons_sp_05 Ref0000
+S _cannons_sp_15 Ref0000
+S _cannons_sp_06 Ref0000
+S _cannons_sp_16 Ref0000
+S _cannons_sp_07 Ref0000
+S _tileset_00 Ref0000
+S _cannons_sp_17 Ref0000
+S _cannons_sp_08 Ref0000
+S _cannons_sp_18 Ref0000
+S _cannons_sp_09 Ref0000
+S _cannons_sp_19 Ref0000
+S jugandostate_init Ref0000
+S get_gamemode Ref0000
+S _gamemode Ref0000
+S .__.ABS. Def0000
+S set_Gameover Ref0000
+S manage_game Ref0000
+S _spr2 Ref0000
+S _spr3 Ref0000
+S _spr4 Ref0000
+S _player_sp Ref0000
+S _mapa1 Ref0000
+S _mapa2 Ref0000
+S _bala_sp Ref0000
+S _mapa3 Ref0000
+S _mapa4 Ref0000
+S _mapa5 Ref0000
+S _mapa6 Ref0000
+S _pausa Ref0000
+S set_Ingame Ref0000
+A _CODE size E flags 0 addr 0
+S planta Def0000
+S plantman_getPlanta Def0009
+S create_plant Def0000
+T 00 00
+R 00 00 00 00
+T 00 00
+R 00 00 00 00
+T 00 00 00 00 00 00 04 10 FA 00 C9
+R 00 00 00 00 02 04 00 00
+T 09 00
+R 00 00 00 00
+T 09 00 DD 21 00 00 C9
+R 00 00 00 00 00 04 00 00

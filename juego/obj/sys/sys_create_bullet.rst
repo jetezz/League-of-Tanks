@@ -1,0 +1,710 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;create bullet
+                              3 ;;
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              4 .include "sys_create_bullet.h.s"
+                              1 ;;
+                              2 ;;sys create bullet h
+                              3 ;;
+                              4 
+                              5 .globl sys_create_bullet_init
+                              6 .globl create_bullets_array
+                              7 .globl hacer_disparo
+                              8 
+                              9 
+                             10 
+                     0001    11 _nivel_1x=1
+                     0004    12 _nivel_1y=4
+                     0002    13 _nivel_2x=2
+                     0008    14 _nivel_2y=8
+                             15 
+                     FFFFFFFF    16 _nivel_1x_n=-1
+                     FFFFFFFC    17 _nivel_1y_n=-4
+                     FFFFFFFE    18 _nivel_2x_n=-2
+                     FFFFFFF8    19 _nivel_2y_n=-8
+                             20 
+                             21 
+                             22 .globl velocidad_balas
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "../man/shot_manager.h.s"
+                              1 ;;
+                              2 ;;shot manager h
+                              3 ;;
+                              4 
+                              5 ;; MACROS
+                              6 
+                              7 .macro DefineBalesArray _nameb,_N
+                              8 _nameb::
+                              9 	.rept _N
+                             10 DefineBalesAnnonimous -1,00,00,00,00,00,00,00,00,00,00,0x00
+                             11 	.endm 
+                             12 .endm
+                             13 
+                             14 .macro DefineBalesAnnonimous _bx,_by,_bxl,_byl,_bxll,_byll,_bvx,_bvy,_bsta,_bwidth,_bheight,_bcolor
+                             15 .db _bx           ;; posicion de la bala x          
+                             16 .db _by		;; posicion de la bala y
+                             17 .db _bxl		;; posicion anterior x
+                             18 .db _byl		;; posicion anterior y
+                             19 .db _bxll		;; posicion 2 veces anterior x
+                             20 .db _byll		;; posicion 2 veces anterior y
+                             21 .db _bvx 		;; velocidad bala en x
+                             22 .db _bvy		;; belocidad bala en y
+                             23 .db _bsta		;; estado de la bala   ¡¡¡¡¡YA NO SIRVEE¡¡¡¡¡¡
+                             24 .db _bwidth       ;; anchura de la bala
+                             25 .db _bheight      ;; altura de la bala
+                             26 .db _bcolor       ;; color de la bala
+                             27 .db 0x00 ,0x00    ;; posicion de memoria del canon
+                             28  
+                             29 .endm
+                             30 
+                             31 ;; CONSTANTES QUE REFERENCIAN LOS ATRIBUTOS DE LAS BALAS (USADOS POR LOS REGISTROS IX E IY, RESPECTIVAMENTE)
+                             32 
+                     0000    33 b_x       = 0
+                     0001    34 b_y       = 1
+                     0002    35 b_xl      = 2
+                     0003    36 b_yl      = 3
+                     0004    37 b_xll     = 4
+                     0005    38 b_yll     = 5
+                     0006    39 b_vx      = 6      ;; velocidad bala eje x
+                     0007    40 b_vy      = 7      ;; velocidad bala eje y
+                     0008    41 b_sta     = 8      ;; estado de la bala
+                     0009    42 b_h       = 9      ;; altura de la bala
+                     000A    43 b_w       = 10     ;; anchura de la bala
+                     000B    44 b_color   = 11     ;; color de la bala (sustituible por puntero a sprite)
+                     000C    45 b_canon_l = 12     ;; posicion de memoria del canon en l
+                     000D    46 b_canon_h = 13	 ;; posicion de memoria del canon en h
+                     000E    47 siceof_b  = 14
+                             48 
+                             49 
+                             50 ;; GLOBAL FUNCTIONS
+                             51 
+                             52 
+                             53 .globl entityman_getArray_Bales
+                             54 .globl entityman_num_Bales
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                             55 
+                             56 
+                             57 ;; CONSTANTES:
+                             58 
+                             59 ;; Numero maximo de balas
+                             60 
+                     0005    61 max_bales == 5
+                             62 
+                             63 ;; Posicionar centralmente la bala con respecto al sprite
+                             64 
+                     0002    65 b_inc_pos_x = 2
+                     0006    66 b_inc_pos_y = 6
+                             67 
+                             68 ;; DIMENSIONES POSIBLES DE LA BALA
+                             69 
+                             70 ;; Cuando va en horizontal
+                             71 
+                     0002    72 b_width      = 2   ;; anchura de la bala
+                     0008    73 b_height     = 8   ;; altura de la bala
+                             74 
+                             75 ;; Cuando va en vertical
+                             76 
+                             77 
+                             78 
+                             79 
+                             80 
+                             81 ;; Color por defecto de la bala
+                             82 
+                     00C0    83 reset_bullet_color = 0xC0   ;; Color negro
+                             84 
+                             85 ;; Velocidades posibles de la bala
+                             86 
+                     0001    87 pos_vel_h = 1
+                     FFFFFFFF    88 neg_vel_h = -1
+                     0004    89 pos_vel_v = 4
+                     FFFFFFFC    90 neg_vel_v = -4
+                     0000    91 sin_vel = 0
+                             92 
+                             93 ;; Estados de la bala
+                             94 
+                     0000    95 b_no_shoot  = 0    ;; bala no disparada (estado por defecto)
+                     0001    96 b_shoot     = 1    ;; bala disparada
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                              6 .include "../man/entity_manager.h.s"
+                              1 ;;
+                              2 ;;entity Manager
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl create_entities
+                              8 .globl entityman_getEntityVector_IX
+                              9 .globl entityman_num_entities
+                             10 .globl _num_entities
+                             11 .globl init_entities
+                             12 
+                             13 
+                             14 ;; Entity definition macro
+                             15 
+                             16 
+                             17 .macro Entity _name,_x,_y,_xl,_yl,_xll,_yll,_vx,_vy,_sh,_iast,_dir,_dead,_ancho,_alto
+                             18 _name::
+                             19 .db _x      ;;posicion x del tanque
+                             20 .db _y	;;posicion y del tanque
+                             21 .db _xl	;;posicion de la x anterior
+                             22 .db _yl	;;posicion de la y anterior
+                             23 .db _xll	;;posicion de la x 2 veces anterior
+                             24 .db _yll	;;posicion de la x 2 veces anterior
+                             25 .db _vx	;;velocidad en x
+                             26 .db _vy	;;velocidad en y
+                             27 .db _sh	;;shot 0 no 1 si
+                             28 .db _iast;;type 0 jugador por teclas ,1 enemigo ia
+                             29 .db _dir    ;;movimiento  
+                             30 .db _sh     ;; si no dispara es 0 si dispara es 1
+                             31 .db _dead;;canon 0 vivo 1 muere
+                             32 .db 0x00, 0x00    ;;iax ia y
+                             33 .db _iast  ;;Estado anterior de la ia 
+                             34 .dw 0x0000	;; puntero de la patrulla que voy a realizar
+                             35 .dw 0x0000 ;;puntero al estado que tengo que saltar
+                             36 .db _ancho
+                             37 .db _alto
+                             38 .db 25  ;; contador cambio direcion del sprite
+                             39 
+                             40 
+                             41 
+                             42 
+                             43 
+                             44 
+                             45 .endm 
+                             46 
+                             47 
+                             48 .macro NextEntity
+                             49 ld de, #siceof_e
+                             50 	add ix, de
+                             51 .endm
+                             52 	
+                             53 
+                     0000    54 e_x  	= 0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                     0001    55 e_y  	= 1
+                     0002    56 e_xl  = 2
+                     0003    57 e_yl  = 3
+                     0004    58 e_xll = 4
+                     0005    59 e_yll = 5
+                     0006    60 e_vx	= 6
+                     0007    61 e_vy	= 7
+                     0008    62 e_sh 	= 8
+                     0009    63 e_ia_st = 9
+                     000A    64 e_dir = 10
+                     000B    65 e_sh = 11
+                     000C    66 e_dead=12
+                     000D    67 e_ia_x= 13
+                     000E    68 e_ia_y= 14
+                     000F    69 e_ia_st_prev=15
+                     0010    70 e_ia_puntero_patrol_h=16
+                     0011    71 e_ia_puntero_patrol_l=17
+                     0012    72 e_ia_puntero_st_h=18
+                     0013    73 e_ia_puntero_st_l=19
+                     0014    74 e_ancho 	= 20
+                     0015    75 e_alto	= 21
+                     0016    76 e_clock     = 22
+                     0017    77 siceof_e 	= 23
+                             78 
+                             79 ;; Movimiento de la entidad
+                     0003    80 e_dir_right = 3
+                     0002    81 e_dir_top   = 2
+                     0001    82 e_dir_left  = 1
+                     0004    83 e_dir_bott  = 4
+                             84 
+                             85 ;; Dibujo que representa el movimiento de la entidad
+                             86 
+                             87  ;;      2
+                             88  ;;     1e3
+                             89  ;;      4
+                             90 
+                             91 
+                             92 ;;Estados ia
+                     0000    93 e_ia_st_noIA 	= 0
+                     0001    94 e_ia_st_stand_by	= 1
+                     0002    95 e_ia_st_move_to   = 2
+                     0003    96 e_ia_st_patron	= 3
+                             97 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+                              7 .include "../sys/sys_map_colision.h.s"
+                              1 ;;
+                              2 ;;sys map colision h
+                              3 ;;
+                              4 
+                              5 
+                     0000     6 sin_inicializar=0
+                     0001     7 siguiente_colision=1
+                     0002     8 partida_terminada=2
+                              9 
+                             10 .globl comp_colisiones
+                             11 .globl buscar_tile
+                             12 .globl reiniciar_colisiones
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                              8 .include "../sys/sys_interrup_music.h.s"
+                              1 ;;
+                              2 ;;sys_interrup_music h
+                              3 ;;
+                              4 
+                              5 
+                              6 ;;canciones
+                              7 .globl _song
+                              8 .globl _song2
+                              9 .globl _song3
+                             10 .globl _song4
+                             11 
+                             12 
+                             13 
+                             14 ;;funciones
+                             15 .globl generate_music
+                             16 
+                             17 
+                             18 .globl sonido_disparo
+                             19 .globl sonido_muerte
+                             20 .globl sonido_win
+                             21 .globl sonido_interaccion
+                             22 
+                             23 .globl off_muerte
+                             24 
+                             25 
+                             26 .globl cancion1
+                             27 .globl cancion2
+                             28 .globl cancion3
+                             29 .globl cancion4
+                             30 
+                             31 .globl stopmusic
+                             32 .globl next_song
+                             33 
+                             34 
+                             35 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+                              9 
+   5173 01                   10 velocidad_x:   .db  # _nivel_1x
+   5174 FF                   11 velocidad_x_n: .db  # _nivel_1x_n
+   5175 04                   12 velocidad_y:   .db  # _nivel_1y
+   5176 FC                   13 velocidad_y_n: .db  # _nivel_1y_n
+                             14 
+   5177                      15 sys_create_bullet_init::
+                             16 
+   5177 CD 40 49      [17]   17 call entityman_getArray_Bales  ;; cogemos en ix el puntero a las balas
+   517A CD 45 49      [17]   18  call entityman_num_Bales
+   517D 22 90 51      [16]   19  ld (_contador_balas), hl
+   5180 DD 22 9F 51   [20]   20  ld (_puntero_balas), ix
+                             21 
+   5184 C9            [10]   22   ret
+   5185                      23 hacer_disparo::
+                             24    
+   5185 DD 7E 0B      [19]   25   ld a,e_sh(ix)
+   5188 3D            [ 4]   26      dec a
+   5189 28 03         [12]   27     jr z, _ya_ha_disparado        ;;compruebo si ha disparado o no
+   518B                      28     _disparamos:
+                             29     
+                             30 
+   518B CD 8F 51      [17]   31    call create_bullets            ;;no ha disparado y creo la bala
+                             32  
+   518E                      33 _ya_ha_disparado:
+   518E C9            [10]   34 	ret
+                             35 
+                             36 
+   518F                      37 create_bullets::
+                             38    
+                             39    ;; INCREMENTO EL NUMERO DE BALAS CREADAS
+                     001D    40   _contador_balas=.+1
+   518F 21 00 00      [10]   41   ld hl, #0000       ;; cargo la posicion de memoria donde tengo mi registro de balas creadas en el registro HL
+                             42    
+   5192 7E            [ 7]   43    ld   a, (hl)                    ;; obtengo el numero de balas cargandolo en el registro A
+   5193 F5            [11]   44    push af
+   5194 FE 05         [ 7]   45    cp #max_bales                            ;; numero maximo de balas que podemos tener
+   5196 28 4E         [12]   46    jr z , _maximo_de_balas         ;;si es 0 hemos llegado al numero maximo y no incrementamos 
+                             47    ;;no hemos llegado al maximo de balas
+                             48 
+                             49 
+   5198 CD F4 51      [17]   50    call create_bullet 
+                             51 
+   519B F1            [10]   52    pop af   
+                             53 
+   519C 3C            [ 4]   54    inc  a  
+                             55 
+                     002C    56    _puntero_balas=.+2
+   519D DD 21 00 00   [14]   57   ld ix, #0000
+                             58 
+                             59 
+                             60    
+                             61    ;;compruebo si la bala que va a salir choca con el mapa
+   51A1 FD 22 A7 51   [20]   62 ld (_puntero_bala_creada), iy
+                     0034    63    _puntero_bala_creada=.+2
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+   51A5 DD 21 00 00   [14]   64    ld ix, #0x0000
+                             65 
+                             66   
+                             67 
+   51A9 DD 66 0D      [19]   68    ld h,b_canon_h(ix)
+   51AC DD 6E 0C      [19]   69    ld l,b_canon_l(ix)
+                             70 
+   51AF 11 0A 00      [10]   71    ld de, #e_dir
+   51B2 19            [11]   72    add hl , de
+   51B3 66            [ 7]   73    ld h, (hl)
+   51B4 DD 46 00      [19]   74    ld b, b_x(ix)
+   51B7 DD 4E 01      [19]   75    ld c, b_y(ix)
+   51BA 16 02         [ 7]   76    ld d, #b_width
+   51BC 1E 08         [ 7]   77    ld e, #b_height
+   51BE E5            [11]   78 push hl
+   51BF CD 97 5E      [17]   79    call comp_colisiones
+   51C2 E1            [10]   80 pop hl
+                             81 
+   51C3 3D            [ 4]   82   dec a
+   51C4 28 01         [12]   83   jr z,_crear_bala
+                             84 ;;la bala choca con el mapa por lo que salgo de crear bala 
+   51C6 C9            [10]   85   ret
+                             86 
+                             87 
+   51C7                      88   _crear_bala:
+   51C7 CD 1E 57      [17]   89   call sonido_disparo
+                             90   ;la bala no choca con el mapa asi que la creo
+                             91     ;; incremento el numero de balas
+                             92 
+   51CA DD 36 09 08   [19]   93   ld b_h(ix), #b_height
+   51CE DD 36 0A 02   [19]   94   ld b_w(ix), #b_width
+                             95 
+                             96 
+   51D2 DD 66 0D      [19]   97   ld h,b_canon_h(ix)
+   51D5 DD 6E 0C      [19]   98   ld l,b_canon_l(ix)
+   51D8 11 0B 00      [10]   99   ld de, #e_sh
+   51DB 19            [11]  100   add hl, de
+   51DC 36 01         [10]  101   ld (hl), #1
+                            102 
+                            103 
+   51DE 2A 90 51      [16]  104   ld hl, (_contador_balas) 
+   51E1 7E            [ 7]  105    ld a ,(hl)
+   51E2 3C            [ 4]  106    inc a
+   51E3 77            [ 7]  107    ld   (hl), a       
+                            108 
+   51E4 18 0D         [12]  109    jr _saltamos2
+                            110 
+   51E6                     111    _maximo_de_balas:
+                            112 
+                            113    
+                            114    
+                            115   
+                            116 
+   51E6 F1            [10]  117     pop af
+                            118 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+   51E7 DD 66 0D      [19]  119     ld h,b_canon_h(ix)
+   51EA DD 6E 0C      [19]  120   ld l,b_canon_l(ix)
+   51ED 11 0B 00      [10]  121   ld de, #e_sh
+   51F0 19            [11]  122   add hl, de
+   51F1 36 00         [10]  123   ld (hl), #0
+                            124 
+   51F3                     125  _saltamos2:
+                            126 
+   51F3 C9            [10]  127 	ret
+                            128 
+                            129 ;;
+                            130 ;; FUNCTION: ME ACTUALIZA LA POSICION DE LA BALA A LA DEL PERSONAJE CON TAL DE QUE SE DISPARE DESDE AHI
+                            131 ;; INPUT: DIRECCION DE MEMORIA DE LA ENTIDAD QUE HA DISPARADO (EN IX)
+                            132 ;; CHANGE: POSX, POSY, VELX, VELY, HEIGHT, WIDTH, STATUS DE LA BALA
+                            133 ;;
+   51F4                     134 create_bullet::
+                            135 
+   51F4 DD E5         [15]  136    push ix ;; Me guardo la posicion de memoria de la entidad que ha disparado en la pila con tal de utilizarlo mas adelante
+                            137    
+   51F6 DD 22 F2 52   [20]  138    ld (_puntero_entidad_disparo), ix  ;; Guardo la direccion de memoria de la entidad que ha disparado en el registro de para que la bala pueda guardarlo en sus datos
+                            139 
+   51FA DD 2A 9F 51   [20]  140   ld ix, (_puntero_balas)
+   51FE 2A 90 51      [16]  141   ld hl, (_contador_balas)
+   5201 7E            [ 7]  142    ld a, (hl)
+   5202 B7            [ 4]  143    or a
+   5203 28 08         [12]  144    jr z, _no_hay
+   5205                     145 _multi:
+   5205 01 0E 00      [10]  146    ld bc, #siceof_b    ;;NUMERO DE BYTES QUE TIENE CADA ENTIDAD
+   5208 DD 09         [15]  147    add ix, bc
+   520A 3D            [ 4]  148    dec a
+   520B 20 F8         [12]  149    jr nz ,_multi
+                            150 
+   520D                     151 _no_hay:
+   520D DD 22 13 52   [20]  152    ld (_puntero_bala_actual), ix
+                     00A0   153    _puntero_bala_actual = . + 2
+   5211 FD 21 00 00   [14]  154    ld iy, #0x0000  ;; Me guardo en el registro iy, la posicion de memoria relativa a mi entidad bala, con tal de utilizarlo mas adelante
+                            155    
+   5215 DD E1         [14]  156    pop ix  ;; Recupero la posicion de memoria de la entidad que ha disparado
+                            157 
+   5217 DD 46 00      [19]  158    ld b, e_x(ix)    ;; posicion x de la entidad que ha disparado
+   521A DD 4E 01      [19]  159    ld c, e_y(ix)    ;; posicion y de la entidad que ha disparado
+   521D DD 7E 0A      [19]  160    ld a, e_dir(ix)  ;; direccion a la que apunta la entidad que ha disparado
+                            161 
+                            162    ;; Cogemos los datos de las entidades
+                            163 
+                            164    ;; If que determina la direccion de la bala, a partir de la del personaje
+                            165 
+   5220 FE 03         [ 7]  166    cp #e_dir_right
+   5222 CA 34 52      [10]  167    jp z, _b_dir_right
+   5225 FE 02         [ 7]  168    cp #e_dir_top
+   5227 CA 64 52      [10]  169    jp z, _b_dir_top
+   522A FE 01         [ 7]  170    cp #e_dir_left
+   522C CA 93 52      [10]  171    jp z, _b_dir_left
+   522F FE 04         [ 7]  172    cp #e_dir_bott
+   5231 CA BF 52      [10]  173    jp z, _b_dir_bott
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
+Hexadecimal [16-Bits]
+
+
+
+                            174 
+                            175    ;; Segun la direccion, se establece la velocidad en xy, siendo esta positiva, o negativa. Ademas, se establece la anchura y la altura de la bala en funcion de viaja horizontalmente. o verticalmente (ya que su ancho y su alto, varian en esas condiciones)
+                            176    
+   5234                     177    _b_dir_right:
+                            178 
+                            179    ;; INCREMENTAMOS EL VALOR DE LOS REGISTROS B Y C, CON TAL DE QUE LA BALA SE DISPARO DESDE UNA POSICION REALISTA DEL SPRITE (EVITANDO QUE ESTA MISMA, COLISIONE CON EL)
+                            180 
+                            181 
+                            182 
+   5234 DD 7E 14      [19]  183   ld a ,e_ancho(ix)
+   5237 80            [ 4]  184   add b
+   5238 3C            [ 4]  185   inc a
+   5239 47            [ 4]  186   ld b,a
+                            187 
+   523A DD 7E 15      [19]  188   ld a ,e_alto(ix)
+   523D CB 3F         [ 8]  189   srl a  
+   523F 81            [ 4]  190   add c
+                            191  
+                            192   .rept #4
+                            193   dec a
+                            194   .endm
+   5240 3D            [ 4]    1   dec a
+   5241 3D            [ 4]    1   dec a
+   5242 3D            [ 4]    1   dec a
+   5243 3D            [ 4]    1   dec a
+                            195   
+   5244 4F            [ 4]  196   ld c,a
+                            197 
+                            198 
+                            199 
+                            200 
+   5245 FD 70 00      [19]  201    ld b_x(iy), b     ;; ponemos la posicion del personaje como posicion de la bala en el eje x
+   5248 FD 71 01      [19]  202    ld b_y(iy), c     ;; lo mismo con el eje y
+   524B FD 70 02      [19]  203    ld b_xl(iy), b    ;; lo mismo con la posicion anterior en el eje x
+   524E FD 71 03      [19]  204    ld b_yl(iy), c    ;; y en el eje y
+   5251 FD 70 04      [19]  205    ld b_xll(iy), b   ;; lo mismo con la posicion anterior de la anterior
+   5254 FD 71 05      [19]  206    ld b_yll(iy), c   ;; y en el eje y
+                            207 
+   5257 3A 73 51      [13]  208       ld a,(velocidad_x)
+   525A FD 77 06      [19]  209       ld b_vx(iy), a      ;; Asigno la velocidad en x
+   525D FD 36 07 00   [19]  210       ld b_vy(iy), #sin_vel      ;; Elimino la velocidad en y (para que solo se desplace en una direccion, evitando que vaya en diagonales por el posible cambio de posicion del personaje, o por otros factores)
+                            211     
+   5261 C3 E9 52      [10]  212       jp _endif
+                            213 
+                            214 
+   5264                     215    _b_dir_top:
+                            216 
+                            217 
+                            218  
+                            219 
+   5264 DD 7E 14      [19]  220   ld a ,e_ancho(ix)
+   5267 CB 3F         [ 8]  221   srl a
+   5269 80            [ 4]  222   add b 
+   526A 3D            [ 4]  223   dec a
+   526B 47            [ 4]  224   ld b,a
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
+Hexadecimal [16-Bits]
+
+
+
+                            225 
+                            226    
+                            227   .rept #9
+                            228   dec c
+                            229   .endm
+   526C 0D            [ 4]    1   dec c
+   526D 0D            [ 4]    1   dec c
+   526E 0D            [ 4]    1   dec c
+   526F 0D            [ 4]    1   dec c
+   5270 0D            [ 4]    1   dec c
+   5271 0D            [ 4]    1   dec c
+   5272 0D            [ 4]    1   dec c
+   5273 0D            [ 4]    1   dec c
+   5274 0D            [ 4]    1   dec c
+                            230  
+                            231 
+                            232 
+   5275 FD 70 00      [19]  233    ld b_x(iy), b     ;; ponemos la posicion del personaje como posicion de la bala en el eje x
+   5278 FD 71 01      [19]  234    ld b_y(iy), c     ;; lo mismo con el eje y
+   527B FD 70 02      [19]  235    ld b_xl(iy), b    ;; lo mismo con la posicion anterior en el eje x
+   527E FD 71 03      [19]  236    ld b_yl(iy), c    ;; y en el eje y
+   5281 FD 70 04      [19]  237    ld b_xll(iy), b   ;; lo mismo con la posicion anterior de la anterior
+   5284 FD 71 05      [19]  238    ld b_yll(iy), c   ;; y en el eje y
+                            239 
+   5287 3A 76 51      [13]  240       ld a,(velocidad_y_n)
+   528A FD 36 06 00   [19]  241       ld b_vx(iy), #sin_vel      ;; Elimino la velocidad en x (para que solo se desplace en una direccion, evitando que vaya en diagonales por el posible cambio de posicion del personaje, o por otros factores)
+   528E FD 77 07      [19]  242       ld b_vy(iy), a      ;; Asigno la velocidad en y
+                            243    
+   5291 18 56         [12]  244       jr _endif
+                            245 
+                            246 
+   5293                     247    _b_dir_left:
+                            248 
+                            249 
+                            250 
+                            251   .rept #3
+                            252   dec b
+                            253   .endm
+   5293 05            [ 4]    1   dec b
+   5294 05            [ 4]    1   dec b
+   5295 05            [ 4]    1   dec b
+                            254 
+   5296 DD 7E 15      [19]  255   ld a ,e_alto(ix)
+   5299 CB 3F         [ 8]  256   srl a
+   529B 81            [ 4]  257   add c
+   529C 3D            [ 4]  258   dec a
+   529D 3D            [ 4]  259   dec a
+   529E 3D            [ 4]  260   dec a
+   529F 3D            [ 4]  261   dec a
+   52A0 4F            [ 4]  262   ld c,a
+                            263 
+                            264 
+   52A1 FD 70 00      [19]  265    ld b_x(iy), b     ;; ponemos la posicion del personaje como posicion de la bala en el eje x
+   52A4 FD 71 01      [19]  266    ld b_y(iy), c     ;; lo mismo con el eje y
+   52A7 FD 70 02      [19]  267    ld b_xl(iy), b    ;; lo mismo con la posicion anterior en el eje x
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
+Hexadecimal [16-Bits]
+
+
+
+   52AA FD 71 03      [19]  268    ld b_yl(iy), c    ;; y en el eje y
+   52AD FD 70 04      [19]  269    ld b_xll(iy), b   ;; lo mismo con la posicion anterior de la anterior
+   52B0 FD 71 05      [19]  270    ld b_yll(iy), c   ;; y en el eje y
+                            271 
+                            272 
+   52B3 3A 74 51      [13]  273       ld a,(velocidad_x_n)
+   52B6 FD 77 06      [19]  274       ld b_vx(iy), a      ;; Asigno la velocidad en x
+   52B9 FD 36 07 00   [19]  275       ld b_vy(iy), #sin_vel      ;; Elimino la velocidad en y (para que solo se desplace en una direccion, evitando que vaya en diagonales por el posible cambio de posicion del personaje, o por otros factores)
+                            276   
+   52BD 18 2A         [12]  277       jr _endif
+                            278 
+                            279 
+   52BF                     280    _b_dir_bott:
+                            281 
+                            282  
+                            283 
+   52BF DD 7E 14      [19]  284   ld a ,e_ancho(ix)
+   52C2 CB 3F         [ 8]  285   srl a
+   52C4 80            [ 4]  286   add b 
+   52C5 3D            [ 4]  287   dec a
+   52C6 47            [ 4]  288   ld b,a
+                            289 
+   52C7 DD 7E 15      [19]  290   ld a ,e_alto(ix)  
+   52CA 81            [ 4]  291   add c
+   52CB 3C            [ 4]  292   inc a
+   52CC 4F            [ 4]  293   ld c,a
+                            294 
+                            295 
+   52CD FD 70 00      [19]  296    ld b_x(iy), b     ;; ponemos la posicion del personaje como posicion de la bala en el eje x
+   52D0 FD 71 01      [19]  297    ld b_y(iy), c     ;; lo mismo con el eje y
+   52D3 FD 70 02      [19]  298    ld b_xl(iy), b    ;; lo mismo con la posicion anterior en el eje x
+   52D6 FD 71 03      [19]  299    ld b_yl(iy), c    ;; y en el eje y
+   52D9 FD 70 04      [19]  300    ld b_xll(iy), b   ;; lo mismo con la posicion anterior de la anterior
+   52DC FD 71 05      [19]  301    ld b_yll(iy), c   ;; y en el eje y
+                            302    
+   52DF 3A 75 51      [13]  303       ld a,(velocidad_y)      
+   52E2 FD 36 06 00   [19]  304       ld b_vx(iy), #sin_vel      ;; Elimino la velocidad en x (para que solo se desplace en una direccion, evitando que vaya en diagonales por el posible cambio de posicion del personaje, o por otros factores)
+   52E6 FD 77 07      [19]  305       ld b_vy(iy), a     ;; Asigno la velocidad en y
+                            306     
+                            307    
+                            308 
+   52E9                     309   _endif:
+                            310 
+                            311 
+                            312 
+   52E9 FD 36 0B C0   [19]  313    ld b_color (iy), #reset_bullet_color  ;; Establezco el color de la bala a su color por defecto
+   52ED FD 36 08 01   [19]  314    ld b_sta(iy), #b_shoot  ;; Actualizo el estado de la bala, a disparada
+                            315    
+                     017F   316    _puntero_entidad_disparo = . + 1
+   52F1 21 00 00      [10]  317    ld hl, #0x0000
+                            318    
+   52F4 FD 75 0C      [19]  319    ld b_canon_l(iy), l
+   52F7 FD 74 0D      [19]  320    ld b_canon_h(iy), h
+                            321 
+   52FA C9            [10]  322 	ret
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+                            323 
+                            324 ;;INPUT A NIVEL DE VELOCIDAD DE BALAS
+   52FB                     325 velocidad_balas::
+   52FB FE 01         [ 7]  326   cp #1
+   52FD 28 04         [12]  327 jr z,_nivel_1_v
+   52FF FE 02         [ 7]  328   cp #2
+   5301 28 15         [12]  329 jr z,_nivel_2_v
+                            330   
+                            331 
+                            332 
+                            333 
+                            334 
+   5303                     335 _nivel_1_v:
+   5303 3E 01         [ 7]  336   ld a, #_nivel_1x
+   5305 32 73 51      [13]  337   ld (velocidad_x), a
+   5308 3E FF         [ 7]  338   ld a, #_nivel_1x_n
+   530A 32 74 51      [13]  339   ld (velocidad_x_n), a
+   530D 3E 04         [ 7]  340   ld a, #_nivel_1y
+   530F 32 75 51      [13]  341   ld (velocidad_y), a
+   5312 3E FC         [ 7]  342   ld a, #_nivel_1y_n
+   5314 32 76 51      [13]  343   ld (velocidad_y_n), a
+                            344 
+   5317 C9            [10]  345   ret
+   5318                     346 _nivel_2_v:
+   5318 3E 02         [ 7]  347   ld a, #_nivel_2x
+   531A 32 73 51      [13]  348   ld (velocidad_x), a
+   531D 3E FE         [ 7]  349   ld a, #_nivel_2x_n
+   531F 32 74 51      [13]  350   ld (velocidad_x_n), a
+   5322 3E 08         [ 7]  351   ld a, #_nivel_2y
+   5324 32 75 51      [13]  352   ld (velocidad_y), a
+   5327 3E F8         [ 7]  353   ld a, #_nivel_2y_n
+   5329 32 76 51      [13]  354   ld (velocidad_y_n), a
+   532C C9            [10]  355   ret
+                            356 
+   532D C9            [10]  357   ret

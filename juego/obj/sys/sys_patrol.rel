@@ -1,0 +1,153 @@
+XL2
+H 1 areas 36 global symbols
+S entityman_num_entities Ref0000
+S man_patrol_multi_11_get Ref0000
+S man_patrol_multi_21_get Ref0000
+S man_patrol_multi_12_get Ref0000
+S man_patrol_multi_31_get Ref0000
+S man_patrol_multi_22_get Ref0000
+S man_patrol_multi_13_get Ref0000
+S man_patrol_multi_41_get Ref0000
+S man_patrol_multi_32_get Ref0000
+S man_patrol_multi_23_get Ref0000
+S man_patrol_multi_51_get Ref0000
+S man_patrol_multi_42_get Ref0000
+S man_patrol_multi_33_get Ref0000
+S man_patrol_multi_61_get Ref0000
+S man_patrol_multi_52_get Ref0000
+S man_patrol_multi_43_get Ref0000
+S man_patrol_multi_62_get Ref0000
+S man_patrol_multi_53_get Ref0000
+S man_patrol_multi_63_get Ref0000
+S .__.ABS. Def0000
+S entityman_getEntityVector_IX Ref0000
+S man_patrol_single_11_get Ref0000
+S man_patrol_single_21_get Ref0000
+S man_patrol_single_12_get Ref0000
+S man_patrol_single_31_get Ref0000
+S man_patrol_single_22_get Ref0000
+S man_patrol_single_13_get Ref0000
+S man_patrol_single_41_get Ref0000
+S man_patrol_single_32_get Ref0000
+S man_patrol_single_23_get Ref0000
+S man_patrol_single_51_get Ref0000
+S man_patrol_single_42_get Ref0000
+S man_patrol_single_33_get Ref0000
+S man_patrol_single_61_get Ref0000
+S man_patrol_single_52_get Ref0000
+S man_patrol_single_43_get Ref0000
+S _num_entities Ref0000
+S man_patrol_single_62_get Ref0000
+S man_patrol_single_53_get Ref0000
+S man_patrol_single_63_get Ref0000
+S init_entities Ref0000
+S create_entities Ref0000
+A _CODE size 1E0 flags 0 addr 0
+S patrol_nivel_multi1 Def00F0
+S patrol_nivel_multi2 Def0118
+S patrol_nivel_multi3 Def0140
+S patrol_nivel_multi4 Def0168
+S patrol_nivel_multi5 Def0190
+S patrol_nivel_multi6 Def01B8
+S patrol_nivel_single1 Def0000
+S patrol_nivel_single2 Def0028
+S patrol_nivel_single3 Def0050
+S patrol_nivel_single4 Def0078
+S patrol_nivel_single5 Def00A0
+S patrol_nivel_single6 Def00C8
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 15 00
+T 0E 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 17 00
+T 1C 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 1A 00
+T 28 00
+R 00 00 00 00
+T 28 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 16 00
+T 36 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 19 00
+T 44 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 1D 00
+T 50 00
+R 00 00 00 00
+T 50 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 18 00
+T 5E 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 1C 00
+T 6C 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 20 00
+T 78 00
+R 00 00 00 00
+T 78 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 1B 00
+T 86 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 1F 00
+T 94 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 23 00
+T A0 00
+R 00 00 00 00
+T A0 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 1E 00
+T AE 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 22 00
+T BC 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 26 00
+T C8 00
+R 00 00 00 00
+T C8 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 21 00
+T D6 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 25 00
+T E4 00 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 27 00
+T F0 00
+R 00 00 00 00
+T F0 00 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 01 00
+T FE 00 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 03 00
+T 0C 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 06 00
+T 18 01
+R 00 00 00 00
+T 18 01 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 02 00
+T 26 01 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 05 00
+T 34 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 09 00
+T 40 01
+R 00 00 00 00
+T 40 01 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 04 00
+T 4E 01 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 08 00
+T 5C 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 0C 00
+T 68 01
+R 00 00 00 00
+T 68 01 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 07 00
+T 76 01 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 0B 00
+T 84 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 0F 00
+T 90 01
+R 00 00 00 00
+T 90 01 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 0A 00
+T 9E 01 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 0E 00
+T AC 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 11 00
+T B8 01
+R 00 00 00 00
+T B8 01 CD 00 00 11 17 00 DD 19 CD 00 00 DD 74 10
+R 00 00 00 00 02 03 14 00 02 0B 0D 00
+T C6 01 DD 75 11 DD 19 CD 00 00 DD 74 10 DD 75 11
+R 00 00 00 00 02 08 10 00
+T D4 01 DD 19 CD 00 00 DD 74 10 DD 75 11 C9
+R 00 00 00 00 02 05 12 00

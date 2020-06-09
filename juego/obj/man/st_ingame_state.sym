@@ -1,0 +1,59 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _bala_sp   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _contado=  0019     |     _dificul=  0033 
+    _dificul=  0029     |     _dificul=  0019     |     _dificul=  000F 
+    _gamemod   **** GX  |     _mapa1     **** GX  |     _mapa2     **** GX
+    _mapa3     **** GX  |     _mapa4     **** GX  |     _mapa5     **** GX
+    _mapa6     **** GX  |     _nivel_1=  0001     |     _nivel_1=  FFFFFFFF 
+    _nivel_1=  0004     |     _nivel_1=  FFFFFFFC     |     _nivel_2=  0002 
+    _nivel_2=  FFFFFFFE     |     _nivel_2=  0008     |     _nivel_2=  FFFFFFF8 
+    _pausa     **** GX  |     _plant_s   **** GX  |     _player_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _spr2      **** GX  |     _spr3      **** GX  |     _spr4      **** GX
+    _tileset   **** GX  |     a_ani   =  0005     |     a_con   =  0002 
+    a_h     =  0007     |     a_punt_h=  0004     |     a_punt_l=  0003 
+    a_w     =  0006     |     a_x     =  0000     |     a_y     =  0001 
+    animar     **** GX  |     cambiar_   **** GX  |     cambiar_   **** GX
+    check_Es   **** GX  |     check_Pa   **** GX  |     check_ga   **** GX
+    check_ga   **** GX  |     check_ke   **** GX  |     check_ke   **** GX
+    check_ne   **** GX  |     check_re   **** GX  |     check_un   **** GX
+    clean_en   **** GX  |     clean_en   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_dis   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_etm   **** GX  |     cpct_etm   **** GX  |     cpct_get   **** GX
+    cpct_get   **** GX  |     cpct_isK   **** GX  |     cpct_sca   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_wai   **** GX
+    cpct_wai   **** GX  |     cpct_zx7   **** GX  |     duracion=  0005 
+    get_game   **** GX  |   0 ingame_r   001C GR  |   0 ingame_u   0000 GR
+    iniciar_   **** GX  |     iniciar_   **** GX  |     jugador_   **** GX
+    jugandos   **** GX  |     limpiar_   **** GX  |     limpiar_   **** GX
+    limpiar_   **** GX  |     manage_g   **** GX  |     maximo_b=  0008 
+    maximo_c=  0004     |     move_ent   **** GX  |     move_ent   **** GX
+    pintar_h   **** GX  |     pintar_l   **** GX  |     plant_up   **** GX
+    render_e   **** GX  |     rendersy   **** GX  |     rendersy   **** GX
+    set_Game   **** GX  |     set_Inga   **** GX  |     set_Inic   **** GX
+    siceof_a=  0008     |     sys_ai_c   **** GX  |     sys_ai_c   **** GX
+    sys_ai_p   **** GX  |     sys_comp   **** GX  |     sys_comp   **** GX
+    sys_ia_s   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   23   flags    0
+

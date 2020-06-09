@@ -1,0 +1,81 @@
+XL2
+H 1 areas 46 global symbols
+S _plant_sp Ref0000
+S cpct_setInterruptHandler_asm Ref0000
+S cpct_setPalette_asm Ref0000
+S cpct_isKeyPressed_asm Ref0000
+S cpct_akp_SFXInit_asm Ref0000
+S map_getVideoPrt Ref0000
+S cpct_akp_stop_asm Ref0000
+S cpct_akp_SFXPlay_asm Ref0000
+S cpct_drawStringM0_asm Ref0000
+S cpct_drawSprite_asm Ref0000
+S _single_mapa1 Ref0000
+S _cannons_sp_00 Ref0000
+S _single_mapa2 Ref0000
+S _cannons_sp_10 Ref0000
+S _cannons_sp_01 Ref0000
+S _single_mapa3 Ref0000
+S _cannons_sp_11 Ref0000
+S _cannons_sp_02 Ref0000
+S _single_mapa4 Ref0000
+S _cannons_sp_12 Ref0000
+S _cannons_sp_03 Ref0000
+S cpct_etm_drawTilemap4x8_ag_asm Ref0000
+S _single_mapa5 Ref0000
+S _cannons_sp_13 Ref0000
+S _cannons_sp_04 Ref0000
+S _single_mapa6 Ref0000
+S _cannons_sp_14 Ref0000
+S _cannons_sp_05 Ref0000
+S _cannons_sp_15 Ref0000
+S _cannons_sp_06 Ref0000
+S _cannons_sp_16 Ref0000
+S _cannons_sp_07 Ref0000
+S _tileset_00 Ref0000
+S _cannons_sp_17 Ref0000
+S _cannons_sp_08 Ref0000
+S _cannons_sp_18 Ref0000
+S _cannons_sp_09 Ref0000
+S _cannons_sp_19 Ref0000
+S plantman_getPlanta Ref0000
+S cpct_waitHalts_asm Ref0000
+S .__.ABS. Def0000
+S map_firstBuffer Ref0000
+S cpct_setVideoMemoryPage_asm Ref0000
+S _spr2 Ref0000
+S _spr3 Ref0000
+S _spr4 Ref0000
+S _player_sp Ref0000
+S _mapa1 Ref0000
+S _mapa2 Ref0000
+S _bala_sp Ref0000
+S _mapa3 Ref0000
+S cpct_zx7b_decrunch_s_asm Ref0000
+S cpct_waitVSYNC_asm Ref0000
+S cpct_setVideoMode_asm Ref0000
+S _mapa4 Ref0000
+S create_plant Ref0000
+S _mapa5 Ref0000
+S _mapa6 Ref0000
+S cpct_akp_SFXStopAll_asm Ref0000
+S cpct_akp_musicInit_asm Ref0000
+S cpct_disableFirmware_asm Ref0000
+S cpct_getRandom_mxor_u8_asm Ref0000
+S cpct_akp_musicPlay_asm Ref0000
+S cpct_drawSolidBox_asm Ref0000
+S map_switchBuffers Ref0000
+S cpct_setDrawCharM0_asm Ref0000
+S cpct_etm_setDrawTilemap4x8_ag_asm Ref0000
+S cpct_scanKeyboard_asm Ref0000
+S cpct_getScreenPtr_asm Ref0000
+A _CODE size 1F flags 0 addr 0
+S plant_render Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 EB DD 4E 00 DD 46 01 CD
+R 00 00 00 00 02 03 26 00 02 06 05 00
+T 0E 00 00 00 EB DD 6E 02 DD 66 03 0E 04 06 10 CD
+R 00 00 00 00 02 02 44 00
+T 1C 00 00 00 C9
+R 00 00 00 00 02 02 09 00

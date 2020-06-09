@@ -1,0 +1,56 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 _NO_inic   0014 R   |   0 _NO_inic   0130 R
+    _bala_di=  FFFFFFFF     |     _dificul=  0033     |     _dificul=  0029 
+    _dificul=  0019     |     _dificul=  000F     |     _id_last=  0004 
+  0 _inicial   0009 R   |   0 _inicial   0125 R   |     _nivel_1=  0001 
+    _nivel_1=  FFFFFFFF     |     _nivel_1=  0004     |     _nivel_1=  FFFFFFFC 
+    _nivel_2=  0002     |     _nivel_2=  FFFFFFFE     |     _nivel_2=  0008 
+    _nivel_2=  FFFFFFF8     |   0 _puntero=  001B R   |   0 _puntero=  0131 R
+  0 _puntero=  001E R   |   0 _reinici   001D R   |     _song      **** GX
+    _song2     **** GX  |     _song3     **** GX  |     _song4     **** GX
+    buscar_t   **** GX  |     cambiar_   **** GX  |     cambiar_   **** GX
+    cambiar_   **** GX  |     cancion1   **** GX  |     cancion2   **** GX
+    cancion3   **** GX  |     cancion4   **** GX  |     comp_col   **** GX
+  0 crear_ni   011E GR  |   0 crear_ni   0002 GR  |     create_b   **** GX
+    dificult=  0001     |     dificult=  0002     |     dificult=  0003 
+    dificult=  0004     |     draw_map   **** GX  |     draw_map   **** GX
+    estado_g   **** GX  |   0 estado_n   0001 R   |   0 estado_n   0000 GR
+    generate   **** GX  |     hacer_di   **** GX  |     hay_enti=  0000 
+    kill_all   **** GX  |     kill_bul   **** GX  |     kill_bul   **** GX
+    kill_bul   **** GX  |     mapa_1  =  0001     |     mapa_2  =  0002 
+    mapa_3  =  0003     |     mapa_4  =  0004     |     mapa_5  =  0005 
+    mapa_6  =  0006     |     mapa_sin=  0007     |     mapa_sin=  0008 
+    mapa_sin=  0009     |     mapa_sin=  000A     |     mapa_sin=  000B 
+    mapa_sin=  000C     |     mueren_t=  0000     |     next_map   **** GX
+    next_son   **** GX  |   0 nivel_1    0020 GR  |   0 nivel_2    004B GR
+  0 nivel_3    0073 GR  |   0 nivel_4    009E GR  |   0 nivel_5    00C6 GR
+  0 nivel_6    00F1 GR  |   0 nivel_mu   0133 GR  |   0 nivel_mu   014C GR
+  0 nivel_mu   015F GR  |   0 nivel_mu   0175 GR  |   0 nivel_mu   0188 GR
+  0 nivel_mu   019F R   |     no_hay_e=  0001     |     off_muer   **** GX
+    partida_=  0002     |     patrol_n   **** GX  |     patrol_n   **** GX
+    patrol_n   **** GX  |     patrol_n   **** GX  |     patrol_n   **** GX
+    patrol_n   **** GX  |     patrol_n   **** GX  |     patrol_n   **** GX
+    patrol_n   **** GX  |     patrol_n   **** GX  |     patrol_n   **** GX
+    patrol_n   **** GX  |     posicion   **** GX  |     reinicia   **** GX
+    reinicia   **** GX  |     reinicia   **** GX  |     reset_lv   **** GX
+    set_winn   **** GX  |     siguient=  0001     |     siguient=  0001 
+    siguient=  0001     |     sin_inic=  0000     |     sin_nive=  0000 
+    sin_posi=  0000     |     single_e   **** GX  |     single_e   **** GX
+    single_m=  0001     |   0 sistema_   01AF GR  |     sonido_d   **** GX
+    sonido_i   **** GX  |     sonido_m   **** GX  |     sonido_w   **** GX
+    stopmusi   **** GX  |     sys_ai_c   **** GX  |     sys_ai_c   **** GX
+    sys_ai_p   **** GX  |     sys_crea   **** GX  |     sys_ia_s   **** GX
+    updatega   **** GX  |     updatega   **** GX  |     velocida   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  1D6   flags    0
+

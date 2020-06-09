@@ -1,0 +1,32 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 Single_p   0024 R   |     _canons_   **** GX
+    _gamemod   **** GX  |   0 _main      0067 GR  |     _pausa     **** GX
+    _song      **** GX  |   0 battle_r   0032 R   |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_dis   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_etm   **** GX  |     cpct_etm   **** GX  |     cpct_get   **** GX
+    cpct_get   **** GX  |     cpct_isK   **** GX  |     cpct_sca   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_wai   **** GX
+    cpct_wai   **** GX  |     cpct_zx7   **** GX  |   0 cuatro_p   005D R
+  0 enter      0010 R   |     get_game   **** GX  |     isr        **** GX
+    jugandos   **** GX  |   0 loop       008A R   |     manage_g   **** GX
+    map_firs   **** GX  |     map_getV   **** GX  |     map_swit   **** GX
+  0 one_play   0040 R   |     print_se   **** GX  |     set_Game   **** GX
+    set_Inga   **** GX  |     set_Inic   **** GX  |   0 title      0000 R
+  0 tres_pla   0053 R   |   0 two_play   0049 R   |     zerostat   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   92   flags    0
+   1 _DATA      size    0   flags    0
+

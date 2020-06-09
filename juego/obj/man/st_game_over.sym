@@ -1,0 +1,92 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _bala_di=  FFFFFFFF     |     _bala_sp   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _contado=  0019 
+    _gamemod   **** GX  |   0 _ganador   0106 R   |     _id_last=  0004 
+  0 _loop_ma   0247 R   |   0 _loopche   00F8 R   |     _mapa1     **** GX
+    _mapa2     **** GX  |     _mapa3     **** GX  |     _mapa4     **** GX
+    _mapa5     **** GX  |     _mapa6     **** GX  |   0 _matar     0256 R
+  0 _muere_s   00C7 R   |   0 _no_muer   007F R   |     _num_ent   **** GX
+    _pausa     **** GX  |     _plant_s   **** GX  |     _player_   **** GX
+  0 _puntero=  00E6 R   |   0 _single_   00B1 R   |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |   0 _single_   00BE R
+  0 _single_   0098 R   |     _song      **** GX  |     _song2     **** GX
+    _song3     **** GX  |     _song4     **** GX  |     _spr2      **** GX
+    _spr3      **** GX  |     _spr4      **** GX  |   0 _stado_g   0064 R
+    _tileset   **** GX  |   0 _update_   00E4 R   |   0 _update_   00DD R
+    a_ani   =  0005     |     a_con   =  0002     |     a_h     =  0007 
+    a_punt_h=  0004     |     a_punt_l=  0003     |     a_w     =  0006 
+    a_x     =  0000     |     a_y     =  0001     |     animar     **** GX
+    cancion1   **** GX  |     cancion2   **** GX  |     cancion3   **** GX
+    cancion4   **** GX  |     check_Es   **** GX  |     check_Pa   **** GX
+    check_ga   **** GX  |     check_ke   **** GX  |     check_ke   **** GX
+    check_ne   **** GX  |     check_re   **** GX  |     check_un   **** GX
+  0 continue   003D R   |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_dis   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_dra   **** GX  |     cpct_etm   **** GX
+    cpct_etm   **** GX  |     cpct_get   **** GX  |     cpct_get   **** GX
+    cpct_isK   **** GX  |     cpct_sca   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_wai   **** GX  |     cpct_wai   **** GX
+    cpct_zx7   **** GX  |     crear_ni   **** GX  |     crear_ni   **** GX
+    create_e   **** GX  |   0 dibujar_   025C R   |     dificult=  0001 
+    dificult=  0002     |     dificult=  0003     |     dificult=  0004 
+  0 draw_con   01B3 GR  |   0 draw_los   016E GR  |   0 draw_sin   01F8 GR
+  0 draw_win   0129 GR  |     duracion=  0005     |     e_alto  =  0015 
+    e_ancho =  0014     |     e_clock =  0016     |     e_dead  =  000C 
+    e_dir   =  000A     |     e_dir_bo=  0004     |     e_dir_le=  0001 
+    e_dir_ri=  0003     |     e_dir_to=  0002     |     e_ia_pun=  0010 
+    e_ia_pun=  0011     |     e_ia_pun=  0012     |     e_ia_pun=  0013 
+    e_ia_st =  0009     |     e_ia_st_=  0002     |     e_ia_st_=  0000 
+    e_ia_st_=  0003     |     e_ia_st_=  000F     |     e_ia_st_=  0001 
+    e_ia_x  =  000D     |     e_ia_y  =  000E     |     e_sh    =  000B 
+    e_vx    =  0006     |     e_vy    =  0007     |     e_x     =  0000 
+    e_xl    =  0002     |     e_xll   =  0004     |     e_y     =  0001 
+    e_yl    =  0003     |     e_yll   =  0005     |     entityma   **** GX
+    entityma   **** GX  |   0 esc        0051 R   |   0 estado_g   023D GR
+    estado_n   **** GX  |     generate   **** GX  |     get_game   **** GX
+    iniciar_   **** GX  |     iniciar_   **** GX  |     init_ent   **** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    jugador_   **** GX  |     jugandos   **** GX  |   0 jugwin     0000 R
+  0 julose     000C R   |   0 kill_all   0241 GR  |     kill_bul   **** GX
+    kill_bul   **** GX  |     kill_bul   **** GX  |     limpiar_   **** GX
+    manage_g   **** GX  |     mapa_1  =  0001     |     mapa_2  =  0002 
+    mapa_3  =  0003     |     mapa_4  =  0004     |     mapa_5  =  0005 
+    mapa_6  =  0006     |     mapa_sin=  0007     |     mapa_sin=  0008 
+    mapa_sin=  0009     |     mapa_sin=  000A     |     mapa_sin=  000B 
+    mapa_sin=  000C     |     maximo_b=  0008     |     maximo_c=  0004 
+    modifica   **** GX  |     mueren_t=  0000     |     next_son   **** GX
+    off_muer   **** GX  |     partida_=  0002     |     pintar_h   **** GX
+    pintar_l   **** GX  |   0 reinicia   0287 GR  |     render_e   **** GX
+    rendersy   **** GX  |     rendersy   **** GX  |   0 restart    002A R
+    set_Game   **** GX  |     set_Inga   **** GX  |     set_Inic   **** GX
+  0 set_winn   00F2 GR  |     siceof_a=  0008     |     siceof_e=  0017 
+    siguient=  0001     |     sin_nive=  0000     |   0 single_e   028D GR
+  0 single_e   029E GR  |     single_m=  0001     |     sistema_   **** GX
+    sonido_d   **** GX  |     sonido_i   **** GX  |     sonido_m   **** GX
+    sonido_w   **** GX  |     stopmusi   **** GX  |   0 updatega   00D6 GR
+  0 updatega   0065 GR  |   0 youwon     0016 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  2A9   flags    0
+

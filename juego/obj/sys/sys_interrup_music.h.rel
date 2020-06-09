@@ -1,0 +1,20 @@
+XL2
+H 1 areas 11 global symbols
+S _song2 Ref0000
+S _song3 Ref0000
+S _song4 Ref0000
+S generate_music Ref0000
+S cancion1 Ref0000
+S cancion2 Ref0000
+S cancion3 Ref0000
+S cancion4 Ref0000
+S next_song Ref0000
+S _song Ref0000
+S sonido_disparo Ref0000
+S .__.ABS. Def0000
+S stopmusic Ref0000
+S off_muerte Ref0000
+S sonido_win Ref0000
+S sonido_interaccion Ref0000
+S sonido_muerte Ref0000
+A _CODE size 0 flags 0 addr 0

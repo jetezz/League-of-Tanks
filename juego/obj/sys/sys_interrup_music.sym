@@ -1,0 +1,42 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _continu=  0002     |     _empezar=  0001 
+    _parar  =  0000     |   0 _realiza   0099 R   |   0 _realiza   00A6 R
+  0 _realiza   00B3 R   |   0 _realiza   00C0 R   |   0 _reinici   0148 R
+  0 _sfx_int   0074 GR  |     _song      **** GX  |     _song2     **** GX
+    _song3     **** GX  |     _song4     **** GX  |   0 _song_1    0144 R
+  0 _song_2    013C R   |   0 _song_3    0140 R   |   0 cancion1   00CC GR
+  0 cancion2   00E0 GR  |   0 cancion3   00F4 GR  |   0 cancion4   0108 GR
+  0 canciona   0000 R   |   0 contador   0001 R   |   0 contador   0003 R
+  0 contador   0009 R   |   0 contador   0005 R   |   0 contador   0007 R
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_dis   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_etm   **** GX  |     cpct_etm   **** GX
+    cpct_get   **** GX  |     cpct_get   **** GX  |     cpct_isK   **** GX
+    cpct_sca   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_wai   **** GX  |     cpct_wai   **** GX  |     cpct_zx7   **** GX
+    estado_g   **** GX  |   0 estadodi   0004 R   |   0 estadoin   000A R
+  0 estadomu   0006 R   |   0 estadowi   0008 R   |   0 generate   000B GR
+    kill_all   **** GX  |     mueren_t=  0000     |   0 next_son   0120 GR
+  0 off_muer   00C6 GR  |     reinicia   **** GX  |   0 return     001D R
+  0 return2    003A R   |   0 return3    0057 R   |   0 return4    0074 R
+  0 return5    0091 R   |     set_winn   **** GX  |     sfxdead    **** GX
+    sfxdisp    **** GX  |     sfxinter   **** GX  |     sfxwin     **** GX
+    single_e   **** GX  |     single_e   **** GX  |     single_m=  0001 
+  0 sonido_d   0092 GR  |   0 sonido_i   00B9 GR  |   0 sonido_m   009F GR
+  0 sonido_w   00AC GR  |   0 stopmusi   011C GR  |   0 tiempo     0002 R
+    updatega   **** GX  |     updatega   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  149   flags    0
+

@@ -1,0 +1,429 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;sys_interrup_music
+                              3 ;;
+                              4 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "sys_music.h.s"
+                              1 ;;
+                              2 ;;sys_music h
+                              3 ;;
+                              4 .globl sfxdisp
+                              5 .globl sfxdead
+                              6 .globl sfxwin
+                              7 .globl sfxinteraccion
+                              8 
+                     0000     9 _parar=0
+                     0001    10 _empezar=1
+                     0002    11 _continuar=2
+                             12 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              6 .include "../cpct_functions.h.s"
+                              1 ;;
+                              2 ;;CPCTELERA FUNCTION
+                              3 ;;
+                              4 
+                              5 
+                              6 .globl cpct_getScreenPtr_asm
+                              7 .globl cpct_drawSolidBox_asm
+                              8 .globl cpct_setDrawCharM0_asm 
+                              9 .globl cpct_drawStringM0_asm
+                             10 .globl cpct_disableFirmware_asm
+                             11 .globl cpct_scanKeyboard_asm
+                             12 .globl cpct_isKeyPressed_asm
+                             13 .globl cpct_setVideoMode_asm
+                             14 .globl cpct_drawSprite_asm
+                             15 .globl cpct_setPalette_asm
+                             16 .globl cpct_setVideoMemoryPage_asm
+                             17 .globl cpct_waitVSYNC_asm
+                             18 .globl cpct_zx7b_decrunch_s_asm
+                             19 .globl cpct_etm_setDrawTilemap4x8_ag_asm
+                             20 .globl cpct_etm_drawTilemap4x8_ag_asm	
+                             21 .globl cpct_waitHalts_asm
+                             22 
+                             23 .globl cpct_akp_musicPlay_asm
+                             24 .globl cpct_akp_musicInit_asm
+                             25 .globl cpct_setInterruptHandler_asm
+                             26 .globl cpct_getRandom_mxor_u8_asm
+                             27 
+                             28 
+                             29 
+                             30 
+                             31 
+                             32 
+                             33 
+                             34 .globl cpct_akp_SFXPlay_asm
+                             35 .globl cpct_akp_SFXInit_asm
+                             36 .globl cpct_akp_SFXStopAll_asm
+                             37 .globl cpct_akp_stop_asm
+                             38 
+                             39 
+                             40 
+                             41 
+                             42 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              7 .include "sys_interrup_music.h.s"
+                              1 ;;
+                              2 ;;sys_interrup_music h
+                              3 ;;
+                              4 
+                              5 
+                              6 ;;canciones
+                              7 .globl _song
+                              8 .globl _song2
+                              9 .globl _song3
+                             10 .globl _song4
+                             11 
+                             12 
+                             13 
+                             14 ;;funciones
+                             15 .globl generate_music
+                             16 
+                             17 
+                             18 .globl sonido_disparo
+                             19 .globl sonido_muerte
+                             20 .globl sonido_win
+                             21 .globl sonido_interaccion
+                             22 
+                             23 .globl off_muerte
+                             24 
+                             25 
+                             26 .globl cancion1
+                             27 .globl cancion2
+                             28 .globl cancion3
+                             29 .globl cancion4
+                             30 
+                             31 .globl stopmusic
+                             32 .globl next_song
+                             33 
+                             34 
+                             35 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                              8 .include "man/st_game_over.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 .globl updategameover_init
+                              6 .globl updategameover
+                              7 .globl set_winner_pos
+                              8 .globl estado_game_over
+                              9 .globl reiniciar_gameover
+                             10 .globl single_end_init
+                             11 .globl single_end_update
+                             12 .globl kill_all
+                             13 
+                     0001    14 single_muere=1
+                     0000    15 mueren_todos=0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                              9 
+                             10 
+                             11 
+   0000 00                   12 cancionactual: .db #0
+   0001 01                   13 contador: .db #1
+   0002 01                   14 tiempo  : .db #1
+                             15 
+   0003 01                   16 contadordis: .db #1
+   0004 00                   17 estadodis: .db #00
+                             18 
+   0005 01                   19 contadormuer: .db #1
+   0006 00                   20 estadomuer: .db #00
+                             21 
+   0007 01                   22 contadorwin: .db #1
+   0008 00                   23 estadowin: .db #00
+                             24 
+   0009 01                   25 contadorintera: .db #1
+   000A 00                   26 estadointera: .db #0
+                             27 
+                             28 
+                             29 
+                             30 
+                             31 
+   000B                      32 generate_music::
+                             33 
+                             34 
+   000B 3A 01 00      [13]   35 	ld a, (contador)
+   000E 3D            [ 4]   36 	dec a
+   000F 32 01 00      [13]   37 	ld (contador),a
+   0012 20 09         [12]   38 	jr nz,return
+   0014 CD 00 00      [17]   39  		call cpct_akp_musicPlay_asm
+   0017 3A 02 00      [13]   40  		ld a ,(tiempo)
+   001A 32 01 00      [13]   41  		ld(contador), a
+                             42 
+   001D                      43  	return:
+                             44 
+                             45 
+   001D 3A 04 00      [13]   46  	ld a ,(estadodis)
+   0020 B7            [ 4]   47  	or a
+   0021 28 17         [12]   48  	jr z, return2
+                             49 
+   0023 3A 03 00      [13]   50  		ld a, (contadordis)
+   0026 3D            [ 4]   51 		dec a
+   0027 32 03 00      [13]   52 		ld (contadordis),a
+   002A 20 0E         [12]   53 		jr nz,return2
+   002C 3A 04 00      [13]   54 			ld a,(estadodis)
+   002F CD 00 00      [17]   55  			call sfxdisp
+                             56 			;;debuelvo el estado nuevo
+   0032 32 04 00      [13]   57  			ld (estadodis), a
+   0035 3E 06         [ 7]   58  			ld a ,#6
+   0037 32 03 00      [13]   59  			ld (contadordis), a
+                             60 
+   003A                      61  	return2:
+                             62 
+                             63 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+   003A 3A 06 00      [13]   64  	ld a ,(estadomuer)
+   003D B7            [ 4]   65  	or a
+   003E 28 17         [12]   66  	jr z, return3
+                             67 
+   0040 3A 05 00      [13]   68  		ld a, (contadormuer)
+   0043 3D            [ 4]   69 		dec a
+   0044 32 05 00      [13]   70 		ld (contadormuer),a
+   0047 20 0E         [12]   71 		jr nz,return3
+   0049 3A 06 00      [13]   72 			ld a,(estadomuer)
+   004C CD 00 00      [17]   73  			call sfxdead
+                             74 			;;debuelvo el estado nuevo
+   004F 32 06 00      [13]   75  			ld (estadomuer), a
+   0052 3E 1E         [ 7]   76  			ld a ,#30
+   0054 32 05 00      [13]   77  			ld (contadormuer), a
+                             78 
+   0057                      79  	return3:
+                             80 
+                             81 
+   0057 3A 08 00      [13]   82  		ld a ,(estadowin)
+   005A B7            [ 4]   83  	or a
+   005B 28 17         [12]   84  	jr z, return4
+                             85 
+   005D 3A 07 00      [13]   86  		ld a, (contadorwin)
+   0060 3D            [ 4]   87 		dec a
+   0061 32 07 00      [13]   88 		ld (contadorwin),a
+   0064 20 0E         [12]   89 		jr nz,return4
+   0066 3A 08 00      [13]   90 			ld a,(estadowin)
+   0069 CD 00 00      [17]   91  			call sfxwin
+                             92 			;;debuelvo el estado nuevo
+   006C 32 08 00      [13]   93  			ld (estadowin), a
+   006F 3E 28         [ 7]   94  			ld a ,#40
+   0071 32 07 00      [13]   95  			ld (contadorwin), a
+                             96 
+   0074                      97  	return4:
+                             98 
+                             99 	
+                            100 
+                            101 
+   0074                     102 _sfx_interacion::
+   0074 3A 0A 00      [13]  103 ld a ,(estadointera)
+   0077 B7            [ 4]  104  	or a
+   0078 28 17         [12]  105  	jr z, return5
+                            106 
+   007A 3A 09 00      [13]  107  		ld a, (contadorintera)
+   007D 3D            [ 4]  108 		dec a
+   007E 32 09 00      [13]  109 		ld (contadorintera),a
+   0081 20 B7         [12]  110 		jr nz,return2
+   0083 3A 0A 00      [13]  111 			ld a,(estadointera)
+   0086 CD 00 00      [17]  112  			call sfxinteraccion
+                            113 			;;debuelvo el estado nuevo
+   0089 32 0A 00      [13]  114  			ld (estadointera), a
+   008C 3E FF         [ 7]  115  			ld a ,#0xFF
+   008E 32 09 00      [13]  116  			ld (contadorintera), a
+                            117 
+   0091                     118  	return5:
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                            119 
+   0091 C9            [10]  120 ret
+                            121 
+   0092                     122 sonido_disparo::
+   0092 3A 04 00      [13]  123 	ld a, (estadodis)
+   0095 B7            [ 4]  124 	or a
+   0096 28 01         [12]  125 	jr z, _realizamos_sonido
+   0098 C9            [10]  126 	ret
+                            127 
+   0099                     128 	_realizamos_sonido:
+   0099 3E 01         [ 7]  129 	ld a, #1
+   009B 32 04 00      [13]  130 	ld (estadodis), a
+                            131 
+   009E C9            [10]  132 ret
+                            133 
+   009F                     134 sonido_muerte::
+   009F 3A 06 00      [13]  135 	ld a, (estadomuer)
+   00A2 B7            [ 4]  136 	or a
+   00A3 28 01         [12]  137 	jr z, _realizamos_sonido2
+   00A5 C9            [10]  138 	ret
+                            139 
+   00A6                     140 	_realizamos_sonido2:
+   00A6 3E 01         [ 7]  141 	ld a, #1
+   00A8 32 06 00      [13]  142 	ld (estadomuer), a
+                            143 
+   00AB C9            [10]  144 ret
+                            145 
+                            146 
+                            147 
+   00AC                     148 sonido_win::
+   00AC 3A 08 00      [13]  149 	ld a, (estadowin)
+   00AF B7            [ 4]  150 	or a
+   00B0 28 01         [12]  151 	jr z, _realizamos_sonido3
+   00B2 C9            [10]  152 	ret
+                            153 
+   00B3                     154 	_realizamos_sonido3:
+   00B3 3E 01         [ 7]  155 	ld a, #1
+   00B5 32 08 00      [13]  156 	ld (estadowin), a
+                            157 
+   00B8 C9            [10]  158 ret
+                            159 
+                            160 
+   00B9                     161 sonido_interaccion::
+   00B9 3A 0A 00      [13]  162 	ld a, (estadointera)
+   00BC B7            [ 4]  163 	or a
+   00BD 28 01         [12]  164 	jr z, _realizamos_sonido4
+   00BF C9            [10]  165 	ret
+                            166 
+   00C0                     167 	_realizamos_sonido4:
+   00C0 3E 01         [ 7]  168 	ld a, #1
+   00C2 32 0A 00      [13]  169 	ld (estadointera), a
+                            170 
+   00C5 C9            [10]  171 ret
+                            172 
+                            173 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+   00C6                     174 off_muerte::
+   00C6 3E 00         [ 7]  175  ld a, #0
+   00C8 32 06 00      [13]  176  ld (estadomuer), a
+   00CB C9            [10]  177  ret
+                            178 
+                            179 
+                            180 
+   00CC                     181 cancion1::
+   00CC 3E 06         [ 7]  182 	ld a,#6
+   00CE 32 02 00      [13]  183 	ld (tiempo), a
+   00D1 32 01 00      [13]  184 	ld (contador),a
+                            185 	
+   00D4 11 00 00      [10]  186 	ld de, #_song
+   00D7 CD 00 00      [17]  187     call cpct_akp_musicInit_asm
+                            188  
+   00DA 3E 01         [ 7]  189     ld a,#1
+   00DC 32 00 00      [13]  190     ld (cancionactual),a
+                            191 
+   00DF C9            [10]  192  ret
+                            193 
+   00E0                     194 cancion2::
+                            195 
+   00E0 3E 08         [ 7]  196 	ld a,#8
+   00E2 32 02 00      [13]  197 	ld (tiempo), a	
+   00E5 32 01 00      [13]  198 	ld (contador),a
+                            199 
+   00E8 11 00 00      [10]  200 	ld de, #_song2
+   00EB CD 00 00      [17]  201     call cpct_akp_musicInit_asm
+                            202 
+   00EE 3E 02         [ 7]  203      ld a,#2
+   00F0 32 00 00      [13]  204     ld (cancionactual),a
+                            205 
+   00F3 C9            [10]  206  ret
+   00F4                     207 cancion3::
+                            208 
+   00F4 3E 0A         [ 7]  209 	ld a,#10
+   00F6 32 02 00      [13]  210 	ld (tiempo), a	
+   00F9 32 01 00      [13]  211 	ld (contador),a
+                            212 
+   00FC 11 00 00      [10]  213 	ld de, #_song3
+   00FF CD 00 00      [17]  214     call cpct_akp_musicInit_asm
+                            215 
+   0102 3E 03         [ 7]  216          ld a,#3
+   0104 32 00 00      [13]  217     ld (cancionactual),a
+                            218 
+   0107 C9            [10]  219  ret
+                            220 
+   0108                     221 cancion4::
+                            222 
+   0108 3E 08         [ 7]  223 	ld a,#8
+   010A 32 02 00      [13]  224 	ld (tiempo), a	
+   010D 32 01 00      [13]  225 	ld (contador),a
+                            226 
+   0110 11 00 00      [10]  227 	ld de, #_song4
+   0113 CD 00 00      [17]  228     call cpct_akp_musicInit_asm
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+                            229 
+   0116 3E 04         [ 7]  230        ld a,#4
+   0118 32 00 00      [13]  231     ld (cancionactual),a
+                            232 
+   011B C9            [10]  233  ret
+                            234 
+   011C                     235 stopmusic::
+   011C CD 00 00      [17]  236 call cpct_akp_stop_asm
+   011F C9            [10]  237  ret
+                            238 
+                            239 
+   0120                     240 next_song::
+   0120 CD 1C 01      [17]  241 call stopmusic
+                            242 	
+   0123 CD 00 00      [17]  243 call estado_game_over
+   0126 3D            [ 4]  244 dec a
+   0127 28 1F         [12]  245 jr z,_reiniciar_posiciones
+                            246 
+                            247 	
+                            248 
+   0129 3A 00 00      [13]  249 	ld a,(cancionactual)
+                            250 
+   012C FE 01         [ 7]  251 	cp #1
+   012E 28 0C         [12]  252 	jr z,_song_2
+   0130 FE 02         [ 7]  253 	cp #2
+   0132 28 0C         [12]  254 	jr z,_song_3
+   0134 FE 03         [ 7]  255 	cp #3
+   0136 28 0C         [12]  256 	jr z,_song_1
+   0138 FE 04         [ 7]  257 	cp #4
+   013A 28 08         [12]  258 	jr z,_song_1
+                            259 
+   013C                     260 	_song_2:
+   013C CD E0 00      [17]  261 	call cancion2
+   013F C9            [10]  262 	ret
+   0140                     263 	_song_3:
+   0140 CD F4 00      [17]  264 	call cancion3
+   0143 C9            [10]  265 	ret
+   0144                     266 	_song_1:
+   0144 CD CC 00      [17]  267 	call cancion1
+   0147 C9            [10]  268 	ret
+                            269 
+   0148                     270 _reiniciar_posiciones:
+   0148 C9            [10]  271 	ret
+                            272 	
+                            273 
+                            274 
+                            275 

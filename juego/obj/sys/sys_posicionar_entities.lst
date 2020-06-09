@@ -1,0 +1,892 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;sys_posicionar_entities
+                              3 ;;
+                              4 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "sys_posicionar_entities.h.s"
+                              1 ;;
+                              2 ;;sys_posicionar entities h
+                              3 ;;
+                              4 .globl posicion_entities
+                              5 .globl reiniciar_posiciones
+                     0000     6 sin_posicion=0
+                     0001     7 siguiente_posicion=1
+                     0002     8 partida_terminada=2
+                              9 
+                     0000    10 hay_entidad=0
+                     0001    11 no_hay_entidad=1
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                              6 .include "man/state_manager.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl manage_game
+                              8 .globl jugandostate_init
+                              9 .globl set_Ingame
+                             10 .globl set_Gameover
+                             11 .globl set_Inicio
+                             12 .globl _pausa
+                             13 .globl _gamemode
+                             14 
+                             15 .globl get_gamemode
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              7 .include "man/entity_manager.h.s"
+                              1 ;;
+                              2 ;;entity Manager
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl create_entities
+                              8 .globl entityman_getEntityVector_IX
+                              9 .globl entityman_num_entities
+                             10 .globl _num_entities
+                             11 .globl init_entities
+                             12 
+                             13 
+                             14 ;; Entity definition macro
+                             15 
+                             16 
+                             17 .macro Entity _name,_x,_y,_xl,_yl,_xll,_yll,_vx,_vy,_sh,_iast,_dir,_dead,_ancho,_alto
+                             18 _name::
+                             19 .db _x      ;;posicion x del tanque
+                             20 .db _y	;;posicion y del tanque
+                             21 .db _xl	;;posicion de la x anterior
+                             22 .db _yl	;;posicion de la y anterior
+                             23 .db _xll	;;posicion de la x 2 veces anterior
+                             24 .db _yll	;;posicion de la x 2 veces anterior
+                             25 .db _vx	;;velocidad en x
+                             26 .db _vy	;;velocidad en y
+                             27 .db _sh	;;shot 0 no 1 si
+                             28 .db _iast;;type 0 jugador por teclas ,1 enemigo ia
+                             29 .db _dir    ;;movimiento  
+                             30 .db _sh     ;; si no dispara es 0 si dispara es 1
+                             31 .db _dead;;canon 0 vivo 1 muere
+                             32 .db 0x00, 0x00    ;;iax ia y
+                             33 .db _iast  ;;Estado anterior de la ia 
+                             34 .dw 0x0000	;; puntero de la patrulla que voy a realizar
+                             35 .dw 0x0000 ;;puntero al estado que tengo que saltar
+                             36 .db _ancho
+                             37 .db _alto
+                             38 .db 25  ;; contador cambio direcion del sprite
+                             39 
+                             40 
+                             41 
+                             42 
+                             43 
+                             44 
+                             45 .endm 
+                             46 
+                             47 
+                             48 .macro NextEntity
+                             49 ld de, #siceof_e
+                             50 	add ix, de
+                             51 .endm
+                             52 	
+                             53 
+                     0000    54 e_x  	= 0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                     0001    55 e_y  	= 1
+                     0002    56 e_xl  = 2
+                     0003    57 e_yl  = 3
+                     0004    58 e_xll = 4
+                     0005    59 e_yll = 5
+                     0006    60 e_vx	= 6
+                     0007    61 e_vy	= 7
+                     0008    62 e_sh 	= 8
+                     0009    63 e_ia_st = 9
+                     000A    64 e_dir = 10
+                     000B    65 e_sh = 11
+                     000C    66 e_dead=12
+                     000D    67 e_ia_x= 13
+                     000E    68 e_ia_y= 14
+                     000F    69 e_ia_st_prev=15
+                     0010    70 e_ia_puntero_patrol_h=16
+                     0011    71 e_ia_puntero_patrol_l=17
+                     0012    72 e_ia_puntero_st_h=18
+                     0013    73 e_ia_puntero_st_l=19
+                     0014    74 e_ancho 	= 20
+                     0015    75 e_alto	= 21
+                     0016    76 e_clock     = 22
+                     0017    77 siceof_e 	= 23
+                             78 
+                             79 ;; Movimiento de la entidad
+                     0003    80 e_dir_right = 3
+                     0002    81 e_dir_top   = 2
+                     0001    82 e_dir_left  = 1
+                     0004    83 e_dir_bott  = 4
+                             84 
+                             85 ;; Dibujo que representa el movimiento de la entidad
+                             86 
+                             87  ;;      2
+                             88  ;;     1e3
+                             89  ;;      4
+                             90 
+                             91 
+                             92 ;;Estados ia
+                     0000    93 e_ia_st_noIA 	= 0
+                     0001    94 e_ia_st_stand_by	= 1
+                     0002    95 e_ia_st_move_to   = 2
+                     0003    96 e_ia_st_patron	= 3
+                             97 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                              8 .include "man/st_game_over.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 .globl updategameover_init
+                              6 .globl updategameover
+                              7 .globl set_winner_pos
+                              8 .globl estado_game_over
+                              9 .globl reiniciar_gameover
+                             10 .globl single_end_init
+                             11 .globl single_end_update
+                             12 .globl kill_all
+                             13 
+                     0001    14 single_muere=1
+                     0000    15 mueren_todos=0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+                              9 
+   0000 00                   10 estado_posiciones: .db #00
+                             11 
+                             12 
+                             13 
+                             14 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+                             15 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             16 ;;POSICIONAR LOS CANONS EN SINGLE PLAYER;; 
+                             17 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             18 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             19 
+   0001                      20 posicion_entities::
+   0001 3A 00 00      [13]   21 ld a, (estado_posiciones)
+   0004 FE 00         [ 7]   22 cp #sin_posicion
+   0006 20 1A         [12]   23 jr nz,_NO_inicializar_posicion ;; Comprobamos si el nivel actual es 0 o otro para inicializar o ir al siguiente
+   0008                      24 _inicializar_posicion:	;; inicializo el nivel y lo pongo en el nivel_1
+                             25 
+   0008 CD 00 00      [17]   26 call get_gamemode
+   000B FE 05         [ 7]   27 cp #5
+   000D 28 08         [12]   28 jr z,_posiciones_single			;;inicializo para ir al single o al multi
+   000F                      29 _posiciones_multi:
+                             30 
+   000F 21 B3 01      [10]   31 ld hl, #pos_entities_multi_1
+   0012 22 29 00      [16]   32 ld(_puntero_posicion),hl
+   0015 18 06         [12]   33 jr salir
+                             34 
+   0017                      35 _posiciones_single:
+                             36 
+   0017 21 2E 00      [10]   37 ld hl, #pos_entities_single_1
+   001A 22 29 00      [16]   38 ld(_puntero_posicion),hl
+                             39 
+   001D                      40 salir:
+                             41 
+   001D 3E 01         [ 7]   42 ld a, #siguiente_posicion ;;pongo el estado a siguiente nivel para que salte a los siguientes y no inicialice
+   001F 32 00 00      [13]   43 ld (estado_posiciones),a
+                             44 
+   0022                      45 _NO_inicializar_posicion: ;; salto al nivel que toca
+                             46 
+   0022 CD 00 00      [17]   47 call estado_game_over
+   0025 3D            [ 4]   48 dec a
+   0026 28 03         [12]   49 jr z,_reiniciar_posiciones
+                             50 
+                             51 
+                     0029    52  _puntero_posicion=.+1
+   0028 C3 00 00      [10]   53  jp 0000
+                             54 
+                             55 
+   002B                      56 _reiniciar_posiciones:
+                     002C    57   _puntero_posicion_reinicio=.+1
+   002B C3 00 00      [10]   58  jp 0000
+                             59  
+                             60 
+                             61 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                             62 ;;POSICIONES PARA EL MAPA 1  single;;;;;;
+                             63 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+   002E                      64 pos_entities_single_1::
+   002E CD 00 00      [17]   65 call entityman_getEntityVector_IX
+                             66 
+                             67 ;;en ix posicion de la entidad
+                             68 ;;cargamos en a si hay(0) o si no(1)
+                             69 ;;cargamos en h posicion x 
+                             70 ;;cargamos en l posicion y
+                             71 
+                             72 ;;posicion entidad 1
+   0031 3E 00         [ 7]   73 ld a, #hay_entidad
+   0033 26 08         [ 7]   74 ld h,#8
+   0035 2E 10         [ 7]   75 ld l,#16
+   0037 CD CF 02      [17]   76 call colocamos_entidad
+   003A                      77 NextEntity
+   003A 11 17 00      [10]    1 ld de, #siceof_e
+   003D DD 19         [15]    2 	add ix, de
+                             78 
+                             79 
+                             80 ;;posicion entidad 2
+   003F 3E 01         [ 7]   81 ld a, #no_hay_entidad
+   0041 CD CF 02      [17]   82 call colocamos_entidad
+   0044                      83 NextEntity
+   0044 11 17 00      [10]    1 ld de, #siceof_e
+   0047 DD 19         [15]    2 	add ix, de
+                             84 
+                             85 
+                             86 ;;posicion entidad 3
+   0049 3E 01         [ 7]   87 ld a, #no_hay_entidad
+   004B CD CF 02      [17]   88 call colocamos_entidad
+   004E                      89 NextEntity
+   004E 11 17 00      [10]    1 ld de, #siceof_e
+   0051 DD 19         [15]    2 	add ix, de
+                             90 
+                             91 ;;posicion entidad 4
+   0053 3E 00         [ 7]   92 ld a, #hay_entidad
+   0055 26 48         [ 7]   93 ld h,#72
+   0057 2E 70         [ 7]   94 ld l,#112
+   0059 CD CF 02      [17]   95 call colocamos_entidad
+   005C                      96 NextEntity
+   005C 11 17 00      [10]    1 ld de, #siceof_e
+   005F DD 19         [15]    2 	add ix, de
+                             97 
+                             98 
+                             99 
+                            100 
+                            101 
+                            102 
+   0061 21 6E 00      [10]  103 ld hl, #pos_entities_single_2		;;preparo para ir al siguiente nivel
+   0064 22 29 00      [16]  104 ld(_puntero_posicion),hl
+                            105 
+   0067 21 2E 00      [10]  106 ld hl ,#pos_entities_single_1
+   006A 22 2C 00      [16]  107 ld (_puntero_posicion_reinicio),hl
+   006D C9            [10]  108 ret
+                            109 	
+                            110 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+                            111 
+                            112 
+                            113 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            114 ;;POSICIONES PARA EL MAPA 2;;;;;;
+                            115 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   006E                     116 pos_entities_single_2::
+   006E CD 00 00      [17]  117 call entityman_getEntityVector_IX
+                            118 
+                            119 ;;en ix posicion de la entidad
+                            120 ;;cargamos en a si hay(0) o si no(1)
+                            121 ;;cargamos en h posicion x 
+                            122 ;;cargamos en l posicion y
+                            123 
+                            124 ;;posicion entidad 1
+   0071 3E 00         [ 7]  125 ld a, #hay_entidad
+   0073 26 48         [ 7]  126 ld h,#72
+   0075 2E 18         [ 7]  127 ld l,#24
+   0077 CD CF 02      [17]  128 call colocamos_entidad
+   007A                     129 NextEntity
+   007A 11 17 00      [10]    1 ld de, #siceof_e
+   007D DD 19         [15]    2 	add ix, de
+                            130 
+                            131 
+                            132 ;;posicion entidad 2
+   007F 3E 00         [ 7]  133 ld a, #hay_entidad
+   0081 26 38         [ 7]  134 ld h,#56
+   0083 2E 40         [ 7]  135 ld l,#64
+   0085 CD CF 02      [17]  136 call colocamos_entidad
+   0088                     137 NextEntity
+   0088 11 17 00      [10]    1 ld de, #siceof_e
+   008B DD 19         [15]    2 	add ix, de
+                            138 
+                            139 
+                            140 ;;posicion entidad 3
+   008D 3E 01         [ 7]  141 ld a, #no_hay_entidad
+                            142 
+   008F CD CF 02      [17]  143 call colocamos_entidad
+   0092                     144 NextEntity
+   0092 11 17 00      [10]    1 ld de, #siceof_e
+   0095 DD 19         [15]    2 	add ix, de
+                            145 
+                            146 ;;posicion entidad 4
+   0097 3E 00         [ 7]  147 ld a, #hay_entidad
+   0099 26 08         [ 7]  148 ld h,#8
+   009B 2E 90         [ 7]  149 ld l,#144
+   009D CD CF 02      [17]  150 call colocamos_entidad
+                            151 
+                            152 
+   00A0 21 AD 00      [10]  153 ld hl, #pos_entities_single_3		;;preparo para ir al siguiente nivel
+   00A3 22 29 00      [16]  154 ld(_puntero_posicion),hl
+                            155 
+   00A6 21 6E 00      [10]  156 ld hl ,#pos_entities_single_2
+   00A9 22 2C 00      [16]  157 ld (_puntero_posicion_reinicio),hl
+   00AC C9            [10]  158 ret
+                            159 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+                            160 
+                            161 
+                            162 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            163 ;;POSICIONES PARA EL MAPA 3;;;;;;
+                            164 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   00AD                     165 pos_entities_single_3::
+   00AD CD 00 00      [17]  166 call entityman_getEntityVector_IX
+                            167 
+                            168 ;;en ix posicion de la entidad
+                            169 ;;cargamos en a si hay(0) o si no(1)
+                            170 ;;cargamos en h posicion x 
+                            171 ;;cargamos en l posicion y
+                            172 
+                            173 
+                            174 ;;posicion entidad 1
+   00B0 3E 00         [ 7]  175 ld a, #hay_entidad
+   00B2 26 14         [ 7]  176 ld h,#20
+   00B4 2E 50         [ 7]  177 ld l,#80
+   00B6 CD CF 02      [17]  178 call colocamos_entidad
+   00B9                     179 NextEntity
+   00B9 11 17 00      [10]    1 ld de, #siceof_e
+   00BC DD 19         [15]    2 	add ix, de
+                            180 
+                            181 
+                            182 ;;posicion entidad 2
+   00BE 3E 00         [ 7]  183 ld a, #hay_entidad
+   00C0 26 08         [ 7]  184 ld h,#8
+   00C2 2E 30         [ 7]  185 ld l,#48
+   00C4 CD CF 02      [17]  186 call colocamos_entidad
+   00C7                     187 NextEntity
+   00C7 11 17 00      [10]    1 ld de, #siceof_e
+   00CA DD 19         [15]    2 	add ix, de
+                            188 
+                            189 
+                            190 ;;posicion entidad 3
+   00CC 3E 00         [ 7]  191 ld a, #hay_entidad
+   00CE 26 26         [ 7]  192 ld h,#38
+   00D0 2E 80         [ 7]  193 ld l,#128
+   00D2 CD CF 02      [17]  194 call colocamos_entidad
+   00D5                     195 NextEntity
+   00D5 11 17 00      [10]    1 ld de, #siceof_e
+   00D8 DD 19         [15]    2 	add ix, de
+                            196 
+                            197 ;;posicion entidad 4
+   00DA 3E 00         [ 7]  198 ld a, #hay_entidad
+   00DC 26 44         [ 7]  199 ld h,#68
+   00DE 2E 30         [ 7]  200 ld l,#48
+   00E0 CD CF 02      [17]  201 call colocamos_entidad
+                            202 
+                            203 
+   00E3 21 F0 00      [10]  204 ld hl, #pos_entities_single_4		;;preparo para ir al siguiente nivel
+   00E6 22 29 00      [16]  205 ld(_puntero_posicion),hl
+                            206 
+   00E9 21 AD 00      [10]  207 ld hl ,#pos_entities_single_3
+   00EC 22 2C 00      [16]  208 ld (_puntero_posicion_reinicio),hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+   00EF C9            [10]  209 ret
+                            210 	
+                            211 
+                            212 
+                            213 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            214 ;;POSICIONES PARA EL MAPA 4;;;;;;
+                            215 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   00F0                     216 pos_entities_single_4::
+   00F0 CD 00 00      [17]  217 call entityman_getEntityVector_IX
+                            218 
+                            219 ;;en ix posicion de la entidad
+                            220 ;;cargamos en a si hay(0) o si no(1)
+                            221 ;;cargamos en h posicion x 
+                            222 ;;cargamos en l posicion y
+                            223 
+                            224 
+                            225 ;;posicion entidad 1
+   00F3 3E 00         [ 7]  226 ld a, #hay_entidad
+   00F5 26 06         [ 7]  227 ld h,#6
+   00F7 2E 70         [ 7]  228 ld l,#112
+   00F9 CD CF 02      [17]  229 call colocamos_entidad
+   00FC                     230 NextEntity
+   00FC 11 17 00      [10]    1 ld de, #siceof_e
+   00FF DD 19         [15]    2 	add ix, de
+                            231 
+                            232 
+                            233 ;;posicion entidad 2
+   0101 3E 00         [ 7]  234 ld a, #hay_entidad
+   0103 26 48         [ 7]  235 ld h,#72
+   0105 2E 50         [ 7]  236 ld l,#80
+   0107 CD CF 02      [17]  237 call colocamos_entidad
+   010A                     238 NextEntity
+   010A 11 17 00      [10]    1 ld de, #siceof_e
+   010D DD 19         [15]    2 	add ix, de
+                            239 
+                            240 
+                            241 ;;posicion entidad 3
+   010F 3E 00         [ 7]  242 ld a, #hay_entidad
+   0111 26 1A         [ 7]  243 ld h,#26
+   0113 2E 50         [ 7]  244 ld l,#80
+   0115 CD CF 02      [17]  245 call colocamos_entidad
+   0118                     246 NextEntity
+   0118 11 17 00      [10]    1 ld de, #siceof_e
+   011B DD 19         [15]    2 	add ix, de
+                            247 
+                            248 ;;posicion entidad 4
+   011D 3E 00         [ 7]  249 ld a, #hay_entidad
+   011F 26 30         [ 7]  250 ld h,#48
+   0121 2E 50         [ 7]  251 ld l,#80
+   0123 CD CF 02      [17]  252 call colocamos_entidad
+                            253 
+                            254 
+                            255 
+                            256 
+   0126 21 33 01      [10]  257 ld hl, #pos_entities_single_5		;;preparo para ir al siguiente nivel
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
+Hexadecimal [16-Bits]
+
+
+
+   0129 22 29 00      [16]  258 ld(_puntero_posicion),hl
+                            259 
+   012C 21 F0 00      [10]  260 ld hl ,#pos_entities_single_4
+   012F 22 2C 00      [16]  261 ld (_puntero_posicion_reinicio),hl
+   0132 C9            [10]  262 ret
+                            263 	
+                            264 
+                            265 
+                            266 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            267 ;;POSICIONES PARA EL MAPA 5;;;;;;
+                            268 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   0133                     269 pos_entities_single_5::
+   0133 CD 00 00      [17]  270 call entityman_getEntityVector_IX
+                            271 
+                            272 ;;en ix posicion de la entidad
+                            273 ;;cargamos en a si hay(0) o si no(1)
+                            274 ;;cargamos en h posicion x 
+                            275 ;;cargamos en l posicion y
+                            276 
+                            277 
+                            278 ;;posicion entidad 1
+   0136 3E 00         [ 7]  279 ld a, #hay_entidad
+   0138 26 48         [ 7]  280 ld h,#72
+   013A 2E 88         [ 7]  281 ld l,#136
+   013C CD CF 02      [17]  282 call colocamos_entidad
+   013F                     283 NextEntity
+   013F 11 17 00      [10]    1 ld de, #siceof_e
+   0142 DD 19         [15]    2 	add ix, de
+                            284 
+                            285 
+                            286 ;;posicion entidad 2
+   0144 3E 00         [ 7]  287 ld a, #hay_entidad
+   0146 26 16         [ 7]  288 ld h,#22
+   0148 2E 50         [ 7]  289 ld l,#80
+   014A CD CF 02      [17]  290 call colocamos_entidad
+   014D                     291 NextEntity
+   014D 11 17 00      [10]    1 ld de, #siceof_e
+   0150 DD 19         [15]    2 	add ix, de
+                            292 
+                            293 
+                            294 ;;posicion entidad 3
+   0152 3E 00         [ 7]  295 ld a, #hay_entidad
+   0154 26 26         [ 7]  296 ld h,#38
+   0156 2E 30         [ 7]  297 ld l,#48
+   0158 CD CF 02      [17]  298 call colocamos_entidad
+   015B                     299 NextEntity
+   015B 11 17 00      [10]    1 ld de, #siceof_e
+   015E DD 19         [15]    2 	add ix, de
+                            300 
+                            301 ;;posicion entidad 4
+   0160 3E 00         [ 7]  302 ld a, #hay_entidad
+   0162 26 36         [ 7]  303 ld h,#54
+   0164 2E 10         [ 7]  304 ld l,#16
+   0166 CD CF 02      [17]  305 call colocamos_entidad
+                            306 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
+Hexadecimal [16-Bits]
+
+
+
+   0169 21 76 01      [10]  307 ld hl, #pos_entities_single_6		;;preparo para ir al siguiente nivel
+   016C 22 29 00      [16]  308 ld(_puntero_posicion),hl
+                            309 
+   016F 21 33 01      [10]  310 ld hl ,#pos_entities_single_5
+   0172 22 2C 00      [16]  311 ld (_puntero_posicion_reinicio),hl
+   0175 C9            [10]  312 ret
+                            313 	
+                            314 
+                            315 
+                            316 
+                            317 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            318 ;;POSICIONES PARA EL MAPA 6;;;;;;
+                            319 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   0176                     320 pos_entities_single_6::
+                            321 
+   0176 CD 00 00      [17]  322 call entityman_getEntityVector_IX
+                            323 
+                            324 ;;en ix posicion de la entidad
+                            325 ;;cargamos en a si hay(0) o si no(1)
+                            326 ;;cargamos en h posicion x 
+                            327 ;;cargamos en l posicion y
+                            328 
+                            329 
+                            330 ;;posicion entidad 1
+   0179 3E 00         [ 7]  331 ld a, #hay_entidad
+   017B 26 04         [ 7]  332 ld h,#4
+   017D 2E 90         [ 7]  333 ld l,#144
+   017F CD CF 02      [17]  334 call colocamos_entidad
+   0182                     335 NextEntity
+   0182 11 17 00      [10]    1 ld de, #siceof_e
+   0185 DD 19         [15]    2 	add ix, de
+                            336 
+                            337 
+                            338 ;;posicion entidad 2
+   0187 3E 00         [ 7]  339 ld a, #hay_entidad
+   0189 26 16         [ 7]  340 ld h,#22
+   018B 2E 50         [ 7]  341 ld l,#80
+   018D CD CF 02      [17]  342 call colocamos_entidad
+   0190                     343 NextEntity
+   0190 11 17 00      [10]    1 ld de, #siceof_e
+   0193 DD 19         [15]    2 	add ix, de
+                            344 
+                            345 
+                            346 ;;posicion entidad 3
+   0195 3E 00         [ 7]  347 ld a, #hay_entidad
+   0197 26 36         [ 7]  348 ld h,#54
+   0199 2E 50         [ 7]  349 ld l,#80
+   019B CD CF 02      [17]  350 call colocamos_entidad
+   019E                     351 NextEntity
+   019E 11 17 00      [10]    1 ld de, #siceof_e
+   01A1 DD 19         [15]    2 	add ix, de
+                            352 
+                            353 ;;posicion entidad 4
+   01A3 3E 00         [ 7]  354 ld a, #hay_entidad
+   01A5 26 48         [ 7]  355 ld h,#72
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
+Hexadecimal [16-Bits]
+
+
+
+   01A7 2E 10         [ 7]  356 ld l,#16
+   01A9 CD CF 02      [17]  357 call colocamos_entidad
+                            358 
+   01AC 21 76 01      [10]  359 ld hl ,#pos_entities_single_6
+   01AF 22 2C 00      [16]  360 ld (_puntero_posicion_reinicio),hl
+                            361 
+   01B2 C9            [10]  362 ret
+                            363 
+                            364 
+                            365 
+                            366 
+                            367 
+                            368 
+                            369 
+                            370 
+                            371 
+                            372 
+                            373 
+                            374 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+                            375 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            376 ;;POSICIONAR LOS CANONS EN MULTIPLAYER;;;; 
+                            377 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            378 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            379 
+                            380 
+                            381 
+                            382 
+                            383 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            384 ;;POSICIONES PARA EL MAPA 1;;;;;;
+                            385 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   01B3                     386 pos_entities_multi_1::
+                            387 
+   01B3 CD 00 00      [17]  388 call entityman_getEntityVector_IX
+                            389 
+   01B6 3E 00         [ 7]  390 ld a, #hay_entidad
+   01B8 26 04         [ 7]  391 ld h,#4
+   01BA 2E 10         [ 7]  392 ld l,#16
+   01BC CD CF 02      [17]  393 call colocamos_entidad
+   01BF                     394 NextEntity
+   01BF 11 17 00      [10]    1 ld de, #siceof_e
+   01C2 DD 19         [15]    2 	add ix, de
+                            395 
+                            396 
+                            397 ;;posicion entidad 2
+   01C4 3E 00         [ 7]  398 ld a, #hay_entidad
+   01C6 26 04         [ 7]  399 ld h,#4
+   01C8 2E 90         [ 7]  400 ld l,#144
+   01CA CD CF 02      [17]  401 call colocamos_entidad
+   01CD                     402 NextEntity
+   01CD 11 17 00      [10]    1 ld de, #siceof_e
+   01D0 DD 19         [15]    2 	add ix, de
+                            403 
+                            404 
+                            405 ;;posicion entidad 3
+   01D2 3E 00         [ 7]  406 ld a, #hay_entidad
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+   01D4 26 48         [ 7]  407 ld h,#72
+   01D6 2E 10         [ 7]  408 ld l,#16
+   01D8 CD CF 02      [17]  409 call colocamos_entidad
+   01DB                     410 NextEntity
+   01DB 11 17 00      [10]    1 ld de, #siceof_e
+   01DE DD 19         [15]    2 	add ix, de
+                            411 
+                            412 ;;posicion entidad 4
+   01E0 3E 00         [ 7]  413 ld a, #hay_entidad
+   01E2 26 48         [ 7]  414 ld h,#72
+   01E4 2E 90         [ 7]  415 ld l,#144
+   01E6 CD CF 02      [17]  416 call colocamos_entidad
+   01E9                     417 NextEntity
+   01E9 11 17 00      [10]    1 ld de, #siceof_e
+   01EC DD 19         [15]    2 	add ix, de
+                            418 
+                            419 
+   01EE 21 F5 01      [10]  420 ld hl, #pos_entities_multi_2		;;preparo para ir al siguiente nivel
+   01F1 22 29 00      [16]  421 ld(_puntero_posicion),hl
+   01F4 C9            [10]  422 ret
+                            423 
+                            424 
+                            425 
+                            426 
+                            427 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            428 ;;POSICIONES PARA EL MAPA 2;;;;;;
+                            429 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   01F5                     430 pos_entities_multi_2::
+                            431 
+   01F5 CD B3 01      [17]  432 call #pos_entities_multi_1
+                            433 
+                            434 
+   01F8 21 FF 01      [10]  435 ld hl, #pos_entities_multi_3		;;preparo para ir al siguiente nivel
+   01FB 22 29 00      [16]  436 ld(_puntero_posicion),hl
+   01FE C9            [10]  437 ret
+                            438 
+                            439 
+                            440 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            441 ;;POSICIONES PARA EL MAPA 3;;;;;;
+                            442 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   01FF                     443 pos_entities_multi_3::
+                            444 
+   01FF CD 00 00      [17]  445 call entityman_getEntityVector_IX
+                            446 
+   0202 3E 00         [ 7]  447 ld a, #hay_entidad
+   0204 26 04         [ 7]  448 ld h,#4
+   0206 2E 20         [ 7]  449 ld l,#32
+   0208 CD CF 02      [17]  450 call colocamos_entidad
+   020B                     451 NextEntity
+   020B 11 17 00      [10]    1 ld de, #siceof_e
+   020E DD 19         [15]    2 	add ix, de
+                            452 
+                            453 
+                            454 ;;posicion entidad 2
+   0210 3E 00         [ 7]  455 ld a, #hay_entidad
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 16.
+Hexadecimal [16-Bits]
+
+
+
+   0212 26 18         [ 7]  456 ld h,#24
+   0214 2E 90         [ 7]  457 ld l,#144
+   0216 CD CF 02      [17]  458 call colocamos_entidad
+   0219                     459 NextEntity
+   0219 11 17 00      [10]    1 ld de, #siceof_e
+   021C DD 19         [15]    2 	add ix, de
+                            460 
+                            461 
+                            462 ;;posicion entidad 3
+   021E 3E 00         [ 7]  463 ld a, #hay_entidad
+   0220 26 34         [ 7]  464 ld h,#52
+   0222 2E 10         [ 7]  465 ld l,#16
+   0224 CD CF 02      [17]  466 call colocamos_entidad
+   0227                     467 NextEntity
+   0227 11 17 00      [10]    1 ld de, #siceof_e
+   022A DD 19         [15]    2 	add ix, de
+                            468 
+                            469 ;;posicion entidad 4
+   022C 3E 00         [ 7]  470 ld a, #hay_entidad
+   022E 26 48         [ 7]  471 ld h,#72
+   0230 2E 80         [ 7]  472 ld l,#128
+   0232 CD CF 02      [17]  473 call colocamos_entidad
+   0235                     474 NextEntity
+   0235 11 17 00      [10]    1 ld de, #siceof_e
+   0238 DD 19         [15]    2 	add ix, de
+                            475 
+   023A 21 41 02      [10]  476 ld hl, #pos_entities_multi_4		;;preparo para ir al siguiente nivel
+   023D 22 29 00      [16]  477 ld(_puntero_posicion),hl
+   0240 C9            [10]  478 ret 
+                            479 
+                            480 
+                            481 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            482 ;;POSICIONES PARA EL MAPA 4;;;;;;
+                            483 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   0241                     484 pos_entities_multi_4::
+                            485 
+   0241 CD B3 01      [17]  486 call #pos_entities_multi_1
+                            487 
+                            488 
+   0244 21 4B 02      [10]  489 ld hl, #pos_entities_multi_5		;;preparo para ir al siguiente nivel
+   0247 22 29 00      [16]  490 ld(_puntero_posicion),hl
+   024A C9            [10]  491 ret 
+                            492 
+                            493 
+                            494 
+                            495 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            496 ;;POSICIONES PARA EL MAPA 5;;;;;;
+                            497 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   024B                     498 pos_entities_multi_5::
+                            499 
+   024B CD 00 00      [17]  500 call entityman_getEntityVector_IX
+                            501 
+   024E 3E 00         [ 7]  502 ld a, #hay_entidad
+   0250 26 24         [ 7]  503 ld h,#36
+   0252 2E 10         [ 7]  504 ld l,#16
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 17.
+Hexadecimal [16-Bits]
+
+
+
+   0254 CD CF 02      [17]  505 call colocamos_entidad
+   0257                     506 NextEntity
+   0257 11 17 00      [10]    1 ld de, #siceof_e
+   025A DD 19         [15]    2 	add ix, de
+                            507 
+                            508 
+                            509 ;;posicion entidad 2
+   025C 3E 00         [ 7]  510 ld a, #hay_entidad
+   025E 26 04         [ 7]  511 ld h,#4
+   0260 2E 90         [ 7]  512 ld l,#144
+   0262 CD CF 02      [17]  513 call colocamos_entidad
+   0265                     514 NextEntity
+   0265 11 17 00      [10]    1 ld de, #siceof_e
+   0268 DD 19         [15]    2 	add ix, de
+                            515 
+                            516 
+                            517 ;;posicion entidad 3
+   026A 3E 00         [ 7]  518 ld a, #hay_entidad
+   026C 26 48         [ 7]  519 ld h,#72
+   026E 2E 10         [ 7]  520 ld l,#16
+   0270 CD CF 02      [17]  521 call colocamos_entidad
+   0273                     522 NextEntity
+   0273 11 17 00      [10]    1 ld de, #siceof_e
+   0276 DD 19         [15]    2 	add ix, de
+                            523 
+                            524 ;;posicion entidad 4
+   0278 3E 00         [ 7]  525 ld a, #hay_entidad
+   027A 26 28         [ 7]  526 ld h,#40
+   027C 2E 90         [ 7]  527 ld l,#144
+   027E CD CF 02      [17]  528 call colocamos_entidad
+   0281                     529 NextEntity
+   0281 11 17 00      [10]    1 ld de, #siceof_e
+   0284 DD 19         [15]    2 	add ix, de
+                            530 
+   0286 21 8D 02      [10]  531 ld hl, #pos_entities_multi_6		;;preparo para ir al siguiente nivel
+   0289 22 29 00      [16]  532 ld(_puntero_posicion),hl
+   028C C9            [10]  533 ret 
+                            534 
+                            535 
+                            536 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                            537 ;;POSICIONES PARA EL MAPA 6;;;;;;
+                            538 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   028D                     539 pos_entities_multi_6::
+   028D CD 00 00      [17]  540 call entityman_getEntityVector_IX
+                            541 
+   0290 3E 00         [ 7]  542 ld a, #hay_entidad
+   0292 26 04         [ 7]  543 ld h,#4
+   0294 2E 10         [ 7]  544 ld l,#16
+   0296 CD CF 02      [17]  545 call colocamos_entidad
+   0299                     546 NextEntity
+   0299 11 17 00      [10]    1 ld de, #siceof_e
+   029C DD 19         [15]    2 	add ix, de
+                            547 
+                            548 
+                            549 ;;posicion entidad 2
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 18.
+Hexadecimal [16-Bits]
+
+
+
+   029E 3E 00         [ 7]  550 ld a, #hay_entidad
+   02A0 26 04         [ 7]  551 ld h,#4
+   02A2 2E 90         [ 7]  552 ld l,#144
+   02A4 CD CF 02      [17]  553 call colocamos_entidad
+   02A7                     554 NextEntity
+   02A7 11 17 00      [10]    1 ld de, #siceof_e
+   02AA DD 19         [15]    2 	add ix, de
+                            555 
+                            556 
+                            557 ;;posicion entidad 3
+   02AC 3E 00         [ 7]  558 ld a, #hay_entidad
+   02AE 26 48         [ 7]  559 ld h,#72
+   02B0 2E 10         [ 7]  560 ld l,#16
+   02B2 CD CF 02      [17]  561 call colocamos_entidad
+   02B5                     562 NextEntity
+   02B5 11 17 00      [10]    1 ld de, #siceof_e
+   02B8 DD 19         [15]    2 	add ix, de
+                            563 
+                            564 ;;posicion entidad 4
+   02BA 3E 00         [ 7]  565 ld a, #hay_entidad
+   02BC 26 48         [ 7]  566 ld h,#72
+   02BE 2E 90         [ 7]  567 ld l,#144
+   02C0 CD CF 02      [17]  568 call colocamos_entidad
+   02C3                     569 NextEntity
+   02C3 11 17 00      [10]    1 ld de, #siceof_e
+   02C6 DD 19         [15]    2 	add ix, de
+                            570 
+   02C8 21 B3 01      [10]  571 ld hl, #pos_entities_multi_1		;;preparo para ir al siguiente nivel
+   02CB 22 29 00      [16]  572 ld(_puntero_posicion),hl
+   02CE C9            [10]  573 ret 
+                            574 
+                            575 
+   02CF                     576 colocamos_entidad:
+   02CF DD 74 00      [19]  577 ld e_x(ix),h
+   02D2 DD 74 02      [19]  578 ld e_xl(ix),h 
+   02D5 DD 74 04      [19]  579 ld e_xll(ix),h 
+   02D8 DD 75 01      [19]  580 ld e_y(ix),l
+   02DB DD 75 03      [19]  581 ld e_yl(ix),l
+   02DE DD 75 05      [19]  582 ld e_yll(ix),l
+   02E1 DD 77 0C      [19]  583 ld e_dead(ix), a
+                            584 
+                            585 
+                            586 
+   02E4 C9            [10]  587 ret
+                            588 
+                            589 
+                            590 
+   02E5                     591 reiniciar_posiciones::
+   02E5 3E 00         [ 7]  592 	ld a ,#00
+   02E7 32 00 00      [13]  593 	ld(estado_posiciones),a
+   02EA C9            [10]  594 ret

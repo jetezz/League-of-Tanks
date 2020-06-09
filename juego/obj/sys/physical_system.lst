@@ -1,0 +1,663 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;Phisical_sistem
+                              3 ;;
+                              4 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+
+
+                              5 .include "man/entity_manager.h.s"
+                              1 ;;
+                              2 ;;entity Manager
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl create_entities
+                              8 .globl entityman_getEntityVector_IX
+                              9 .globl entityman_num_entities
+                             10 .globl _num_entities
+                             11 .globl init_entities
+                             12 
+                             13 
+                             14 ;; Entity definition macro
+                             15 
+                             16 
+                             17 .macro Entity _name,_x,_y,_xl,_yl,_xll,_yll,_vx,_vy,_sh,_iast,_dir,_dead,_ancho,_alto
+                             18 _name::
+                             19 .db _x      ;;posicion x del tanque
+                             20 .db _y	;;posicion y del tanque
+                             21 .db _xl	;;posicion de la x anterior
+                             22 .db _yl	;;posicion de la y anterior
+                             23 .db _xll	;;posicion de la x 2 veces anterior
+                             24 .db _yll	;;posicion de la x 2 veces anterior
+                             25 .db _vx	;;velocidad en x
+                             26 .db _vy	;;velocidad en y
+                             27 .db _sh	;;shot 0 no 1 si
+                             28 .db _iast;;type 0 jugador por teclas ,1 enemigo ia
+                             29 .db _dir    ;;movimiento  
+                             30 .db _sh     ;; si no dispara es 0 si dispara es 1
+                             31 .db _dead;;canon 0 vivo 1 muere
+                             32 .db 0x00, 0x00    ;;iax ia y
+                             33 .db _iast  ;;Estado anterior de la ia 
+                             34 .dw 0x0000	;; puntero de la patrulla que voy a realizar
+                             35 .dw 0x0000 ;;puntero al estado que tengo que saltar
+                             36 .db _ancho
+                             37 .db _alto
+                             38 .db 25  ;; contador cambio direcion del sprite
+                             39 
+                             40 
+                             41 
+                             42 
+                             43 
+                             44 
+                             45 .endm 
+                             46 
+                             47 
+                             48 .macro NextEntity
+                             49 ld de, #siceof_e
+                             50 	add ix, de
+                             51 .endm
+                             52 	
+                             53 
+                     0000    54 e_x  	= 0
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+
+
+                     0001    55 e_y  	= 1
+                     0002    56 e_xl  = 2
+                     0003    57 e_yl  = 3
+                     0004    58 e_xll = 4
+                     0005    59 e_yll = 5
+                     0006    60 e_vx	= 6
+                     0007    61 e_vy	= 7
+                     0008    62 e_sh 	= 8
+                     0009    63 e_ia_st = 9
+                     000A    64 e_dir = 10
+                     000B    65 e_sh = 11
+                     000C    66 e_dead=12
+                     000D    67 e_ia_x= 13
+                     000E    68 e_ia_y= 14
+                     000F    69 e_ia_st_prev=15
+                     0010    70 e_ia_puntero_patrol_h=16
+                     0011    71 e_ia_puntero_patrol_l=17
+                     0012    72 e_ia_puntero_st_h=18
+                     0013    73 e_ia_puntero_st_l=19
+                     0014    74 e_ancho 	= 20
+                     0015    75 e_alto	= 21
+                     0016    76 e_clock     = 22
+                     0017    77 siceof_e 	= 23
+                             78 
+                             79 ;; Movimiento de la entidad
+                     0003    80 e_dir_right = 3
+                     0002    81 e_dir_top   = 2
+                     0001    82 e_dir_left  = 1
+                     0004    83 e_dir_bott  = 4
+                             84 
+                             85 ;; Dibujo que representa el movimiento de la entidad
+                             86 
+                             87  ;;      2
+                             88  ;;     1e3
+                             89  ;;      4
+                             90 
+                             91 
+                             92 ;;Estados ia
+                     0000    93 e_ia_st_noIA 	= 0
+                     0001    94 e_ia_st_stand_by	= 1
+                     0002    95 e_ia_st_move_to   = 2
+                     0003    96 e_ia_st_patron	= 3
+                             97 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+
+
+                              6 .include "man/shot_manager.h.s"
+                              1 ;;
+                              2 ;;shot manager h
+                              3 ;;
+                              4 
+                              5 ;; MACROS
+                              6 
+                              7 .macro DefineBalesArray _nameb,_N
+                              8 _nameb::
+                              9 	.rept _N
+                             10 DefineBalesAnnonimous -1,00,00,00,00,00,00,00,00,00,00,0x00
+                             11 	.endm 
+                             12 .endm
+                             13 
+                             14 .macro DefineBalesAnnonimous _bx,_by,_bxl,_byl,_bxll,_byll,_bvx,_bvy,_bsta,_bwidth,_bheight,_bcolor
+                             15 .db _bx           ;; posicion de la bala x          
+                             16 .db _by		;; posicion de la bala y
+                             17 .db _bxl		;; posicion anterior x
+                             18 .db _byl		;; posicion anterior y
+                             19 .db _bxll		;; posicion 2 veces anterior x
+                             20 .db _byll		;; posicion 2 veces anterior y
+                             21 .db _bvx 		;; velocidad bala en x
+                             22 .db _bvy		;; belocidad bala en y
+                             23 .db _bsta		;; estado de la bala   ¡¡¡¡¡YA NO SIRVEE¡¡¡¡¡¡
+                             24 .db _bwidth       ;; anchura de la bala
+                             25 .db _bheight      ;; altura de la bala
+                             26 .db _bcolor       ;; color de la bala
+                             27 .db 0x00 ,0x00    ;; posicion de memoria del canon
+                             28  
+                             29 .endm
+                             30 
+                             31 ;; CONSTANTES QUE REFERENCIAN LOS ATRIBUTOS DE LAS BALAS (USADOS POR LOS REGISTROS IX E IY, RESPECTIVAMENTE)
+                             32 
+                     0000    33 b_x       = 0
+                     0001    34 b_y       = 1
+                     0002    35 b_xl      = 2
+                     0003    36 b_yl      = 3
+                     0004    37 b_xll     = 4
+                     0005    38 b_yll     = 5
+                     0006    39 b_vx      = 6      ;; velocidad bala eje x
+                     0007    40 b_vy      = 7      ;; velocidad bala eje y
+                     0008    41 b_sta     = 8      ;; estado de la bala
+                     0009    42 b_h       = 9      ;; altura de la bala
+                     000A    43 b_w       = 10     ;; anchura de la bala
+                     000B    44 b_color   = 11     ;; color de la bala (sustituible por puntero a sprite)
+                     000C    45 b_canon_l = 12     ;; posicion de memoria del canon en l
+                     000D    46 b_canon_h = 13	 ;; posicion de memoria del canon en h
+                     000E    47 siceof_b  = 14
+                             48 
+                             49 
+                             50 ;; GLOBAL FUNCTIONS
+                             51 
+                             52 
+                             53 .globl entityman_getArray_Bales
+                             54 .globl entityman_num_Bales
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 5.
+Hexadecimal [16-Bits]
+
+
+
+                             55 
+                             56 
+                             57 ;; CONSTANTES:
+                             58 
+                             59 ;; Numero maximo de balas
+                             60 
+                     0005    61 max_bales == 5
+                             62 
+                             63 ;; Posicionar centralmente la bala con respecto al sprite
+                             64 
+                     0002    65 b_inc_pos_x = 2
+                     0006    66 b_inc_pos_y = 6
+                             67 
+                             68 ;; DIMENSIONES POSIBLES DE LA BALA
+                             69 
+                             70 ;; Cuando va en horizontal
+                             71 
+                     0002    72 b_width      = 2   ;; anchura de la bala
+                     0008    73 b_height     = 8   ;; altura de la bala
+                             74 
+                             75 ;; Cuando va en vertical
+                             76 
+                             77 
+                             78 
+                             79 
+                             80 
+                             81 ;; Color por defecto de la bala
+                             82 
+                     00C0    83 reset_bullet_color = 0xC0   ;; Color negro
+                             84 
+                             85 ;; Velocidades posibles de la bala
+                             86 
+                     0001    87 pos_vel_h = 1
+                     FFFFFFFF    88 neg_vel_h = -1
+                     0004    89 pos_vel_v = 4
+                     FFFFFFFC    90 neg_vel_v = -4
+                     0000    91 sin_vel = 0
+                             92 
+                             93 ;; Estados de la bala
+                             94 
+                     0000    95 b_no_shoot  = 0    ;; bala no disparada (estado por defecto)
+                     0001    96 b_shoot     = 1    ;; bala disparada
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 6.
+Hexadecimal [16-Bits]
+
+
+
+                              7 .include "sys_kill_bullet.h.s"
+                              1 ;;
+                              2 ;;sys_kill_bullet h
+                              3 ;;
+                              4 
+                              5 
+                              6 ;; FUNCIONES GLOBALES
+                              7 .globl kill_bullet_init
+                              8 .globl kill_bullet
+                              9 .globl kill_bullet_all
+                             10 
+                             11 
+                             12 ;; CONSTANTES
+                             13 
+                     FFFFFFFF    14 _bala_disponible = -1
+                     0004    15 _id_last_bullet = 4      ;; NUMERO MAXIMO DE BALAS - 1
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 7.
+Hexadecimal [16-Bits]
+
+
+
+                              8 .include "sys_kill_bullet_2.h.s"	
+                              1 ;;
+                              2 ;;kill bullet 2 h
+                              3 ;;
+                              4 
+                              5 .globl kill_bullet_init_2
+                              6 .globl kill_bullet_2
+                              7 
+                              8 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 8.
+Hexadecimal [16-Bits]
+
+
+
+                              9 .include "sys_map_colision.h.s"
+                              1 ;;
+                              2 ;;sys map colision h
+                              3 ;;
+                              4 
+                              5 
+                     0000     6 sin_inicializar=0
+                     0001     7 siguiente_colision=1
+                     0002     8 partida_terminada=2
+                              9 
+                             10 .globl comp_colisiones
+                             11 .globl buscar_tile
+                             12 .globl reiniciar_colisiones
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 9.
+Hexadecimal [16-Bits]
+
+
+
+                             10 .include "man/state_manager.h.s"
+                              1 ;;
+                              2 ;;Draw map h
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl manage_game
+                              8 .globl jugandostate_init
+                              9 .globl set_Ingame
+                             10 .globl set_Gameover
+                             11 .globl set_Inicio
+                             12 .globl _pausa
+                             13 .globl _gamemode
+                             14 
+                             15 .globl get_gamemode
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 10.
+Hexadecimal [16-Bits]
+
+
+
+                             11 .include "sys_dir.h.s"
+                              1 ;;
+                              2 ;;sys dir h
+                              3 ;;
+                              4 
+                              5 
+                              6 .globl modificar_sprite
+                              7 
+                              8 
+                     0019     9 _contador_ciclos = 25
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 11.
+Hexadecimal [16-Bits]
+
+
+
+                             12 
+                             13 
+   0000                      14 move_entities_init::
+   0000 CD 00 00      [17]   15  call entityman_getEntityVector_IX
+   0003 CD 00 00      [17]   16  call entityman_num_entities	
+   0006 32 23 00      [13]   17 ld (_contador_entidades),a
+   0009 DD 22 26 00   [20]   18 ld (_puntero_entidades), ix
+                             19 
+                             20 
+   000D CD 00 00      [17]   21  call entityman_getArray_Bales  ;; cogemos en ix el puntero a las balas
+   0010 CD 00 00      [17]   22  call entityman_num_Bales
+   0013 22 BB 00      [16]   23  ld (_contador_balas), hl
+   0016 DD 22 B8 00   [20]   24  ld (_puntero_balas), ix
+   001A C9            [10]   25 ret
+                             26 
+                             27 
+                             28 
+   001B                      29 move_entities::
+                             30 
+   001B CD 22 00      [17]   31 call _move_canon
+   001E CD B6 00      [17]   32 call _move_balas	
+   0021 C9            [10]   33 ret
+                             34 
+   0022                      35 _move_canon::
+                     0023    36  _contador_entidades=.+1
+   0022 3E 00         [ 7]   37  ld a, #00
+                     0026    38  _puntero_entidades=.+2
+   0024 DD 21 00 00   [14]   39  ld ix, #0000
+                             40 
+   0028                      41  _loop:
+   0028 F5            [11]   42 	push af
+                             43 
+                             44 	
+   0029 CD 00 00      [17]   45 call modificar_sprite
+   002C DD 46 02      [19]   46 	ld   b, e_xl(ix)
+   002F DD 4E 03      [19]   47 	ld   c, e_yl(ix)
+                             48 
+                             49 
+   0032 DD 70 04      [19]   50 	ld   e_xll(ix), b 
+   0035 DD 71 05      [19]   51 	ld   e_yll(ix), c
+                             52 
+   0038 DD 46 00      [19]   53 	ld   b, e_x(ix)
+   003B DD 4E 01      [19]   54 	ld   c, e_y(ix)
+                             55 
+   003E DD 70 02      [19]   56 	ld   e_xl(ix), b 
+   0041 DD 71 03      [19]   57 	ld   e_yl(ix), c
+                             58 
+                             59 
+                             60 
+   0044 DD 46 00      [19]   61 	ld 	b, e_x(ix)
+   0047 DD 4E 01      [19]   62 	ld 	c, e_y(ix)
+   004A DD 56 14      [19]   63 	ld   	d, e_ancho(ix)
+   004D DD 5E 15      [19]   64 	ld	e, e_alto(ix)
+                             65 
+                             66 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 12.
+Hexadecimal [16-Bits]
+
+
+
+                             67 
+   0050 DD 7E 06      [19]   68 	ld   a, e_vx(ix)
+   0053 B7            [ 4]   69 	or a
+   0054 28 27         [12]   70 	jr z ,_no_move_x
+                             71 	
+   0056 FA 6C 00      [10]   72 		jp m ,_izquierda
+   0059                      73 		_derecha:
+   0059 26 03         [ 7]   74 			ld h,#3
+                             75 
+   005B CD 00 00      [17]   76 			call comp_colisiones
+   005E 3D            [ 4]   77 			dec a
+   005F 20 49         [12]   78 			jr nz, _out
+                             79 
+   0061 DD 7E 00      [19]   80 			ld a, e_x(ix)
+   0064 DD 86 06      [19]   81 			add e_vx(ix)
+                             82 			
+   0067 DD 77 00      [19]   83 			ld e_x(ix),a	
+   006A 18 3E         [12]   84 			jr _out		
+   006C                      85 		_izquierda:
+   006C 26 01         [ 7]   86 			ld h,#1
+   006E CD 00 00      [17]   87 			call comp_colisiones
+   0071 3D            [ 4]   88 			dec a
+   0072 20 36         [12]   89 			jr nz, _out	
+                             90 
+   0074 DD 7E 00      [19]   91 			ld a, e_x(ix)
+   0077 DD 86 06      [19]   92 			add e_vx(ix)
+                             93 			
+   007A DD 77 00      [19]   94 			ld e_x(ix),a
+   007D                      95 	_no_move_x:
+                             96 
+                             97 
+   007D DD 7E 07      [19]   98 	ld   a, e_vy(ix)
+   0080 B7            [ 4]   99 	or a
+   0081 28 27         [12]  100 	jr z,_no_move_y
+                            101 		
+   0083 FA 99 00      [10]  102 		jp m,_arriba
+   0086                     103 		_abajo:
+   0086 26 04         [ 7]  104 			ld h,#4
+   0088 CD 00 00      [17]  105 			call comp_colisiones
+   008B 3D            [ 4]  106 			dec a
+   008C 20 1C         [12]  107 			jr nz, _out
+                            108 			
+   008E DD 7E 01      [19]  109 			ld a, e_y(ix)
+   0091 DD 86 07      [19]  110 			add e_vy(ix)
+                            111 			
+   0094 DD 77 01      [19]  112 			ld e_y(ix),a
+   0097 18 11         [12]  113 			jr _out
+   0099                     114 		_arriba:
+   0099 26 02         [ 7]  115 			ld h,#2
+   009B CD 00 00      [17]  116 			call comp_colisiones
+   009E 3D            [ 4]  117 			dec a
+   009F 20 09         [12]  118 			jr nz, _out
+                            119 
+   00A1 DD 7E 01      [19]  120 			ld a, e_y(ix)
+   00A4 DD 86 07      [19]  121 			add e_vy(ix)
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 13.
+Hexadecimal [16-Bits]
+
+
+
+                            122 
+   00A7 DD 77 01      [19]  123 			ld e_y(ix),a
+   00AA                     124 	_no_move_y:
+                            125 
+   00AA                     126 _out:
+                            127 
+                            128 
+                            129 
+   00AA F1            [10]  130 	pop af
+   00AB 3D            [ 4]  131 	dec a
+   00AC C8            [11]  132 	ret z
+                            133 
+                            134 	
+   00AD 11 17 00      [10]  135 	ld de, #siceof_e
+   00B0 DD 19         [15]  136 	add ix, de
+                            137 	
+   00B2 C3 28 00      [10]  138 	jp _loop
+   00B5 C9            [10]  139 ret
+                            140 
+                            141 
+   00B6                     142 _move_balas::
+                     00B8   143 	 _puntero_balas=.+2
+   00B6 DD 21 00 00   [14]  144  	ld ix, #0000
+                     00BB   145  	_contador_balas=.+1
+   00BA 21 00 00      [10]  146  	ld hl, #0000	
+                            147 
+   00BD 7E            [ 7]  148 	ld a, (hl)
+                            149 	
+   00BE 6F            [ 4]  150 	ld l ,a			;numero de balas 
+   00BF B7            [ 4]  151  	or a
+   00C0 CA 6C 01      [10]  152  	jp z, _no_hay_balas
+                            153  	;;hay balas
+                            154 
+                            155 		
+                            156 					
+   00C3                     157 	_balloop:
+                            158 
+                            159 
+                            160 	
+   00C3 DD 46 02      [19]  161 			ld   b, b_xl(ix)
+   00C6 DD 4E 03      [19]  162 			ld   c, b_yl(ix)
+                            163 
+                            164 
+   00C9 DD 70 04      [19]  165 			ld   b_xll(ix), b 
+   00CC DD 71 05      [19]  166 			ld   b_yll(ix), c
+                            167 
+   00CF DD 46 00      [19]  168 			ld   b, b_x(ix)
+   00D2 DD 4E 01      [19]  169 			ld   c, b_y(ix)
+                            170 
+   00D5 DD 70 02      [19]  171 			ld   b_xl(ix), b 
+   00D8 DD 71 03      [19]  172 			ld   b_yl(ix), c
+                            173 
+   00DB DD 56 0A      [19]  174 			ld   d ,b_w(ix)
+   00DE DD 5E 09      [19]  175 			ld   e ,b_h(ix)
+                            176 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 14.
+Hexadecimal [16-Bits]
+
+
+
+                            177 					
+                            178 
+                            179 			
+   00E1 DD 7E 06      [19]  180 			ld a , b_vx(ix)
+   00E4 B7            [ 4]  181 			or a
+   00E5 28 3C         [12]  182 			jr z ,_no_move_x_bales
+   00E7 FE 01         [ 7]  183 				cp #1
+   00E9 20 22         [12]  184 				jr nz, _bala_izquierda 
+   00EB                     185 				_bala_derecha:
+   00EB 26 03         [ 7]  186 					ld h,#3
+   00ED E5            [11]  187 					push hl
+   00EE CD 00 00      [17]  188 					call comp_colisiones
+   00F1 E1            [10]  189 					pop hl
+   00F2 3D            [ 4]  190 					dec a
+   00F3 20 0C         [12]  191 					jr nz, _matar
+   00F5 DD 7E 06      [19]  192 					ld a ,b_vx(ix)
+   00F8 DD 46 00      [19]  193 					ld   b, b_x(ix)
+   00FB 80            [ 4]  194 					add b
+   00FC DD 77 00      [19]  195 					ld b_x(ix), a
+   00FF 18 58         [12]  196 					jr _siguiente
+                            197 
+   0101                     198 					_matar:
+   0101 7D            [ 4]  199 					ld a, l
+   0102 E5            [11]  200 					push hl
+   0103 DD E5         [15]  201 					push ix
+   0105 CD 00 00      [17]  202 					call kill_bullet
+   0108 DD E1         [14]  203 					pop ix
+   010A E1            [10]  204 					pop hl
+                            205 
+   010B 18 58         [12]  206 					jr _siguiente_matando
+                            207 
+   010D                     208 				_bala_izquierda:
+   010D 26 01         [ 7]  209 					ld h,#1
+   010F E5            [11]  210 					push hl
+   0110 CD 00 00      [17]  211 					call comp_colisiones
+   0113 E1            [10]  212 					pop hl
+   0114 3D            [ 4]  213 					dec a
+   0115 20 EA         [12]  214 					jr nz, _matar
+   0117 DD 7E 06      [19]  215 					ld a ,b_vx(ix)
+   011A DD 46 00      [19]  216 					ld   b, b_x(ix)
+   011D 80            [ 4]  217 					add b
+   011E DD 77 00      [19]  218 					ld b_x(ix), a
+   0121 18 36         [12]  219 					jr _siguiente
+   0123                     220 			_no_move_x_bales:
+                            221 
+   0123 DD 7E 07      [19]  222 			ld a , b_vy(ix)
+   0126 B7            [ 4]  223 			or a
+   0127 28 30         [12]  224 			jr z ,_no_move_y_bales
+   0129 FE 04         [ 7]  225 				cp #4
+   012B 20 16         [12]  226 				jr nz, _bala_arriba
+   012D                     227 				_bala_abajo:
+   012D 26 04         [ 7]  228 					ld h,#4
+   012F E5            [11]  229 					push hl
+   0130 CD 00 00      [17]  230 					call comp_colisiones
+   0133 E1            [10]  231 					pop hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 15.
+Hexadecimal [16-Bits]
+
+
+
+   0134 3D            [ 4]  232 					dec a
+   0135 20 CA         [12]  233 					jr nz, _matar
+   0137 DD 7E 07      [19]  234 					ld a ,b_vy(ix)
+   013A DD 4E 01      [19]  235 					ld   c, b_y(ix)
+   013D 81            [ 4]  236 					add c
+                            237 					
+   013E DD 77 01      [19]  238 					ld b_y(ix), a
+   0141 18 16         [12]  239 					jr _siguiente
+   0143                     240 				_bala_arriba:
+   0143 26 01         [ 7]  241 					ld h,#1
+   0145 E5            [11]  242 					push hl
+   0146 CD 00 00      [17]  243 					call comp_colisiones
+   0149 E1            [10]  244 					pop hl
+   014A 3D            [ 4]  245 					dec a
+   014B 20 B4         [12]  246 					jr nz, _matar
+   014D DD 7E 07      [19]  247 					ld a ,b_vy(ix)
+   0150 DD 4E 01      [19]  248 					ld   c, b_y(ix)					
+   0153 81            [ 4]  249 					add c
+   0154 DD 77 01      [19]  250 					ld   b_y(ix), a
+                            251 
+   0157 18 00         [12]  252 					jr _siguiente
+   0159                     253 			_no_move_y_bales:
+                            254 
+                            255 
+   0159                     256 	_siguiente:
+   0159 7D            [ 4]  257 	ld a, l
+   015A 3D            [ 4]  258 	dec a
+   015B C8            [11]  259 	ret z
+                            260 
+   015C 6F            [ 4]  261 	ld l, a	
+   015D 11 0E 00      [10]  262 	ld de, #siceof_b
+   0160 DD 19         [15]  263 	add ix, de
+                            264 	
+   0162 C3 C3 00      [10]  265 	jp _balloop
+                            266 			
+   0165                     267 _siguiente_matando:
+                            268 
+   0165 7D            [ 4]  269 	ld a, l
+   0166 3D            [ 4]  270 	dec a
+   0167 C8            [11]  271 	ret z
+                            272 
+   0168 6F            [ 4]  273 	ld l, a
+   0169 C3 C3 00      [10]  274 	jp _balloop
+                            275 		
+   016C                     276 	_no_hay_balas:
+   016C C9            [10]  277 	ret
+                            278 
+                            279 
+                            280 
+                            281 
+                            282 
+   016D                     283 check_gameover::
+                            284 
+                            285 	;;Bucle que va contando en h el numero de muertos, si alfinal solo queda uno vivo pasa a state game over
+                            286 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 16.
+Hexadecimal [16-Bits]
+
+
+
+   016D DD 2A 26 00   [20]  287 	ld ix, (_puntero_entidades)
+                            288  	
+                            289 
+                            290 
+   0171 CD 00 00      [17]  291  	call get_gamemode
+   0174 FE 05         [ 7]  292  	cp #5
+   0176 28 1E         [12]  293  	jr z, _single_player
+                            294 
+   0178                     295  	_comprobar_otro:
+   0178 3A 23 00      [13]  296  	ld a, (_contador_entidades)
+   017B 26 04         [ 7]  297       ld h, #04
+   017D                     298       _loopMuerte:
+                            299 
+                            300 	
+   017D DD 46 0C      [19]  301 	ld b, e_dead(ix)
+   0180 05            [ 4]  302       dec b
+   0181 20 01         [12]  303  	jr nz, _nomuerto
+   0183 25            [ 4]  304  	dec h
+   0184                     305  	_nomuerto:
+                            306 
+   0184                     307       NextEntity
+   0184 11 17 00      [10]    1 ld de, #siceof_e
+   0187 DD 19         [15]    2 	add ix, de
+   0189 3D            [ 4]  308       dec a
+   018A 20 F1         [12]  309       jr nz, _loopMuerte
+                            310 
+   018C 7C            [ 4]  311       ld a, h
+   018D B7            [ 4]  312       or a
+   018E CC 00 00      [17]  313       call z, set_Gameover
+   0191 3D            [ 4]  314       dec a
+   0192 CC 00 00      [17]  315       call z, set_Gameover
+                            316       
+                            317 
+                            318 
+   0195 C9            [10]  319 ret
+                            320 
+                            321 
+                            322 
+   0196                     323 _single_player:
+   0196 DD 7E 0C      [19]  324 ld a, e_dead(ix)
+   0199 3D            [ 4]  325 dec a
+   019A 20 DC         [12]  326 jr nz, _comprobar_otro    ;;complueba si mueren todos 
+   019C                     327 _muere_player_1:		;;muere el player 1 en el single
+   019C CC 00 00      [17]  328 	call z, set_Gameover
+   019F C9            [10]  329 ret

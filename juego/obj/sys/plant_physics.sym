@@ -1,0 +1,44 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     _bala_sp   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |   0 _incorre   001D R   |   0 _incorre   0026 R
+    _mapa1     **** GX  |     _mapa2     **** GX  |     _mapa3     **** GX
+    _mapa4     **** GX  |     _mapa5     **** GX  |     _mapa6     **** GX
+  0 _novalid   001D R   |     _plant_s   **** GX  |     _player_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _spr2      **** GX  |     _spr3      **** GX  |     _spr4      **** GX
+    _tileset   **** GX  |     buscar_t   **** GX  |     comp_col   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_akp   **** GX  |     cpct_akp   **** GX  |     cpct_akp   **** GX
+    cpct_dis   **** GX  |     cpct_dra   **** GX  |     cpct_dra   **** GX
+    cpct_dra   **** GX  |     cpct_etm   **** GX  |     cpct_etm   **** GX
+    cpct_get   **** GX  |     cpct_get   **** GX  |     cpct_isK   **** GX
+    cpct_sca   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_set   **** GX  |     cpct_set   **** GX  |     cpct_set   **** GX
+    cpct_wai   **** GX  |     cpct_wai   **** GX  |     cpct_zx7   **** GX
+    create_p   **** GX  |     map_firs   **** GX  |     map_getV   **** GX
+    map_swit   **** GX  |   0 nocambio   0016 R   |     p_activa=  0007 
+    p_alto  =  0005     |     p_ancho =  0004     |     p_cont  =  0006 
+    p_sprite=  0002     |     p_sprite=  0003     |     p_x     =  0000 
+    p_y     =  0001     |     partida_=  0002     |   0 plant_up   0000 GR
+    plantman   **** GX  |     reinicia   **** GX  |     siguient=  0001 
+    sin_inic=  0000 
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size   5A   flags    0
+

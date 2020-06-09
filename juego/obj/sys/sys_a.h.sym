@@ -1,0 +1,20 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     a_ani   =  0005     |     a_con   =  0002 
+    a_h     =  0007     |     a_punt_h=  0004     |     a_punt_l=  0003 
+    a_w     =  0006     |     a_x     =  0000     |     a_y     =  0001 
+    animar     **** GX  |     duracion=  0005     |     iniciar_   **** GX
+    iniciar_   **** GX  |     limpiar_   **** GX  |     maximo_b=  0008 
+    maximo_c=  0004     |     siceof_a=  0008 
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+

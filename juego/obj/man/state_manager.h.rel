@@ -1,0 +1,12 @@
+XL2
+H 1 areas 9 global symbols
+S set_Inicio Ref0000
+S jugandostate_init Ref0000
+S get_gamemode Ref0000
+S _gamemode Ref0000
+S .__.ABS. Def0000
+S set_Gameover Ref0000
+S manage_game Ref0000
+S _pausa Ref0000
+S set_Ingame Ref0000
+A _CODE size 0 flags 0 addr 0

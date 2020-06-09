@@ -1,0 +1,22 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |     crear_ni   **** GX  |     crear_ni   **** GX
+    dificult=  0001     |     dificult=  0002     |     dificult=  0003 
+    dificult=  0004     |     estado_n   **** GX  |     mapa_1  =  0001 
+    mapa_2  =  0002     |     mapa_3  =  0003     |     mapa_4  =  0004 
+    mapa_5  =  0005     |     mapa_6  =  0006     |     mapa_sin=  0007 
+    mapa_sin=  0008     |     mapa_sin=  0009     |     mapa_sin=  000A 
+    mapa_sin=  000B     |     mapa_sin=  000C     |     partida_=  0002 
+    siguient=  0001     |     sin_nive=  0000     |     sistema_   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size    0   flags    0
+

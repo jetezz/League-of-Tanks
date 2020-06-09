@@ -1,0 +1,39 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 man_patr   0202 GR  |   0 man_patr   0206 GR
+  0 man_patr   020A GR  |   0 man_patr   020E GR  |   0 man_patr   0212 GR
+  0 man_patr   0216 GR  |   0 man_patr   021A GR  |   0 man_patr   021E GR
+  0 man_patr   0222 GR  |   0 man_patr   0226 GR  |   0 man_patr   022A GR
+  0 man_patr   022E GR  |   0 man_patr   0232 GR  |   0 man_patr   0236 GR
+  0 man_patr   023A GR  |   0 man_patr   023E GR  |   0 man_patr   0242 GR
+  0 man_patr   0246 GR  |   0 man_patr   01BA GR  |   0 man_patr   01BE GR
+  0 man_patr   01C2 GR  |   0 man_patr   01C6 GR  |   0 man_patr   01CA GR
+  0 man_patr   01CE GR  |   0 man_patr   01D2 GR  |   0 man_patr   01D6 GR
+  0 man_patr   01DA GR  |   0 man_patr   01DE GR  |   0 man_patr   01E2 GR
+  0 man_patr   01E6 GR  |   0 man_patr   01EA GR  |   0 man_patr   01EE GR
+  0 man_patr   01F2 GR  |   0 man_patr   01F6 GR  |   0 man_patr   01FA GR
+  0 man_patr   01FE GR  |     patrol_i=  FFFFFFFF     |   0 patrol_m   00F4 R
+  0 patrol_m   00FF R   |   0 patrol_m   010E R   |   0 patrol_m   011B R
+  0 patrol_m   0122 R   |   0 patrol_m   0129 R   |   0 patrol_m   0130 R
+  0 patrol_m   0139 R   |   0 patrol_m   0142 R   |   0 patrol_m   014B R
+  0 patrol_m   0158 R   |   0 patrol_m   0169 R   |   0 patrol_m   0174 R
+  0 patrol_m   0181 R   |   0 patrol_m   018E R   |   0 patrol_m   0199 R
+  0 patrol_m   01A6 R   |   0 patrol_m   01B1 R   |   0 patrol_s   0000 R
+  0 patrol_s   0003 R   |   0 patrol_s   0006 R   |   0 patrol_s   0013 R
+  0 patrol_s   0024 R   |   0 patrol_s   0027 R   |   0 patrol_s   003A R
+  0 patrol_s   0045 R   |   0 patrol_s   005C R   |   0 patrol_s   0063 R
+  0 patrol_s   006E R   |   0 patrol_s   0075 R   |   0 patrol_s   0088 R
+  0 patrol_s   00A1 R   |   0 patrol_s   00B4 R   |   0 patrol_s   00CB R
+  0 patrol_s   00D6 R   |   0 patrol_s   00E9 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  24A   flags    0
+

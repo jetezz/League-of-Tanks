@@ -1,0 +1,52 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+
+
+                              1 ;;
+                              2 ;;sys menu h
+                              3 ;;
+                              4 
+                              5 
+                              6 
+                              7 .globl zerostate_init
+                              8 .globl print_selected_green
+                              9 
+                             10 .macro textoNegro
+                             11 
+                             12    ld    h, #0         ;; D = Background PEN (0)
+                             13    ld    l, #1         ;; E = Foreground PEN (3)
+                             14    call cpct_setDrawCharM0_asm   ;; Set draw char colours
+                             15 
+                             16 .endm
+                             17 
+                             18 .macro textoVerde
+                             19 
+                             20 
+                             21    ld    h, #00         ;; D = Background PEN (0)
+                             22    ld    l, #07        ;; E = Foreground PEN (3)
+                             23 
+                             24    call cpct_setDrawCharM0_asm   ;; Set draw char colours
+                             25  .endm
+                             26 
+   68FC 4C 45 41 47 55 45    27 title:            .asciz "LEAGUE OF TANKS";
+        20 4F 46 20 54 41
+        4E 4B 53 00
+   690C 50 52 45 53 53 20    28 enter:            .asciz "PRESS ENTER TO PLAY";
+        45 4E 54 45 52 20
+        54 4F 20 50 4C 41
+        59 00
+   6920 53 69 6E 67 6C 65    29 Single_player:    .asciz "Single player";
+        20 70 6C 61 79 65
+        72 00
+   692E 42 61 74 74 6C 65    30 battle_royale:    .asciz "Battle Royale"
+        20 52 6F 79 61 6C
+        65 00
+   693C 31 20 50 6C 61 79    31 one_player:       .asciz "1 Player"
+        65 72 00
+   6945 32 20 50 6C 61 79    32 two_players:      .asciz "2 Players"
+        65 72 73 00
+   694F 33 20 50 6C 61 79    33 tres_players:     .asciz "3 Players"
+        65 72 73 00
+   6959 34 20 50 6C 61 79    34 cuatro_players:   .asciz "4 Players"
+        65 72 73 00

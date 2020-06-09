@@ -1,0 +1,118 @@
+XL2
+H 1 areas 2D global symbols
+S rendersys_update Ref0000
+S render_entities Ref0000
+S clean_entities Ref0000
+S _song2 Ref0000
+S _song3 Ref0000
+S _song4 Ref0000
+S generate_music Ref0000
+S cancion1 Ref0000
+S entityman_num_entities Ref0000
+S cancion2 Ref0000
+S cancion3 Ref0000
+S entityman_num_Bales Ref0000
+S cancion4 Ref0000
+S kill_bullet Ref0000
+S limpiar_animaciones Ref0000
+S next_song Ref0000
+S _song Ref0000
+S limpiar_ultima Ref0000
+S clean_entities_init Ref0000
+S iniciar_animacion_canon Ref0000
+S iniciar_animacion_bala Ref0000
+S sonido_disparo Ref0000
+S .__.ABS. Def0000
+S kill_bullet_init Ref0000
+S stopmusic Ref0000
+S jugador_muerto Ref0000
+S limpiar_ultimo Ref0000
+S entityman_getEntityVector_IX Ref0000
+S kill_bullet_all Ref0000
+S off_muerte Ref0000
+S max_bales Def0005
+S pintar_hud Ref0000
+S rendersys_init Ref0000
+S _num_entities Ref0000
+S animar Ref0000
+S pintar_letras Ref0000
+S init_entities Ref0000
+S create_entities Ref0000
+S sonido_win Ref0000
+S sonido_interaccion Ref0000
+S sonido_muerte Ref0000
+S entityman_getArray_Bales Ref0000
+A _CODE size BD flags 0 addr 0
+S sys_comp_disp_init Def0000
+S sys_comp_disp_update Def001B
+S _choca_en_y Def0077
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 32 2D 00 DD 22
+R 00 00 00 00 02 03 1B 00 02 06 08 00 00 09 00 00
+T 0B 00 25 00 CD 00 00 CD 00 00 22
+R 00 00 00 00 00 02 00 00 02 05 29 00 02 08 0B 00
+T 14 00 1C 00 DD 22 29 00 C9
+R 00 00 00 00 00 02 00 00 00 06 00 00
+T 1B 00
+R 00 00 00 00
+T 1B 00 21 00 00 7E B7 CA BC 00 FD 21 00 00 DD 21
+R 00 00 00 00 00 08 00 00
+T 29 00 00 00 67 3E 00 6F
+R 00 00 00 00
+T 2F 00
+R 00 00 00 00
+T 2F 00 FD 7E 0C 3D 28 7E E5 CD 00 00 7E E1 B7 28
+R 00 00 00 00 02 0A 0B 00
+T 3D 00 7E 67 DD 2A 29 00
+R 00 00 00 00 00 06 00 00
+T 43 00
+R 00 00 00 00
+T 43 00 16 01 FD 46 00 FD 4E 14 78 81 4F DD 7E 00
+R 00 00 00 00
+T 51 00 91 30 4E
+R 00 00 00 00
+T 54 00
+R 00 00 00 00
+T 54 00 DD 7E 00 DD 86 0A 90 38 45
+R 00 00 00 00
+T 5D 00
+R 00 00 00 00
+T 5D 00 16 00 FD 46 01 FD 4E 15 78 81 4F DD 7E 01
+R 00 00 00 00
+T 6B 00 91 30 34
+R 00 00 00 00
+T 6E 00
+R 00 00 00 00
+T 6E 00 DD 7E 01 DD 86 09 90 38 2B
+R 00 00 00 00
+T 77 00
+R 00 00 00 00
+T 77 00 7A B7 20 27 E5 DD E5 FD E5 CD 00 00 CD
+R 00 00 00 00 02 0C 1A 00
+T 84 00 00 00 7E FD 36 0C 01 FD E5 CD 00 00 CD
+R 00 00 00 00 02 02 0B 00 02 0C 0D 00
+T 91 00 00 00 FD E1 CD 00 00 CD 00 00 FD E1 DD E1
+R 00 00 00 00 02 02 19 00 02 07 28 00 02 0A 13 00
+T 9F 00 E1 18 0A
+R 00 00 00 00
+T A2 00
+R 00 00 00 00
+T A2 00
+R 00 00 00 00
+T A2 00 01 0E 00 DD 09 25 20 99 18 07
+R 00 00 00 00
+T AC 00
+R 00 00 00 00
+T AC 00 7C 25 3D 28 02 20 90
+R 00 00 00 00
+T B3 00
+R 00 00 00 00
+T B3 00
+R 00 00 00 00
+T B3 00 01 17 00 FD 09 2D C2 2F 00
+R 00 00 00 00 00 09 00 00
+T BC 00
+R 00 00 00 00
+T BC 00 C9
+R 00 00 00 00

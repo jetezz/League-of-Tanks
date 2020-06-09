@@ -1,0 +1,27 @@
+XL2
+H 9 areas 2 global symbols
+M plant
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 40 flags 0 addr 0
+S _plant_sp Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 00 A8 54 00 00 93 63 00 D6 93 63 E9 FC 93
+R 00 00 00 00
+T 0E 00 63 FC 54 E9 D6 A8 54 D2 E1 A8 C3 58 A4 C3
+R 00 00 00 00
+T 1C 00 33 F0 F0 33 33 F0 F0 33 C3 58 A4 C3 54 D2
+R 00 00 00 00
+T 2A 00 E1 A8 54 E9 D6 A8 E9 93 63 D6 D6 93 63 E9
+R 00 00 00 00
+T 38 00 00 93 63 00 00 A8 54 00
+R 00 00 00 00

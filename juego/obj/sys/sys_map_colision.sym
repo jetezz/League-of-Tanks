@@ -1,0 +1,48 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.=  2710 L   |     .__.ABS.=  0000 G   |     .__.CPU.=  0000 L
+    .__.H$L.=  0000 L   |   0 _NO_inic   00B6 R   |     _bala_sp   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |     _cannons   **** GX
+    _cannons   **** GX  |     _cannons   **** GX  |   0 _colisio   00A3 R
+  0 _colisio   00AB R   |   0 _down      003C R   |   0 _el_prim   0024 R
+  0 _el_prim   004B R   |     _gamemod   **** GX  |   0 _inicial   009C R
+  0 _left      002C R   |     _mapa1     **** GX  |     _mapa2     **** GX
+    _mapa3     **** GX  |     _mapa4     **** GX  |     _mapa5     **** GX
+    _mapa6     **** GX  |   0 _mapa_1_   0146 R   |   0 _mapa_1_   00C2 R
+  0 _mapa_2_   0156 R   |   0 _mapa_2_   00D8 R   |   0 _mapa_3_   0166 R
+  0 _mapa_3_   00EE R   |   0 _mapa_4_   0176 R   |   0 _mapa_4_   0104 R
+  0 _mapa_5_   0186 R   |   0 _mapa_5_   011A R   |   0 _mapa_6_   0196 R
+  0 _mapa_6_   0130 R   |     _pausa     **** GX  |     _plant_s   **** GX
+    _player_   **** GX  |   0 _puedes_   0087 R   |   0 _puntero=  00BD R
+  0 _puntero   0000 R   |   0 _puntero=  00C0 R   |   0 _reinici   00BF R
+  0 _right     0015 R   |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _single_   **** GX  |     _single_   **** GX
+    _single_   **** GX  |     _spr2      **** GX  |     _spr3      **** GX
+    _spr4      **** GX  |     _tileset   **** GX  |   0 _up        0053 R
+  0 buscar_t   0063 GR  |   0 cambiar_   0095 GR  |   0 coger_pu   008A GR
+  0 comp_col   0003 GR  |     draw_map   **** GX  |     draw_map   **** GX
+  0 estado_c   0002 R   |     estado_g   **** GX  |     get_game   **** GX
+    jugandos   **** GX  |     kill_all   **** GX  |   0 loop_y     0074 R
+    manage_g   **** GX  |     mueren_t=  0000     |     next_map   **** GX
+    partida_=  0002     |   0 reinicia   01A6 GR  |     reinicia   **** GX
+    reset_lv   **** GX  |   0 salir      00B1 R   |     set_Game   **** GX
+    set_Inga   **** GX  |     set_Inic   **** GX  |     set_winn   **** GX
+    siguient=  0001     |     sin_inic=  0000     |     single_e   **** GX
+    single_e   **** GX  |     single_m=  0001     |   0 tile_0     007B R
+    updatega   **** GX  |     updatega   **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE      size  1AC   flags    0
+
