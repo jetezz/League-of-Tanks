@@ -1,7 +1,7 @@
 # League-of-Tanks
 
-# Videojuego
-Videojuego en ensamblador z80 con cpctelera
+## Videojuego en ensamblador z80 con cpctelera
+
 
 Descripción
 ==========
